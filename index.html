@@ -316,6 +316,37 @@
   .verdict .vt{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(38px,7vw,60px);letter-spacing:-.04em;line-height:1.05;color:var(--ink);margin-bottom:14px}
   .verdict.win .vt{color:var(--green)}
   .verdict .vd{color:var(--muted);font-size:15px;margin:0;max-width:520px;line-height:1.55}
+  /* letter grade badge */
+  .verdictrow{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+  .verdictmain{flex:1;min-width:280px}
+  .verdictgrade{display:flex;flex-direction:column;align-items:center;text-align:center;padding:20px 28px;background:var(--surface);border:1px solid var(--line);border-radius:12px;min-width:180px}
+  .lgeyebrow{font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin-bottom:8px}
+  .lettergrade{font-family:'Archivo',sans-serif;font-weight:900;font-size:82px;line-height:1;letter-spacing:-.06em;color:var(--ink);margin-bottom:8px;transition:.4s ease}
+  .lgdesc{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.05em;line-height:1.4;max-width:180px}
+  /* letter grade tier colors */
+  .lettergrade.lg-F{color:#d94e5f;text-shadow:0 0 20px rgba(217,78,95,.35)}
+  .lettergrade.lg-D{color:#e88a3f;text-shadow:0 0 20px rgba(232,138,63,.35)}
+  .lettergrade.lg-C{color:#e0c85a;text-shadow:0 0 20px rgba(224,200,90,.35)}
+  .lettergrade.lg-B{color:#78a8ff;text-shadow:0 0 24px rgba(120,168,255,.4)}
+  .lettergrade.lg-A{color:var(--gold);text-shadow:0 0 28px rgba(212,162,74,.5)}
+  .lettergrade.lg-Aplus{color:#4ade80;text-shadow:0 0 32px rgba(74,222,128,.6);animation:lgpulse 1.8s ease-in-out infinite}
+  @keyframes lgpulse{0%,100%{text-shadow:0 0 32px rgba(74,222,128,.6)}50%{text-shadow:0 0 48px rgba(74,222,128,.9)}}
+  @media(max-width:640px){.verdictgrade{min-width:auto;width:100%}}
+
+  /* grading transition screen */
+  .gradingticker{display:flex;flex-direction:column;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .gtrow{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line);gap:16px}
+  .gtrow:last-child{border-bottom:none}
+  .gtname{font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:var(--ink);letter-spacing:-.01em}
+  .gtgrade{font-family:'Space Mono',monospace;font-weight:700;font-size:15px;color:var(--faint);letter-spacing:.06em;padding:6px 12px;border-radius:6px;background:var(--surface2);min-width:100px;text-align:center;transition:.3s ease}
+  .gtgrade.revealed{animation:gradePop .4s cubic-bezier(.2,.9,.3,1.3) both}
+  @keyframes gradePop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+  .gtgrade.g10{color:#4ade80;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.3)}
+  .gtgrade.g95{color:var(--gold);background:rgba(212,162,74,.12);border:1px solid rgba(212,162,74,.3)}
+  .gtgrade.g9{color:#78a8ff;background:rgba(120,168,255,.12);border:1px solid rgba(120,168,255,.3)}
+  .gtgrade.g8{color:var(--ink);background:var(--surface2);border:1px solid var(--line)}
+  .gtgrade.g7{color:#d94e5f;background:rgba(217,78,95,.1);border:1px solid rgba(217,78,95,.25)}
+  .gradingdone{margin-top:24px;font-family:'Space Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:.05em;text-align:center;padding:14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .slabsheader{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin:32px 0 14px}
   /* Display case for graded slabs */
   .displaycase{margin:36px 0 12px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#1c1712,#0f0a06);box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px rgba(212,162,74,.15) inset;position:relative;animation:caseIn 700ms cubic-bezier(.2,.9,.3,1.1) both}
@@ -480,7 +511,7 @@
         <button class="btn ghost hidden" id="respinBtn" onclick="reSpin()">Re-spin (<span id="respinN">2</span> left)</button>
         <button class="btn grail hidden" id="ripBtn" onclick="ripPack()">Rip pack <span id="ripNo">1</span> →</button>
         <button class="btn primary hidden" id="nextBtn" onclick="nextPack()">Spin for pack <span id="nextNo">2</span> →</button>
-        <button class="btn grail hidden" id="toCollBtn" onclick="goCollection()">Grade my box →</button>
+        <button class="btn grail hidden" id="toCollBtn" onclick="goCollection()">Prepare for grading →</button>
       </div>
       <div class="reveal" id="reveal"></div>
     </div>
@@ -504,12 +535,34 @@
   </section>
 
   <!-- RESULTS -->
+  <section id="grading" class="hidden">
+    <div class="card-panel">
+      <div class="tag" style="color:var(--gold);margin-bottom:14px">Grading in progress</div>
+      <h2 class="section" style="font-size:32px;letter-spacing:-.035em;margin-bottom:12px">Your slabs are being graded.</h2>
+      <div class="sub" style="margin-bottom:32px">PSA is grading your five picks. Grades from 7 to 10 — higher grades multiply the value.</div>
+      <div class="gradingticker" id="gradingTicker"></div>
+      <div class="gradingdone hidden" id="gradingDone">All five graded. Ready for the box breakdown.</div>
+      <div class="row hidden" id="gradingDoneBtn" style="margin-top:24px">
+        <button class="btn primary" onclick="revealResults()">See my results →</button>
+      </div>
+    </div>
+  </section>
+
   <section id="results" class="hidden">
     <div class="card-panel">
       <div class="verdict" id="verdictBox">
         <div class="veyebrow" id="verdictEyebrow">Box graded</div>
-        <div class="vt" id="verdictText">—</div>
-        <div class="vd" id="verdictDesc">—</div>
+        <div class="verdictrow">
+          <div class="verdictmain">
+            <div class="vt" id="verdictText">—</div>
+            <div class="vd" id="verdictDesc">—</div>
+          </div>
+          <div class="verdictgrade">
+            <div class="lgeyebrow">Box grade</div>
+            <div class="lettergrade" id="letterGrade">—</div>
+            <div class="lgdesc" id="letterGradeDesc">Waiting...</div>
+          </div>
+        </div>
       </div>
       <div class="scoregrid">
         <div class="stat"><div class="k">Graded showcase</div><div class="v" id="sShowcase">$0</div></div>
@@ -1645,15 +1698,69 @@ function slabHTML(c){
       <div class="val">${money(c.graded)}</div>
     </div></div>`;
 }
+function letterGrade(showcase){
+  if(showcase>=200000) return {g:"A+", desc:"Goal cleared — box won"};
+  if(showcase>=110000) return {g:"A",  desc:"Elite rip — just shy of the goal"};
+  if(showcase>=60000)  return {g:"B",  desc:"Strong pulls, solid box"};
+  if(showcase>=25000)  return {g:"C",  desc:"Fair box, nothing wild"};
+  if(showcase>=10000)  return {g:"D",  desc:"Rough rip"};
+  return                {g:"F",  desc:"Brutal. Rip another?"};
+}
+
 function gradeThem(){
+  // Phase 1: show grading transition
+  show('grading');
   const chosen=cards.filter(c=>selected.has(c.id)).map(gradeCard);
   chosen.sort((a,b)=>b.graded-a.graded);
+  // Animate the grading ticker over ~2.5 seconds
+  const gradeSlots = chosen.map(c=>c.grade);
+  const ticker = $('#gradingTicker');
+  const done = $('#gradingDone');
+  const doneBtn = $('#gradingDoneBtn');
+  if(ticker){
+    ticker.innerHTML = chosen.map((c,i)=>`<div class="gtrow" data-i="${i}"><span class="gtname">${c.pname}</span><span class="gtgrade" id="gt-g-${i}">···</span></div>`).join('');
+    done.classList.add('hidden');
+    doneBtn.classList.add('hidden');
+    let i=0;
+    const revealNext = ()=>{
+      if(i>=chosen.length){
+        setTimeout(()=>{
+          done.classList.remove('hidden');
+          doneBtn.classList.remove('hidden');
+        }, 400);
+        return;
+      }
+      const el = document.getElementById('gt-g-'+i);
+      if(el){
+        el.textContent = "PSA " + gradeSlots[i];
+        el.classList.add('revealed');
+        // color by grade tier
+        const g = gradeSlots[i];
+        if(g==="10") el.classList.add('g10');
+        else if(g==="9.5") el.classList.add('g95');
+        else if(g==="9") el.classList.add('g9');
+        else if(g==="8") el.classList.add('g8');
+        else el.classList.add('g7');
+      }
+      i++;
+      setTimeout(revealNext, 380);
+    };
+    setTimeout(revealNext, 600);
+  }
+  // Stash the chosen array so revealResults can use it without re-grading
+  window._chosen = chosen;
+}
+
+function revealResults(){
+  const chosen = window._chosen;
+  if(!chosen) return;
   $('#slabs').innerHTML=chosen.map(slabHTML).join('');
   const showcase=chosen.reduce((s,c)=>s+c.graded,0);
   const collTotal=cards.reduce((s,c)=>s+c.raw,0);
   const best=cards.reduce((a,b)=>b.raw>a.raw?b:a);
   const hasGrail=cards.some(c=>c.grail);
   const won = showcase>=GOAL;
+  const lg = letterGrade(showcase);
   history.boxes = (history.boxes||0) + 1;
   if(won) history.wins = (history.wins||0) + 1;
   saveHistory();
@@ -1662,7 +1769,14 @@ function gradeThem(){
   $('#sColl').textContent=money(collTotal);
   $('#sBest').textContent=best.pname+" · "+best.subset+(best.serial?" "+best.serial:"");
 
-  // verdict: hit $200,000 across your 5 slabbed cards to win the box
+  const lgEl = $('#letterGrade');
+  if(lgEl){
+    lgEl.textContent = lg.g;
+    lgEl.className = 'lettergrade lg-'+lg.g.replace('+','plus');
+  }
+  const lgDescEl = $('#letterGradeDesc');
+  if(lgDescEl) lgDescEl.textContent = lg.desc;
+
   let vt,vd;
   if(won && hasGrail){vt="Box won";vd="Over $200,000, headlined by a 1-of-1. This is the box collectors dream about.";}
   else if(won){vt="Box won";vd="You cleared the $200,000 target — box complete.";}
@@ -1680,6 +1794,7 @@ function gradeThem(){
   $('#shareText').textContent=
 `200K-Rip — my box
 4 packs · ${sportsHit.size} sport${sportsHit.size>1?'s':''} · 24 cards
+Box grade: ${lg.g}
 —
 Best slab: ${topGrade.pname} ${topGrade.year} ${topGrade.brand} ${topGrade.subset}${topGrade.serial?' '+topGrade.serial:''} · PSA ${topGrade.grade} · ${money(topGrade.graded)}
 Graded 5 showcase: ${money(showcase)} / $200,000 goal
@@ -1687,7 +1802,6 @@ Full 24-card collection: ${money(collTotal)}
 Verdict: ${vt}${won?'':' — missed by '+money(GOAL-showcase)}
 Can you beat my box?`;
 
-  // (phasetag removed)
   show('results');
 }
 
