@@ -51,6 +51,8 @@
   .btn.grail{background:linear-gradient(180deg,#e6b558 0%,#d4a24a 50%,#b78938 100%);color:#1a1200;font-weight:700;box-shadow:0 4px 14px rgba(212,162,74,.28),0 1px 0 rgba(255,255,255,.15) inset,0 -2px 0 rgba(0,0,0,.15) inset}
   .btn.grail:hover{background:linear-gradient(180deg,#f0c26a 0%,#e0af58 50%,#c99843 100%);box-shadow:0 6px 20px rgba(212,162,74,.4),0 1px 0 rgba(255,255,255,.2) inset,0 -2px 0 rgba(0,0,0,.15) inset;transform:translateY(-1px)}
   .btn:disabled{opacity:.3;cursor:not-allowed;filter:none;transform:none;box-shadow:none}
+  .btn.confirming{color:#1a1200!important;background:var(--gold)!important;border-color:var(--gold)!important;animation:confirmpulse .5s ease-in-out infinite alternate}
+  @keyframes confirmpulse{from{box-shadow:0 0 0 0 rgba(212,162,74,.6)}to{box-shadow:0 0 0 6px rgba(212,162,74,0)}}
 
   /* intro / hero */
   .hero{padding:60px 0 40px}
@@ -203,6 +205,24 @@
   /* per-pack reveal */
   .reveal{margin-top:36px}
   .reveal:empty{margin-top:0}
+  /* pick to grade — prominent header shown once pack is opened */
+  .pickheader{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 24px;margin:8px 0 18px;background:linear-gradient(180deg,rgba(212,162,74,.14),rgba(212,162,74,.04));border:1px solid var(--gold);border-radius:12px;box-shadow:0 0 0 1px var(--gold) inset,0 8px 28px rgba(212,162,74,.15);flex-wrap:wrap}
+  .pickeyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:700}
+  .picktitle{font-family:'Archivo',sans-serif;font-weight:900;font-size:24px;letter-spacing:-.02em;color:var(--ink);margin-bottom:6px;line-height:1.1}
+  .picksub{font-size:14px;color:var(--muted);line-height:1.5}
+  .picksub b{color:var(--gold);font-weight:700}
+  .pickcounter{display:flex;flex-direction:column;align-items:center;padding:14px 22px;background:var(--surface);border:1px solid var(--gold);border-radius:10px;flex-shrink:0}
+  .pcnum{font-family:'Archivo',sans-serif;font-weight:900;font-size:38px;line-height:1;letter-spacing:-.04em;color:var(--gold)}
+  .pcnum b{color:var(--gold)}
+  .pcnum span{color:var(--muted);font-size:22px;margin-left:2px}
+  .pclabel{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px;font-weight:700}
+  @media(max-width:520px){.pickheader{padding:16px 18px}.picktitle{font-size:20px}.pickcounter{padding:10px 16px}.pcnum{font-size:30px}}
+
+  /* continue-row: sits below the picked cards */
+  .continueRow{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:32px;padding:20px 24px;background:var(--surface);border:1px solid var(--line);border-radius:10px;flex-wrap:wrap}
+  .continueHint{font-size:13px;color:var(--muted);flex:1;min-width:220px;line-height:1.5}
+  .continueBtns{display:flex;gap:10px;flex-wrap:wrap}
+
   /* pack score line */
   .packscore{display:flex;align-items:center;gap:16px;margin:20px 0 4px;padding:14px 18px;background:var(--surface);border:1px solid var(--line);border-radius:8px;flex-wrap:wrap;transition:.3s ease}
   .packscore .pslabel{font-family:'Space Mono',monospace;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--muted)}
@@ -364,6 +384,7 @@
   .navgroup{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
   .navstart{color:#1a1200;border-color:transparent;background:linear-gradient(180deg,#e6b558 0%,#d4a24a 50%,#b78938 100%);font-weight:700;box-shadow:0 3px 10px rgba(212,162,74,.28),0 1px 0 rgba(255,255,255,.15) inset,0 -1px 0 rgba(0,0,0,.15) inset}
   .navstart:hover{color:#1a1200;background:linear-gradient(180deg,#f0c26a 0%,#e0af58 50%,#c99843 100%);box-shadow:0 5px 16px rgba(212,162,74,.4),0 1px 0 rgba(255,255,255,.2) inset,0 -1px 0 rgba(0,0,0,.15) inset;transform:translateY(-1px)}
+  @media(max-width:520px){.navstart{display:none}}
   @media(max-width:520px){.navgroup{gap:6px}.navbtn{padding:7px 11px;font-size:10.5px}}
   .navcount{background:transparent;color:var(--gold);font-family:'Space Mono',monospace;font-weight:700;font-size:10px;min-width:16px;text-align:center;letter-spacing:.05em}
   .filterbar{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 24px;padding-bottom:20px;border-bottom:1px solid var(--line)}
@@ -495,23 +516,23 @@
         <h2 class="section" style="font-size:32px;letter-spacing:-.035em;margin-bottom:12px">Time to rip.</h2>
         <div class="sub" style="margin-bottom:0">Spin all four wheels, then rip. Every pack is its own spin — a new sport, a new year, a new brand, a new chase.</div>
       </div>
-      <div class="wheels">
-        <div class="wheel" id="w-sport"><div class="lbl">Sport</div><div class="val">—</div></div>
-        <div class="wheel" id="w-year"><div class="lbl">Year / Era</div><div class="val">—</div></div>
-        <div class="wheel" id="w-brand"><div class="lbl">Set / Brand</div><div class="val">—</div></div>
-        <div class="wheel" id="w-type"><div class="lbl">Chasing</div><div class="val">—</div><div class="type-note"></div></div>
-      </div>
-      <div class="packscore hidden" id="packScore">
-        <span class="pslabel">Pack Score</span>
-        <span class="psstars" id="psStars">—</span>
-        <span class="psverdict" id="psVerdict"></span>
-      </div>
-      <div class="row" style="margin-top:18px">
-        <button class="btn primary" id="spinBtn" onclick="doSpin()">Spin the sport →</button>
-        <button class="btn ghost hidden" id="respinBtn" onclick="reSpin()">Re-spin (<span id="respinN">2</span> left)</button>
-        <button class="btn grail hidden" id="ripBtn" onclick="ripPack()">Rip pack <span id="ripNo">1</span> →</button>
-        <button class="btn primary hidden" id="nextBtn" onclick="nextPack()">Spin for pack <span id="nextNo">2</span> →</button>
-        <button class="btn grail hidden" id="toCollBtn" onclick="goCollection()">Prepare for grading →</button>
+      <div class="spinstage" id="spinStage">
+        <div class="wheels">
+          <div class="wheel" id="w-sport"><div class="lbl">Sport</div><div class="val">—</div></div>
+          <div class="wheel" id="w-year"><div class="lbl">Year / Era</div><div class="val">—</div></div>
+          <div class="wheel" id="w-brand"><div class="lbl">Set / Brand</div><div class="val">—</div></div>
+          <div class="wheel" id="w-type"><div class="lbl">Chasing</div><div class="val">—</div><div class="type-note"></div></div>
+        </div>
+        <div class="packscore hidden" id="packScore">
+          <span class="pslabel">Pack Score</span>
+          <span class="psstars" id="psStars">—</span>
+          <span class="psverdict" id="psVerdict"></span>
+        </div>
+        <div class="row" style="margin-top:18px">
+          <button class="btn primary" id="spinBtn" onclick="doSpin()">Spin the wheels →</button>
+          <button class="btn ghost hidden" id="respinBtn" onclick="reSpin()">Re-spin (<span id="respinN">2</span> left)</button>
+          <button class="btn grail hidden" id="ripBtn" onclick="ripPack()">Rip pack <span id="ripNo">1</span> →</button>
+        </div>
       </div>
       <div class="reveal" id="reveal"></div>
     </div>
@@ -1358,8 +1379,8 @@ function startSpin(){
   $('#packNo').textContent="1";
   $('#tally').textContent="0 cards collected";
   $('#reveal').innerHTML='';
+  $('#spinStage').classList.remove('hidden');
   resetWheels();
-  // (phasetag removed)
   show('spin');
 }
 
@@ -1379,36 +1400,32 @@ function spinWheel(el, options, finalVal, ms, cb){
 }
 
 function doSpin(){
-  const btn=$('#spinBtn');btn.disabled=true;
-  if(spinStage===0){
-    const sportKey=rnd(Object.keys(SPORTS)); const sport=SPORTS[sportKey];
-    box={sport:sportKey, sportLabel:sport.label};
-    spinWheel($('#w-sport'), Object.values(SPORTS).map(s=>s.label), sport.label, 900, ()=>{
-      spinStage=1;btn.disabled=false;btn.textContent="Spin the year →";
-    });
-  } else if(spinStage===1){
-    const eras=SPORTS[box.sport].eras.filter(e=>e.brands && e.brands.length>0);
-    const era=rnd(eras);box.era=era;
-    spinWheel($('#w-year'), eras.map(e=>e.year), era.year, 900, ()=>{
-      spinStage=2;btn.disabled=false;btn.textContent="Spin the brand →";
-    });
-  } else if(spinStage===2){
-    const brand=rnd(box.era.brands);box.brand=brand;
-    spinWheel($('#w-brand'), box.era.brands, brand, 900, ()=>{
-      spinStage=3;btn.disabled=false;btn.textContent="Spin what you're chasing →";
-    });
-  } else if(spinStage===3){
-    const chase=rnd(CHASE);box.chase=chase;
+  const btn=$('#spinBtn');btn.disabled=true;btn.textContent="Spinning…";
+
+  // pick everything up front
+  const sportKey=rnd(Object.keys(SPORTS));
+  const sport=SPORTS[sportKey];
+  box={sport:sportKey, sportLabel:sport.label};
+  const eras=sport.eras.filter(e=>e.brands && e.brands.length>0);
+  const era=rnd(eras); box.era=era;
+  const brand=rnd(era.brands); box.brand=brand;
+  const chase=rnd(CHASE); box.chase=chase;
+
+  // spin them one after another with a small stagger between starts
+  spinWheel($('#w-sport'), Object.values(SPORTS).map(s=>s.label), sport.label, 900, ()=>{});
+  setTimeout(()=>spinWheel($('#w-year'), eras.map(e=>e.year), era.year, 900, ()=>{}), 500);
+  setTimeout(()=>spinWheel($('#w-brand'), era.brands, brand, 900, ()=>{}), 1000);
+  setTimeout(()=>{
     spinWheel($('#w-type'), CHASE, chase, 1000, ()=>{
-      spinStage=4;
       $('#w-type').querySelector('.type-note').textContent="Boosted toward "+chase.toLowerCase();
       btn.classList.add('hidden');
       $('#ripNo').textContent=packNo;
       $('#ripBtn').classList.remove('hidden');
       if(respinsLeft>0){ $('#respinN').textContent=respinsLeft; $('#respinBtn').classList.remove('hidden'); }
       showPackScore();
+      spinStage=4;
     });
-  }
+  }, 1500);
 }
 
 function computePackScore(){
@@ -1460,11 +1477,9 @@ function resetWheels(){
     const note=el.querySelector('.type-note');if(note)note.textContent='';
     const streak=el.querySelector('.streak');if(streak) streak.remove();
   });
-  const b=$('#spinBtn');b.textContent="Spin the sport →";b.disabled=false;b.classList.remove('hidden');
+  const b=$('#spinBtn');b.textContent="Spin the wheels →";b.disabled=false;b.classList.remove('hidden');
   $('#ripBtn').classList.add('hidden');
   $('#respinBtn').classList.add('hidden');
-  $('#nextBtn').classList.add('hidden');
-  $('#toCollBtn').classList.add('hidden');
   const ps=$('#packScore'); if(ps){ ps.className='packscore hidden'; }
 }
 
@@ -1475,10 +1490,45 @@ function reSpin(){
   resetWheels();
 }
 
+let _rerippArmed = false;
+function reRipPack(){
+  if(respinsLeft<=0) return;
+  const btn = $('#revRerip');
+  if(!_rerippArmed){
+    _rerippArmed = true;
+    if(btn){ btn.textContent = "Tap again to confirm"; btn.classList.add('confirming'); }
+    toast("Tap again to throw this pack back");
+    setTimeout(()=>{
+      _rerippArmed = false;
+      if(btn && document.body.contains(btn)){ btn.textContent = "Re-rip pack ("+respinsLeft+" left)"; btn.classList.remove('confirming'); }
+    }, 3000);
+    return;
+  }
+  _rerippArmed = false;
+  respinsLeft--;
+  // remove this pack's cards from the collection and un-pick them
+  const packIds = window._currentPackIds || [];
+  packIds.forEach(id=>{ selected.delete(id); });
+  cards = cards.filter(c=>!packIds.includes(c.id));
+  // also remove them from lifetime history — the pack never happened
+  if(history.cards){
+    history.cards = history.cards.slice(0, Math.max(0, history.cards.length-6));
+    saveHistory();
+    updateNavCount();
+  }
+  $('#tally').textContent=cards.length+" cards collected";
+  $('#reveal').innerHTML='';
+  $('#spinStage').classList.remove('hidden');
+  resetWheels();
+  toast("Pack thrown back — "+respinsLeft+" re-spin"+(respinsLeft===1?"":"s")+" left");
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
 function nextPack(){
   packNo++;
   $('#packNo').textContent=packNo;
   $('#reveal').innerHTML='';
+  $('#spinStage').classList.remove('hidden');
   resetWheels();
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -1579,12 +1629,24 @@ function cardHTML(c, idx){
 function ripPack(){
   const pack=generatePack();
   pack.forEach(c=>{ c.id=cards.length; cards.push(c); });
+  window._currentPackIds = pack.map(c=>c.id);   // remember these to undo on re-rip
   addToHistory(pack);
   // hide pack score once we're ripping
   const ps=$('#packScore'); if(ps){ ps.className='packscore hidden'; }
 
   // Render the tearing pack animation first, then the cards inside it
   const rv=$('#reveal');
+  const isLastPack = packNo>=4;
+  const advanceBtn = isLastPack
+    ? `<button class="btn grail" id="revToColl" onclick="goCollection()">Prepare for grading →</button>`
+    : `<button class="btn primary" id="revNext" onclick="nextPack()">Spin for pack ${packNo+1} →</button>`;
+  const rerippBtn = respinsLeft>0
+    ? `<button class="btn ghost" id="revRerip" onclick="reRipPack()">Re-rip pack (${respinsLeft} left)</button>`
+    : '';
+  const continueHint = isLastPack
+    ? `Ready when you are — this is your last pack.`
+    : `You can keep picking or move on. Locked cards stay locked.`;
+
   rv.innerHTML=`<div class="rvhead">Pack ${packNo} · ${box.sportLabel} · ${box.era.year} ${box.brand} · chasing ${box.chase}</div>
     <div class="ripstage">
       <div class="ripwrap">
@@ -1593,24 +1655,43 @@ function ripPack(){
         <div class="riptear"></div>
       </div>
     </div>
-    <div class="slabbar hidden" id="postSlabbar"><span>Pick up to 5 to send to PSA. A gem can multiply the value — a low grade can hurt it. <b>Locked once picked.</b></span><span class="slabcount"><b id="revSelN">${selected.size}</b> / 5 picked</span></div>
-    <div class="grid4 hidden" id="packGrid">${pack.map((c,i)=>cardHTML(c,i)).join('')}</div>`;
+    <div class="pickheader hidden" id="pickHeader">
+      <div class="pickheaderleft">
+        <div class="pickeyebrow">Pick to grade</div>
+        <div class="picktitle">Tap cards to send to PSA</div>
+        <div class="picksub">You get to pick <b>5 across all 4 packs</b> to grade. Skip a card and you might pull something better in a later pack — but pass on the wrong one and you'll regret it. Locked once picked.</div>
+      </div>
+      <div class="pickcounter">
+        <div class="pcnum"><b id="revSelN">${selected.size}</b><span>/5</span></div>
+        <div class="pclabel">picked</div>
+      </div>
+    </div>
+    <div class="grid4 hidden" id="packGrid">${pack.map((c,i)=>cardHTML(c,i)).join('')}</div>
+    <div class="continueRow hidden" id="continueRow">
+      <div class="continueHint">${continueHint}</div>
+      <div class="continueBtns">${rerippBtn}${advanceBtn}</div>
+    </div>`;
 
-  // After the tear animation (~800ms), swap in the cards
+  // After the tear animation (~800ms), swap in the cards + hide the wheels
   setTimeout(()=>{
     const stage=rv.querySelector('.ripstage');
     if(stage) stage.classList.add('done');
     setTimeout(()=>{
-      const grid=$('#packGrid'), bar=$('#postSlabbar');
+      const grid=$('#packGrid'), header=$('#pickHeader'), contRow=$('#continueRow');
       if(grid) grid.classList.remove('hidden');
-      if(bar) bar.classList.remove('hidden');
-      // attach click handlers to each card for mid-rip slabbing
+      if(header) header.classList.remove('hidden');
+      if(contRow) contRow.classList.remove('hidden');
+      // hide the whole spin stage — wheels + spin buttons — during picking
+      $('#spinStage').classList.add('hidden');
+      // attach click handlers to each card for mid-rip picking
       [...rv.querySelectorAll('.tc')].forEach((node,idx)=>{
         const c=pack[idx];
         node.insertAdjacentHTML('beforeend','<div class="tick">✓</div>');
         node.onclick=()=>slabDuringRip(c,node);
         if(selected.has(c.id)) node.classList.add('sel','locked');
       });
+      // scroll picker into view so it's obvious we're in picking mode now
+      window.scrollTo({top:0,behavior:'smooth'});
     }, 350);
   }, 750);
 
@@ -1622,15 +1703,8 @@ function ripPack(){
     if(best.raw>8000) setTimeout(()=>toast(best.pname+" "+best.subset+(best.serial?" "+best.serial:"")+" — "+money(best.raw)), 1200);
   }
 
-  // update counters + buttons
+  // update counters
   $('#tally').textContent=cards.length+" cards collected";
-  $('#ripBtn').classList.add('hidden');
-  if(packNo>=4){
-    $('#toCollBtn').classList.remove('hidden');
-  }else{
-    $('#nextNo').textContent=packNo+1;
-    $('#nextBtn').classList.remove('hidden');
-  }
 }
 function slabDuringRip(c, node){
   if(node.classList.contains('locked')) return;   // already slabbed — locked forever
@@ -1778,11 +1852,11 @@ function revealResults(){
   if(lgDescEl) lgDescEl.textContent = lg.desc;
 
   let vt,vd;
-  if(won && hasGrail){vt="Box won";vd="Over $200,000, headlined by a 1-of-1. This is the box collectors dream about.";}
-  else if(won){vt="Box won";vd="You cleared the $200,000 target — box complete.";}
+  if(won && hasGrail){vt="Winner! Epic Rip";vd="Over $200,000 and headlined by a 1-of-1. This is the box collectors dream about.";}
+  else if(won){vt="Winner! Epic Rip";vd="You cleared the $200,000 target — box complete.";}
   else if(showcase>140000){vt="So close";vd="Just "+money(GOAL-showcase)+" short of $200,000. Rip another box?";}
   else if(showcase>70000){vt="Strong rip";vd="Real hits in here, but short of the $200,000 goal by "+money(GOAL-showcase)+".";}
-  else if(showcase>20000){vt="Solid box";vd="Respectable pulls — still a ways from the $200,000 target.";}
+  else if(showcase>20000){vt="Middling rip";vd="A few decent pulls — nothing to write home about.";}
   else {vt="Rough rip";vd="Well under the $200,000 goal. The hobby giveth and taketh. Rip another?";}
   $('#verdictText').textContent=vt;$('#verdictDesc').textContent=vd;
   $('#verdictEyebrow').textContent = won ? "Goal cleared" : "Box graded";
@@ -1836,11 +1910,23 @@ function renderChecklist(){
   }).join('');
   body.innerHTML = `<div class="clsummary">Across all sports: <b>${totalEras}</b> years and <b>${totalCombos}</b> total year × brand combinations you can roll.</div>${html}`;
 }
+let _goHomeArmed = false;
 function goHome(){
-  if(cards.length && packNo<=4 && spinStage<4){ show('spin'); }  // mid-rip
-  else if(cards.length){ show('results'); }                       // just finished
-  else { show('intro'); }
-  // (phasetag removed)
+  // if mid-rip, require a double-tap to confirm before abandoning progress
+  if(cards.length && cards.length<24){
+    if(!_goHomeArmed){
+      _goHomeArmed = true;
+      toast("Tap logo again to leave this box");
+      setTimeout(()=>{ _goHomeArmed = false; }, 3000);
+      return;
+    }
+    _goHomeArmed = false;
+    cards=[]; selected.clear(); packNo=1;
+    $('#reveal').innerHTML='';
+    $('#spinStage').classList.remove('hidden');
+    resetWheels();
+  }
+  show('intro');
 }
 function renderHistory(){
   const all = history.cards || [];
@@ -1884,8 +1970,15 @@ function renderHistory(){
   }
 }
 function setHistFilter(k){ histFilter=k; renderHistory(); }
+let _clearHistArmed = false;
 async function clearHistory(){
-  if(!confirm("Reset your entire lifetime collection? This can't be undone.")) return;
+  if(!_clearHistArmed){
+    _clearHistArmed = true;
+    toast("Tap Reset again to wipe your lifetime collection");
+    setTimeout(()=>{ _clearHistArmed = false; }, 3000);
+    return;
+  }
+  _clearHistArmed = false;
   history = {cards:[], boxes:0, wins:0};
   if(window.storage){ try{ await window.storage.delete(HKEY); }catch(e){} }
   updateNavCount(); renderHistory();
