@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>200K-Rip — Chase the $200,000 Box</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 260'%3E%3Crect width='260' height='260' rx='18' fill='%230e0e10' stroke='%23f0efeb' stroke-width='10'/%3E%3Crect y='42' width='260' height='10' fill='%23f0efeb'/%3E%3Crect y='208' width='260' height='10' fill='%23f0efeb'/%3E%3Crect x='20' y='66' width='220' height='90' fill='%23d4a24a'/%3E%3Ctext x='130' y='137' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='80' fill='%230e0e10' letter-spacing='-5'%3E200K%3C/text%3E%3Ctext x='130' y='195' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='46' fill='%23f0efeb' letter-spacing='-1'%3ERIP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e0e10; --bg2:#131316; --surface:#17171b; --surface2:#1c1c21;
+    --line:#26262d; --line2:#33333c; --ink:#f0efeb; --muted:#8b8b93; --faint:#55555d;
+    --chrome:#b8b8c0; --gold:#d4a24a; --auto:#9d7ac7; --patch:#c96844;
+    --insert:#5f8cc7; --sp:#4bb8a0; --grail:#c94a72;
+    --green:#5cb87f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg);
+    color:var(--ink); font-family:'Inter',sans-serif; min-height:100%;
+    overflow-x:hidden; -webkit-font-smoothing:antialiased; font-weight:400;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:32px 24px 96px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .logo{font-family:'Archivo',sans-serif;font-weight:900;letter-spacing:-.04em;font-size:20px;line-height:1;color:var(--ink);display:inline-flex;align-items:center;gap:12px}
+  .logo .minibadge{width:36px;height:36px;display:block;flex-shrink:0}
+  .logo .lockup{display:inline-flex;align-items:baseline}
+  .logo .num{color:var(--gold)}
+  .logo .dot{color:var(--muted);margin:0 1px}
+  .logo .sub{font-family:'Space Mono',monospace;font-size:9.5px;font-weight:400;letter-spacing:.22em;color:var(--faint);margin-left:12px;text-transform:uppercase;position:relative;top:-1px}
+  @media(max-width:520px){.logo .lockup .sub{display:none}}
+  .tag{font-family:'Space Mono',monospace;font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:.15em}
+  h2.section{font-family:'Archivo',sans-serif;font-weight:700;letter-spacing:-.02em;font-size:20px;margin-bottom:6px;color:var(--ink)}
+  .sub{color:var(--muted);font-size:13.5px;margin-bottom:28px;line-height:1.55;max-width:560px}
+
+  .card-panel{background:transparent;border:none;border-radius:0;padding:0;box-shadow:none}
+  @keyframes holo{to{background-position:200% 0}}
+
+  /* buttons — quieter, more restrained */
+  .btn{font-family:'Inter',sans-serif;font-weight:600;letter-spacing:0;font-size:14px;border:none;border-radius:8px;padding:13px 22px;cursor:pointer;transition:background .15s ease,border-color .15s ease,color .15s ease;color:var(--ink)}
+  .btn:hover{filter:none}
+  .btn:active{transform:none}
+  .btn.primary{background:var(--ink);color:#0e0e10}
+  .btn.primary:hover{background:#fff}
+  .btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+  .btn.ghost:hover{color:var(--ink);border-color:var(--line2)}
+  .btn.grail{background:var(--gold);color:#1a1200;animation:none}
+  .btn.grail:hover{background:#e6b558}
+  .btn:disabled{opacity:.3;cursor:not-allowed;filter:none}
+
+  /* intro / hero */
+  .hero{padding:60px 0 40px}
+  .herorow{display:flex;align-items:flex-start;justify-content:space-between;gap:48px;margin-bottom:36px}
+  .herorow .herotext{flex:1;min-width:0;text-align:left;max-width:640px}
+  .herorow .badge{width:200px;height:200px;flex-shrink:0;display:block;margin-top:8px}
+  @media(max-width:720px){.herorow{flex-direction:column;gap:24px}.herorow .badge{width:150px;height:150px;order:-1}}
+  .hero .eyebrow{font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;margin-bottom:20px}
+  .hero h1{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(44px,7vw,72px);line-height:.98;letter-spacing:-.045em;margin-bottom:24px;color:var(--ink)}
+  .hero h1 em{font-style:normal;color:var(--gold)}
+  .hero p{color:var(--muted);max-width:520px;margin:0 0 36px;font-size:16px;line-height:1.65}
+  .hero .ntfcnote{font-size:13px;color:var(--gold);border-left:2px solid var(--gold);padding-left:12px;margin:-24px 0 36px;max-width:520px;line-height:1.55;font-style:italic;opacity:.85}
+  .hero .byline{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:-24px 0 40px;max-width:520px}
+  .sitefooter{max-width:1080px;margin:80px auto 32px;padding:24px 32px 0;border-top:1px solid var(--line);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-align:center}
+  .hero .btnrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .howitworks{margin-top:56px;padding-top:32px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  @media(max-width:640px){.howitworks{grid-template-columns:1fr;gap:20px}}
+  .howstep{}
+  .howstep .num{font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.15em;margin-bottom:10px}
+  .howstep .htit{font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+  .howstep .hdesc{color:var(--muted);font-size:13px;line-height:1.6}
+
+  /* wheels */
+  .wheels{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+  @media(max-width:720px){.wheels{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:400px){.wheels{grid-template-columns:1fr}}
+  .wheel{background:var(--bg2);padding:24px 20px;text-align:left;position:relative;overflow:hidden;min-height:118px;display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);border-radius:10px;transition:border-color .3s ease, box-shadow .3s ease, transform .2s ease}
+  /* corner tick marks like a card slab */
+  .wheel::before,.wheel::after{content:"";position:absolute;width:10px;height:10px;border-color:var(--muted);border-style:solid;transition:border-color .3s ease}
+  .wheel::before{top:6px;left:6px;border-width:1px 0 0 1px}
+  .wheel::after{bottom:6px;right:6px;border-width:0 1px 1px 0}
+  .wheel .lbl{font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--faint);margin-bottom:10px;transition:color .3s ease}
+  .wheel .val{font-family:'Archivo',sans-serif;font-weight:700;font-size:18px;letter-spacing:-.015em;min-height:22px;color:var(--ink)}
+  /* spinning state — pulsing border, ticker flick, animated top edge */
+  .wheel.spinning{border-color:var(--muted);box-shadow:0 0 0 1px var(--muted) inset, 0 4px 18px rgba(255,255,255,.04);animation:wheelPulse 900ms ease-in-out infinite}
+  .wheel.spinning::before,.wheel.spinning::after{border-color:var(--gold)}
+  .wheel.spinning .lbl{color:var(--muted)}
+  .wheel.spinning .val{animation:flick .07s steps(1) infinite;color:var(--muted)}
+  @keyframes flick{50%{opacity:.4}}
+  @keyframes wheelPulse{
+    0%,100%{box-shadow:0 0 0 1px var(--muted) inset, 0 4px 18px rgba(255,255,255,.04)}
+    50%{box-shadow:0 0 0 1px var(--muted) inset, 0 6px 26px rgba(255,255,255,.09)}
+  }
+  /* locked state — gold ring, gold corners, and a little top-edge streak */
+  .wheel.locked{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset, 0 8px 24px rgba(212,162,74,.18);transform:translateY(-1px)}
+  .wheel.locked::before,.wheel.locked::after{border-color:var(--gold)}
+  .wheel.locked .lbl{color:var(--gold)}
+  .wheel.locked .val{color:var(--gold)}
+  .wheel.locked .streak{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:streakFlash 500ms ease-out both}
+  @keyframes streakFlash{
+    0%{opacity:0;transform:scaleX(.3)}
+    50%{opacity:1;transform:scaleX(1)}
+    100%{opacity:.6;transform:scaleX(1)}
+  }
+  .wheel .type-note{font-size:11px;color:var(--muted);margin-top:8px;font-family:'Space Mono',monospace;letter-spacing:.02em}
+
+  /* packs */
+  .packs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+  @media(max-width:640px){.packs{grid-template-columns:repeat(2,1fr)}}
+  .pack{aspect-ratio:3/4;border-radius:10px;cursor:pointer;position:relative;overflow:hidden;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:border-color .2s ease}
+  .pack:hover{border-color:var(--gold)}
+  .pack .foil{position:absolute;inset:0;background:linear-gradient(160deg,#1a1a1f,#111114 60%,#1a1a1f);}
+  .pack .shine{position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.06) 50%,transparent 65%);background-size:220% 220%;animation:sheen 4s ease-in-out infinite}
+  @keyframes sheen{0%{background-position:120% 0}100%{background-position:-40% 0}}
+  .pack .plabel{position:relative;z-index:2;text-align:center;font-family:'Archivo',sans-serif;font-weight:700;color:var(--ink);font-size:13px;letter-spacing:.02em}
+  .pack .plabel small{display:block;font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:.15em;color:var(--faint);margin-top:6px;text-transform:uppercase}
+  .pack.ripped{cursor:default;pointer-events:none;opacity:.4}
+  .pack.ripped .foil,.pack.ripped .shine,.pack.ripped .plabel{opacity:.15}
+  .pack .done{position:absolute;z-index:3;font-family:'Space Mono',monospace;font-size:11px;color:var(--green);letter-spacing:.1em}
+
+  /* card grid */
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
+  @media(max-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:480px){.grid{grid-template-columns:repeat(2,1fr)}}
+  .tc{position:relative;border-radius:8px;padding:12px 11px 11px;background:var(--surface);border:1px solid var(--line);cursor:pointer;overflow:hidden;transition:border-color .15s ease;animation:pop .35s cubic-bezier(.2,.9,.3,1.3) both}
+  @keyframes pop{from{opacity:0;transform:scale(.85) translateY(6px)}}
+  .tc:hover{border-color:var(--line2)}
+  .tc .rb{height:2px;border-radius:2px;margin-bottom:10px;opacity:.7}
+  .tc .yr{font-family:'Space Mono',monospace;font-size:10px;color:var(--faint);letter-spacing:.05em;display:inline-block}
+  .tc .teambadge{display:inline-block;font-family:'Archivo',sans-serif;font-weight:900;font-size:9px;letter-spacing:.08em;padding:2px 6px;border-radius:3px;margin-left:6px;vertical-align:1px;box-shadow:0 1px 2px rgba(0,0,0,.4)}
+  .tc .sport{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+  .tc .nm{font-family:'Archivo',sans-serif;font-weight:700;font-size:13.5px;line-height:1.15;margin:4px 0 3px;letter-spacing:-.015em;color:var(--ink)}
+  .tc .br{font-size:10.5px;color:var(--muted);line-height:1.3}
+  .tc .subset{font-family:'Archivo',sans-serif;font-weight:700;font-size:11px;line-height:1.2;margin-top:6px;letter-spacing:-.005em}
+  .tc .subcat{font-family:'Space Mono',monospace;font-size:8.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-top:3px}
+  .tc .meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;padding-top:8px;border-top:1px solid var(--line);gap:8px}
+  .tc .ser{font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.02em}
+  .tc .val{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--muted);transition:color .2s ease}
+  /* value tiers — cards get louder as pulls get bigger */
+  .tc.v-low .val{color:var(--faint)}
+  .tc.v-mid .val{color:var(--ink);font-weight:700;font-size:11.5px}
+  .tc.v-big{border-color:#4a6b9c}
+  .tc.v-big .val{color:#78a8ff;font-weight:900;font-size:13px;font-family:'Archivo',sans-serif;letter-spacing:-.01em}
+  .tc.v-huge{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset, 0 8px 24px rgba(212,162,74,.18)}
+  .tc.v-huge .val{color:var(--gold);font-weight:900;font-size:15px;font-family:'Archivo',sans-serif;letter-spacing:-.02em;text-shadow:0 0 12px rgba(212,162,74,.6)}
+  .tc.v-grail{border-color:var(--grail);box-shadow:0 0 0 1px var(--grail) inset, 0 10px 32px rgba(201,74,114,.35);animation:grailpulse 2.2s ease-in-out infinite}
+  .tc.v-grail .val{color:var(--grail);font-weight:900;font-size:17px;font-family:'Archivo',sans-serif;letter-spacing:-.02em;text-shadow:0 0 16px rgba(201,74,114,.7)}
+  @keyframes grailpulse{0%,100%{box-shadow:0 0 0 1px var(--grail) inset,0 10px 32px rgba(201,74,114,.35)}50%{box-shadow:0 0 0 1px var(--grail) inset,0 14px 42px rgba(201,74,114,.55)}}
+  .tc .badge{position:absolute;top:9px;right:9px;font-family:'Space Mono',monospace;font-size:8.5px;text-transform:uppercase;letter-spacing:.06em;padding:2px 6px;border-radius:20px;background:rgba(0,0,0,.35)}
+  .tc.rookie::after{content:"RC";position:absolute;top:10px;right:10px;font-family:'Space Mono',monospace;font-weight:700;font-size:9px;color:var(--gold);letter-spacing:.05em;background:rgba(212,162,74,.1);border:1px solid rgba(212,162,74,.3);padding:2px 5px;border-radius:3px}
+  .tc.holo::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.06) 48%,transparent 66%);background-size:250% 250%;animation:sheen 3.2s linear infinite;pointer-events:none}
+  .tc.grail{border-color:var(--gold);background:linear-gradient(180deg,var(--surface),#1a1712)}
+  .tc.grail::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(212,162,74,.15) 48%,transparent 66%);background-size:250% 250%;animation:sheen 2.5s linear infinite;pointer-events:none}
+  .tc.sel{border-color:var(--gold);background:linear-gradient(180deg,var(--surface),#1a1712)}
+  .tc .tick{position:absolute;bottom:10px;right:10px;width:20px;height:20px;border-radius:50%;background:var(--gold);color:#0e0e10;font-size:12px;display:none;align-items:center;justify-content:center;font-weight:900}
+  .tc.sel .tick{display:flex}
+
+  /* per-pack reveal */
+  .reveal{margin-top:36px}
+  .reveal:empty{margin-top:0}
+  .reveal .rvhead{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+  .reveal .rvhead::after{content:"";flex:1;height:1px;background:var(--line)}
+  .reveal .grid4{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:520px){.reveal .grid4{grid-template-columns:repeat(2,1fr)}}
+
+  /* rip animation stage */
+  .ripstage{padding:20px 0 28px;display:flex;justify-content:center;align-items:center;min-height:220px;position:relative}
+  .ripwrap{position:relative;width:180px;height:220px;perspective:800px}
+  .rippack{position:absolute;left:0;right:0;height:112px;background:linear-gradient(160deg,#1a1a1f,#111114 60%,#1a1a1f);border:1px solid var(--line);border-radius:10px 10px 0 0;overflow:hidden;transform-origin:center bottom;animation-fill-mode:both;animation-duration:900ms;animation-timing-function:cubic-bezier(.5,.05,.2,1)}
+  .rippack-top{top:0;border-radius:10px 10px 0 0;animation-name:packTearTop}
+  .rippack-bot{top:110px;border-radius:0 0 10px 10px;transform-origin:center top;animation-name:packTearBot}
+  .rippack::after{content:"";position:absolute;bottom:0;left:0;right:0;height:14px;background:repeating-linear-gradient(90deg,transparent 0 6px,rgba(212,162,74,.6) 6px 8px)}
+  .rippack-bot::after{bottom:auto;top:0}
+  .ripshine{position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.08) 50%,transparent 65%);background-size:220% 220%;animation:sheen 3s ease-in-out infinite}
+  .rippacklabel{position:absolute;top:22px;left:0;right:0;text-align:center;z-index:2;font-family:'Archivo',sans-serif;font-weight:700;color:var(--ink);font-size:14px;letter-spacing:.05em}
+  .rippacklabel small{display:block;font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:.15em;color:var(--faint);margin-top:6px;text-transform:uppercase}
+  .riptear{position:absolute;top:107px;left:-10px;right:-10px;height:8px;background:linear-gradient(90deg,transparent,var(--gold) 20%,#fff 50%,var(--gold) 80%,transparent);border-radius:4px;opacity:0;animation:tearFlash 900ms cubic-bezier(.5,.05,.2,1) both;box-shadow:0 0 22px rgba(212,162,74,.9)}
+  @keyframes packTearTop{
+    0%{transform:translateY(0) rotate(0)}
+    45%{transform:translateY(-4px) rotate(-1deg)}
+    100%{transform:translateY(-40px) rotate(-6deg);opacity:0}
+  }
+  @keyframes packTearBot{
+    0%{transform:translateY(0) rotate(0)}
+    45%{transform:translateY(4px) rotate(1deg)}
+    100%{transform:translateY(40px) rotate(6deg);opacity:0}
+  }
+  @keyframes tearFlash{
+    0%{opacity:0;transform:scaleX(.2)}
+    40%{opacity:1;transform:scaleX(1)}
+    100%{opacity:0;transform:scaleX(1.2)}
+  }
+  .ripstage.done{display:none}
+
+  /* card entrance override — cards spring up as if flying out of the pack */
+  .grid4 .tc{animation:cardFly 550ms cubic-bezier(.2,.9,.3,1.15) both}
+  @keyframes cardFly{
+    from{opacity:0;transform:translateY(40px) scale(.75) rotate(var(--r,0deg))}
+    60%{opacity:1}
+    to{opacity:1;transform:translateY(0) scale(1) rotate(0)}
+  }
+  .grid4 .tc:nth-child(1){--r:-4deg;animation-delay:0ms}
+  .grid4 .tc:nth-child(2){--r:3deg;animation-delay:80ms}
+  .grid4 .tc:nth-child(3){--r:-2deg;animation-delay:160ms}
+  .grid4 .tc:nth-child(4){--r:4deg;animation-delay:240ms}
+  .grid4 .tc:nth-child(5){--r:-3deg;animation-delay:320ms}
+  .grid4 .tc:nth-child(6){--r:2deg;animation-delay:400ms}
+
+  .slabbar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 14px;margin-bottom:14px;background:var(--surface2);border:1px solid var(--line);border-radius:8px;font-size:12.5px;color:var(--muted);flex-wrap:wrap}
+  .slabbar b{color:var(--ink);font-weight:500}
+  .slabbar .slabcount b{color:var(--gold);font-weight:700}
+  .tc.locked{cursor:default;position:relative}
+  .tc.locked::after{content:"SLABBED";position:absolute;top:9px;left:9px;font-family:'Space Mono',monospace;font-weight:700;font-size:8.5px;color:var(--gold);letter-spacing:.1em;background:rgba(212,162,74,.12);border:1px solid rgba(212,162,74,.35);padding:2px 6px;border-radius:3px;z-index:2}
+
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 14px;flex-wrap:wrap}
+  .progwrap{margin-bottom:24px}
+  .progbar{height:6px;border-radius:3px;background:var(--surface2);overflow:hidden}
+  .progfill{height:100%;border-radius:3px;background:var(--gold);transition:width .4s cubic-bezier(.2,.9,.3,1)}
+  .progfill.win{background:var(--green)}
+  .progmarks{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;color:var(--faint);margin-top:8px;letter-spacing:.05em}
+  .selcount{font-family:'Space Mono',monospace;font-size:12px;color:var(--muted)}
+  .selcount b{color:var(--gold)}
+
+  /* slab */
+  .slabs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:6px}
+  @media(max-width:720px){.slabs{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:480px){.slabs{grid-template-columns:repeat(2,1fr)}}
+  .slab{background:#e8e8ea;border-radius:8px;padding:6px;box-shadow:0 8px 22px rgba(0,0,0,.35)}
+  .slab .label{background:#fff;border-radius:4px 4px 0 0;padding:5px 8px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #c92030}
+  .slab .psa{font-family:'Archivo',sans-serif;font-weight:900;font-size:9.5px;color:#c92030;letter-spacing:.05em}
+  .slab .grade{font-family:'Archivo',sans-serif;font-weight:900;font-size:16px;color:#111;letter-spacing:-.02em}
+  .slab .inner{background:#0e0e10;border-radius:0 0 5px 5px;padding:10px 9px;position:relative;overflow:hidden;min-height:110px}
+  .slab .rb{height:3px;border-radius:2px;margin-bottom:8px}
+  .slab .nm{font-family:'Archivo',sans-serif;font-weight:700;font-size:12px;color:var(--ink);line-height:1.1;letter-spacing:-.015em}
+  .slab .br{font-size:9.5px;color:var(--muted);margin-top:2px;line-height:1.3}
+  .slab .ser{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;margin-top:8px}
+  .slab .val{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px}
+  .slab.holo .inner::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.08) 48%,transparent 66%);background-size:250% 250%;animation:sheen 3s linear infinite}
+
+  /* score */
+  .scoregrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:32px 0}
+  @media(max-width:640px){.scoregrid{grid-template-columns:1fr}}
+  .stat{background:var(--bg);padding:20px 22px}
+  .stat .k{font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--faint);margin-bottom:10px}
+  .stat .v{font-family:'Archivo',sans-serif;font-weight:700;font-size:26px;letter-spacing:-.02em;color:var(--ink);line-height:1.1}
+  .verdict{text-align:left;padding:40px 0 32px;border-bottom:1px solid var(--line);margin-bottom:0}
+  .verdict .veyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:14px}
+  .verdict.win .veyebrow{color:var(--green)}
+  .verdict .vt{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(36px,7vw,56px);letter-spacing:-.04em;line-height:1;color:var(--ink)}
+  .verdict.win .vt{color:var(--green)}
+  .verdict .vd{color:var(--muted);font-size:15px;margin-top:14px;max-width:520px;line-height:1.55}
+  .slabsheader{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin:32px 0 14px}
+  /* Display case for graded slabs */
+  .displaycase{margin:36px 0 12px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#1c1712,#0f0a06);box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px rgba(212,162,74,.15) inset;position:relative;animation:caseIn 700ms cubic-bezier(.2,.9,.3,1.1) both}
+  @keyframes caseIn{from{opacity:0;transform:translateY(20px) scale(.98)}}
+  .caseplaque{background:linear-gradient(180deg,#d4a24a 0%,#b78938 50%,#8f6a26 100%);color:#1a1200;padding:11px 20px;display:flex;justify-content:space-between;align-items:center;font-family:'Archivo',sans-serif;font-weight:900;font-size:12px;letter-spacing:.15em;text-transform:uppercase;box-shadow:0 2px 4px rgba(0,0,0,.4) inset}
+  .caseplaqueright{font-family:'Space Mono',monospace;font-weight:400;font-size:10px;letter-spacing:.14em;opacity:.75}
+  .casebg{padding:32px 24px 28px;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(212,162,74,.06),transparent 70%),linear-gradient(180deg,#0f0a06,#050302);position:relative}
+  .casebg::before{content:"";position:absolute;top:0;left:0;right:0;height:12px;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent)}
+  .casebase{height:8px;background:linear-gradient(180deg,#2a1e10,#100a05);border-top:1px solid rgba(212,162,74,.2)}
+  .displaycase .slabs{margin-top:0}
+  .share{font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin-top:20px;white-space:pre-wrap;line-height:1.7;text-align:left}
+
+  .navbtn{font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;background:transparent;border:1px solid var(--line);color:var(--muted);padding:8px 14px;border-radius:20px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:.15s}
+  .navbtn:hover{color:var(--ink);border-color:var(--line2)}
+  .navcount{background:transparent;color:var(--gold);font-family:'Space Mono',monospace;font-weight:700;font-size:10px;min-width:16px;text-align:center;letter-spacing:.05em}
+  .filterbar{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 24px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+  .filterbar button{font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;background:transparent;border:1px solid var(--line);color:var(--muted);padding:7px 12px;border-radius:16px;cursor:pointer;transition:.15s}
+  .filterbar button:hover{color:var(--ink);border-color:var(--line2)}
+  .filterbar button.on{background:var(--ink);color:#0e0e10;border-color:var(--ink);font-weight:700}
+  .emptyhist{padding:60px 20px;text-align:center;color:var(--muted);border:1px solid var(--line);border-radius:10px;font-size:13.5px}
+  .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+  .hidden{display:none}
+  .center{text-align:center}
+  .toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#0e0e10;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:500;opacity:0;transition:.25s;z-index:50;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .flash{position:fixed;inset:0;pointer-events:none;z-index:40;opacity:0}
+  .flash.go{animation:flashk 1.1s ease}
+  @keyframes flashk{0%{opacity:0}12%{opacity:.7}100%{opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="logo">
+      <svg class="minibadge" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="200K-Rip">
+        <rect x="0" y="0" width="260" height="260" rx="18" fill="#0e0e10" stroke="#f0efeb" stroke-width="6"/>
+        <rect x="0" y="42" width="260" height="10" fill="#f0efeb"/>
+        <rect x="0" y="208" width="260" height="10" fill="#f0efeb"/>
+        <rect x="20" y="66" width="220" height="90" fill="#d4a24a"/>
+        <text x="130" y="137" text-anchor="middle" font-family="Archivo, 'Arial Black', sans-serif" font-weight="900" font-size="80" fill="#0e0e10" letter-spacing="-5">200K</text>
+        <text x="130" y="195" text-anchor="middle" font-family="Archivo, 'Arial Black', sans-serif" font-weight="900" font-size="46" fill="#f0efeb" letter-spacing="-1">RIP</text>
+      </svg>
+      <span class="lockup"><span class="num">200K</span><span class="dot">-</span>Rip<span class="sub">multi-sport</span></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <button class="navbtn" onclick="goHistory()">Collection <span id="navCount" class="navcount">0</span></button>
+      <div class="tag" id="phasetag">Sealed box · ready to rip</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section id="intro">
+    <div class="hero">
+      <div class="herorow">
+        <div class="herotext">
+          <div class="eyebrow">A sports card ripping game</div>
+          <h1>Rip four packs.<br>Chase <em>$200K</em>.</h1>
+          <p>Every box gives you four sealed packs, six cards each. The game rolls a random sport, year, and brand for every pack, then you rip it and see what you got. Base cards are worth pennies. A 1-of-1 Superfractor can be worth millions.</p>
+          <p>You keep all 24 cards, but only five get graded. Pick your best, send them to PSA, and try to clear $200,000 in combined value. About one box in twenty gets there.</p>
+          <p class="ntfcnote">Yes, Northampton Town is in there as its own sport — they're my favorite team.</p>
+          <p class="byline">A game by Drew Siegel.</p>
+        </div>
+        <svg class="badge" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="200K-Rip">
+          <rect x="0" y="0" width="260" height="260" rx="10" fill="#0e0e10" stroke="#f0efeb" stroke-width="4"/>
+          <rect x="0" y="30" width="260" height="6" fill="#f0efeb"/>
+          <rect x="0" y="224" width="260" height="6" fill="#f0efeb"/>
+          <rect x="20" y="52" width="220" height="90" fill="#d4a24a"/>
+          <text x="130" y="123" text-anchor="middle" font-family="Archivo, 'Arial Black', sans-serif" font-weight="900" font-size="72" fill="#0e0e10" letter-spacing="-4">200K</text>
+          <text x="130" y="200" text-anchor="middle" font-family="Archivo, 'Arial Black', sans-serif" font-weight="900" font-size="64" fill="#f0efeb" letter-spacing="-2">RIP</text>
+          <text x="130" y="252" text-anchor="middle" font-family="'Space Mono', monospace" font-size="10" fill="#8b8b93" letter-spacing="3">SIX SPORTS · ONE GOAL</text>
+          <g transform="translate(198,-8) rotate(12)">
+            <rect x="0" y="0" width="30" height="42" rx="2" fill="#f0efeb" stroke="#0e0e10" stroke-width="2"/>
+            <rect x="3" y="3" width="24" height="14" fill="#d4a24a"/>
+            <line x1="3" y1="24" x2="27" y2="24" stroke="#0e0e10" stroke-width="1.4"/>
+            <line x1="3" y1="30" x2="20" y2="30" stroke="#0e0e10" stroke-width="1.4"/>
+          </g>
+        </svg>
+      </div>
+      <div class="btnrow">
+        <button class="btn primary" onclick="startSpin()">Open a sealed box →</button>
+        <button class="btn ghost" onclick="goHistory()">See collection</button>
+      </div>
+      <div class="howitworks">
+        <div class="howstep">
+          <div class="num">01</div>
+          <div class="htit">Spin</div>
+          <div class="hdesc">Four wheels roll the pack: sport, year, brand, and what kind of hit you're chasing. Hate the roll? You get 2 re-spins per box.</div>
+        </div>
+        <div class="howstep">
+          <div class="num">02</div>
+          <div class="htit">Rip</div>
+          <div class="hdesc">The pack tears open and six cards fly out. Tap any card to lock it as one of your five keepers — but once locked, it's locked. Choose carefully; the next pack might be better.</div>
+        </div>
+        <div class="howstep">
+          <div class="num">03</div>
+          <div class="htit">Grade</div>
+          <div class="hdesc">Your five slabs get PSA grades (7 through 10 — gem mints multiply the value). Clear $200,000 combined and you win the box.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPIN + RIP LOOP -->
+  <section id="spin" class="hidden">
+    <div class="card-panel">
+      <div style="margin-bottom:32px">
+        <div class="tag" style="color:var(--gold);margin-bottom:14px">Pack <span id="packNo">1</span> of 4 · <span id="tally">0 cards collected</span></div>
+        <h2 class="section" style="font-size:32px;letter-spacing:-.035em;margin-bottom:12px">Set the pack.</h2>
+        <div class="sub" style="margin-bottom:0">Spin all three wheels, then rip. Every pack is its own spin — a new year, a new brand, a new chase.</div>
+      </div>
+      <div class="wheels">
+        <div class="wheel" id="w-sport"><div class="lbl">Sport</div><div class="val">—</div></div>
+        <div class="wheel" id="w-year"><div class="lbl">Year / Era</div><div class="val">—</div></div>
+        <div class="wheel" id="w-brand"><div class="lbl">Set / Brand</div><div class="val">—</div></div>
+        <div class="wheel" id="w-type"><div class="lbl">Chasing</div><div class="val">—</div><div class="type-note"></div></div>
+      </div>
+      <div class="row" style="margin-top:18px">
+        <button class="btn primary" id="spinBtn" onclick="doSpin()">Spin the sport →</button>
+        <button class="btn ghost hidden" id="respinBtn" onclick="reSpin()">Re-spin (<span id="respinN">2</span> left)</button>
+        <button class="btn grail hidden" id="ripBtn" onclick="ripPack()">Rip pack <span id="ripNo">1</span> →</button>
+        <button class="btn primary hidden" id="nextBtn" onclick="nextPack()">Spin for pack <span id="nextNo">2</span> →</button>
+        <button class="btn grail hidden" id="toCollBtn" onclick="goCollection()">Grade my box →</button>
+      </div>
+      <div class="reveal" id="reveal"></div>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section id="collection" class="hidden">
+    <div class="card-panel">
+      <h2 class="section">Your collection · 24 cards</h2>
+      <div class="sub">Pick your best <b>5</b> to slab and grade. Get them to <b>$200,000+</b> combined to win the box. Chase cards glow.</div>
+      <div class="bar">
+        <div class="selcount"><b id="selN">0</b> / 5 selected · est. value <b id="selVal" style="color:var(--gold)">$0</b></div>
+        <button class="btn primary" id="gradeBtn" onclick="gradeThem()" disabled>Grade my 5 →</button>
+      </div>
+      <div class="progwrap">
+        <div class="progbar"><div class="progfill" id="progFill" style="width:0%"></div></div>
+        <div class="progmarks"><span>$0</span><span>Goal: $200,000</span></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" class="hidden">
+    <div class="card-panel">
+      <div class="verdict" id="verdictBox">
+        <div class="veyebrow" id="verdictEyebrow">Box graded</div>
+        <div class="vt" id="verdictText">—</div>
+        <div class="vd" id="verdictDesc">—</div>
+      </div>
+      <div class="scoregrid">
+        <div class="stat"><div class="k">Graded showcase</div><div class="v" id="sShowcase">$0</div></div>
+        <div class="stat"><div class="k">Full collection</div><div class="v" id="sColl">$0</div></div>
+        <div class="stat"><div class="k">Best pull</div><div class="v" id="sBest" style="font-size:15px">—</div></div>
+      </div>
+      <div class="displaycase">
+        <div class="caseplaque">
+          <div class="caseplaqueleft">Display Case</div>
+          <div class="caseplaqueright">Your five graded slabs</div>
+        </div>
+        <div class="casebg">
+          <div class="slabs" id="slabs"></div>
+        </div>
+        <div class="casebase"></div>
+      </div>
+      <div class="share" id="shareText"></div>
+      <p style="font-size:11px;color:var(--faint);margin-top:20px;line-height:1.6;max-width:640px">Prices are anchored to real public sales for the famous grails (LeBron Exquisite RPA, Curry Logoman, Jordan &amp; Kobe vintage gems); other cards are estimated to sit realistically alongside them. Not live market pricing.</p>
+      <div class="row">
+        <button class="btn primary" onclick="copyShare()">Copy result</button>
+        <button class="btn grail" onclick="startSpin()">Rip another box →</button>
+        <button class="btn ghost" onclick="goHistory()">See full collection</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY / LIFETIME COLLECTION -->
+  <section id="history" class="hidden">
+    <div class="card-panel">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:4px">
+        <h2 class="section">Your lifetime collection</h2>
+        <button class="btn ghost" style="padding:8px 14px;font-size:13px" onclick="goHome()">← Back</button>
+      </div>
+      <div class="sub" id="histSub">Every card you've ever pulled, saved across boxes.</div>
+
+      <div class="scoregrid" style="margin-top:2px">
+        <div class="stat"><div class="k">Total cards</div><div class="v" id="hCount">0</div></div>
+        <div class="stat"><div class="k">Lifetime value</div><div class="v" id="hValue">$0</div></div>
+        <div class="stat"><div class="k">Boxes ripped · wins</div><div class="v" id="hBoxes" style="font-size:22px">0 · 0</div></div>
+      </div>
+
+      <div class="filterbar" id="filterBar"></div>
+      <div class="grid" id="histGrid"></div>
+
+      <div class="row" style="justify-content:space-between;margin-top:24px">
+        <button class="btn grail" onclick="startSpin()">Rip another box →</button>
+        <button class="btn ghost" onclick="clearHistory()" style="opacity:.7">Reset collection</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="flash" id="flash"></div>
+
+<script>
+/* ---------- DATA ----------
+   Each sport is its own module with the same architecture:
+   - eras: {year, brands, players[[name,pv,rookie]], prestige, vintage, numbered, types}
+   - pv = rough real-world base-card market value ($) for that player in that era.
+   The engine is sport-agnostic — box.era comes from whichever sport the wheel lands on. */
+const T_BASE=["Base","Insert"], T_90S=["Base","Insert","Short Print","Autograph"],
+      T_ALL=["Base","Insert","Short Print","Autograph","Patch / RPA"];
+
+/* ---------- FULL SPORTS DATA — every year 1950-2026 for majors, 1992+/1996+ for EPL/MLS ----------
+   Approximations flagged with (~) in the year comment. Player pools ~8-12 per era.
+   pv = plausible real-world base-card market value ($). Marquee cards anchored via GRAILS.
+   Historically:
+     - Autographs on cards began ~1990 (Upper Deck)
+     - Serial numbering began ~1996 (SP Championship / Topps Chrome refractors)
+     - Patch/RPA format emerged 2003 (Upper Deck Exquisite basketball)
+*/
+
+// Helper to compress era definitions — fills prestige/vintage/numbered/types by year rules
+function ERA(year, brands, players, {prestige=1, vintage, numbered, types}={}){
+  const yr = parseInt(String(year).slice(0,4));
+  if(vintage===undefined) vintage = yr < 1998;
+  if(numbered===undefined) numbered = yr >= 1996;
+  if(types===undefined){
+    if(yr < 1990) types = T_BASE;
+    else if(yr < 2003) types = T_90S;
+    else types = T_ALL;
+  }
+  return {year, prestige, vintage, numbered, types, brands, players};
+}
+
+const SPORTS = {
+
+  NBA: { label:"NBA", eras:[
+    // === 1950s ===
+    ERA("1950-51", ["Bowman"], [["George Mikan",950,false],["Bob Cousy",520,true],["Paul Arizin",180,true],["Ed Macauley",90,false]], {prestige:1.5}),
+    ERA("1951-52", ["Bowman"], [["George Mikan",480,false],["Bob Cousy",260,false],["Paul Arizin",140,false],["Bob Davies",70,false]], {prestige:1.4}),
+    ERA("1957-58", ["Topps"], [["Bill Russell",2200,true],["Bob Cousy",320,false],["Paul Arizin",120,false],["Dolph Schayes",120,false],["Bob Pettit",280,false],["Cliff Hagan",90,true]], {prestige:1.5}),
+    ERA("1961-62", ["Fleer"], [["Wilt Chamberlain",2400,true],["Bill Russell",520,false],["Oscar Robertson",980,true],["Jerry West",1100,true],["Elgin Baylor",380,false],["Bob Pettit",180,false],["Bob Cousy",180,false],["Wayne Embry",70,true]], {prestige:1.5}),
+    // === 1969-70s ===
+    ERA("1969-70", ["Topps"], [["Lew Alcindor",1800,true],["Wilt Chamberlain",320,false],["Jerry West",280,false],["Oscar Robertson",220,false],["John Havlicek",180,false],["Willis Reed",180,false],["Earl Monroe",120,false],["Elvin Hayes",90,false]], {prestige:1.4}),
+    ERA("1970-71", ["Topps"], [["Pete Maravich",1400,true],["Kareem Abdul-Jabbar",380,false],["Dave Cowens",280,true],["Bob Lanier",180,true],["Willis Reed",120,false],["Jerry West",180,false],["John Havlicek",150,false]], {prestige:1.35}),
+    ERA("1971-72", ["Topps"], [["Julius Erving",1500,true],["Kareem Abdul-Jabbar",250,false],["Artis Gilmore",280,true],["Nate Archibald",180,true],["John Havlicek",120,false],["Pete Maravich",250,false],["Rick Barry",120,false]], {prestige:1.3}),
+    ERA("1972-73", ["Topps"], [["Julius Erving",520,false],["Kareem Abdul-Jabbar",220,false],["Bob McAdoo",320,true],["Wilt Chamberlain",200,false],["Jerry West",120,false],["John Havlicek",100,false]], {prestige:1.3}),
+    ERA("1973-74", ["Topps"], [["George Gervin",480,true],["Bill Walton",380,true],["Julius Erving",280,false],["Kareem Abdul-Jabbar",180,false],["Doug Collins",90,true],["Larry Kenon",70,true]], {prestige:1.3}),
+    ERA("1974-75", ["Topps"], [["Bill Walton",180,false],["Moses Malone",580,true],["Kareem Abdul-Jabbar",150,false],["Julius Erving",180,false],["Bob McAdoo",100,false],["Elvin Hayes",70,false]], {prestige:1.3}),
+    ERA("1975-76", ["Topps"], [["Adrian Dantley",180,true],["Alvan Adams",90,true],["Julius Erving",180,false],["Kareem Abdul-Jabbar",180,false],["George Gervin",150,false],["Rick Barry",90,false]], {prestige:1.3}),
+    ERA("1976-77", ["Topps"], [["Robert Parish",220,true],["Adrian Dantley",90,false],["Julius Erving",180,false],["Kareem Abdul-Jabbar",180,false],["Bill Walton",120,false],["George Gervin",120,false]], {prestige:1.3}),
+    ERA("1977-78", ["Topps"], [["Bernard King",280,true],["Marques Johnson",150,true],["Jack Sikma",120,true],["Julius Erving",180,false],["Kareem Abdul-Jabbar",180,false],["Bill Walton",120,false]], {prestige:1.3}),
+    ERA("1978-79", ["Topps"], [["Larry Bird",1200,true],["Larry Nance",180,true],["Reggie Theus",90,true],["Kareem Abdul-Jabbar",150,false],["Julius Erving",150,false],["George Gervin",120,false]], {prestige:1.35}),
+    ERA("1979-80", ["Topps"], [["Magic Johnson",1400,true],["Larry Bird",580,false],["Bill Cartwright",90,true],["Larry Nance",120,false],["Julius Erving",180,false],["Kareem Abdul-Jabbar",150,false]], {prestige:1.4}),
+    // === 1980s ===
+    ERA("1980-81", ["Topps"], [["Kevin McHale",420,true],["Kiki Vandeweghe",120,true],["Michael Ray Richardson",70,true],["Larry Bird",280,false],["Magic Johnson",320,false],["Julius Erving",150,false]], {prestige:1.35}),
+    ERA("1981-82", ["Topps"], [["Isiah Thomas",520,true],["Kelly Tripucka",120,true],["Buck Williams",150,true],["Larry Bird",250,false],["Magic Johnson",250,false],["Kareem Abdul-Jabbar",120,false]], {prestige:1.3}),
+    ERA("1982-83", [], [], {prestige:1.2}), // no major NBA base set — skipped by rip logic if brands empty
+    ERA("1983-84", ["Star Co."], [["Michael Jordan",4200,false],["Hakeem Olajuwon",180,false],["Larry Bird",280,false],["Magic Johnson",250,false],["Isiah Thomas",180,false]], {prestige:1.35, vintage:true}),
+    ERA("1984-85", ["Star Co."], [["Michael Jordan",3800,true],["Hakeem Olajuwon",380,true],["Charles Barkley",520,true],["John Stockton",320,true],["Larry Bird",250,false],["Magic Johnson",220,false]], {prestige:1.4}),
+    ERA("1985-86", ["Star Co."], [["Patrick Ewing",680,true],["Karl Malone",380,true],["Chris Mullin",180,true],["Michael Jordan",680,false],["Larry Bird",250,false],["Hakeem Olajuwon",180,false]], {prestige:1.35}),
+    ERA("1986-87", ["Fleer","Star Co."], [["Michael Jordan",4500,true],["Hakeem Olajuwon",120,true],["Charles Barkley",120,true],["Patrick Ewing",95,true],["Karl Malone",70,true],["Larry Bird",190,false],["Magic Johnson",200,false],["Dominique Wilkins",70,true],["Isiah Thomas",80,false],["Clyde Drexler",70,true]], {prestige:1.4}),
+    ERA("1987-88", ["Fleer"], [["Michael Jordan",680,false],["David Robinson",320,true],["Reggie Miller",280,true],["Scottie Pippen",480,true],["Horace Grant",120,true],["Larry Bird",180,false],["Magic Johnson",180,false]], {prestige:1.3}),
+    ERA("1988-89", ["Fleer"], [["Michael Jordan",520,false],["Dennis Rodman",280,true],["Mark Jackson",90,true],["Kevin Johnson",90,true],["Rod Strickland",70,true],["Larry Bird",180,false],["Magic Johnson",180,false]], {prestige:1.25}),
+    ERA("1989-90", ["Fleer","Hoops","NBA Hoops"], [["David Robinson",420,false],["Tim Hardaway",180,true],["Glen Rice",120,true],["Mookie Blaylock",70,true],["Sean Elliott",70,true],["Vlade Divac",90,true],["Michael Jordan",380,false],["Magic Johnson",150,false]], {prestige:1.2}),
+    // === 1990s ===
+    ERA("1990-91", ["Fleer","Hoops","Skybox"], [["Gary Payton",280,true],["Kendall Gill",90,true],["Dennis Scott",70,true],["Dee Brown",70,true],["Derrick Coleman",90,true],["Michael Jordan",250,false],["David Robinson",180,false]], {prestige:1.1}),
+    ERA("1991-92", ["Fleer","Hoops","Skybox","Upper Deck"], [["Larry Johnson",180,true],["Dikembe Mutombo",220,true],["Steve Smith",90,true],["Stacey Augmon",70,true],["Michael Jordan",320,false],["David Robinson",150,false],["Charles Barkley",120,false]], {prestige:1.1}),
+    ERA("1992-93", ["Fleer","Hoops","Skybox","Upper Deck","Topps","Stadium Club"], [["Shaquille O'Neal",1800,true],["Alonzo Mourning",480,true],["Christian Laettner",180,true],["Michael Jordan",380,false],["Charles Barkley",150,false],["David Robinson",150,false],["Scottie Pippen",150,false]], {prestige:1.15}),
+    ERA("1993-94", ["Fleer","Hoops","Skybox","Upper Deck","Topps","Stadium Club","SP","Finest"], [["Anfernee Hardaway",380,true],["Chris Webber",380,true],["Jamal Mashburn",120,true],["Vin Baker",120,true],["Shaquille O'Neal",380,false],["Michael Jordan",320,false],["Hakeem Olajuwon",180,false]], {prestige:1.15}),
+    ERA("1994-95", ["Fleer","Hoops","Skybox","Upper Deck","Topps","Stadium Club","SP","Finest","Flair","Emotion","Skybox Premium"], [["Grant Hill",380,true],["Jason Kidd",380,true],["Juwan Howard",150,true],["Glenn Robinson",180,true],["Eddie Jones",180,true],["Shaquille O'Neal",250,false],["Michael Jordan",380,false]], {prestige:1.15}),
+    ERA("1995-96", ["Fleer","Hoops","Skybox","Upper Deck","Topps","Stadium Club","SP","Finest","Flair","Metal","SP Championship"], [["Kevin Garnett",520,true],["Michael Finley",120,true],["Jerry Stackhouse",120,true],["Rasheed Wallace",150,true],["Damon Stoudamire",120,true],["Michael Jordan",380,false],["Grant Hill",180,false]], {prestige:1.15, numbered:true}),
+    ERA("1996-97", ["Topps Chrome","Topps Finest","Fleer Ultra","Skybox Metal Universe","SP","Upper Deck","Bowman's Best","Stadium Club","Flair Showcase","Skybox EX-2000"], [["Kobe Bryant",650,true],["Allen Iverson",260,true],["Ray Allen",90,true],["Steve Nash",90,true],["Stephon Marbury",120,true],["Michael Jordan",320,false],["Shaquille O'Neal",150,false],["Grant Hill",60,false],["Penny Hardaway",70,false],["Reggie Miller",50,false]], {prestige:1.2}),
+    ERA("1997-98", ["Topps Chrome","Topps Finest","Fleer Ultra","Skybox Metal Universe","SP Authentic","Upper Deck","Bowman's Best","Stadium Club","Flair Showcase","Metal Universe Championship"], [["Tim Duncan",680,true],["Tracy McGrady",520,true],["Chauncey Billups",180,true],["Antonio McDyess",90,true],["Kobe Bryant",280,false],["Michael Jordan",320,false],["Shaquille O'Neal",150,false]], {prestige:1.2}),
+    ERA("1998-99", ["Topps Chrome","Fleer Ultra","SP Authentic","Upper Deck","Skybox Metal","Topps Gold Label","Stadium Club","Flair Showcase"], [["Vince Carter",480,true],["Dirk Nowitzki",580,true],["Paul Pierce",380,true],["Antawn Jamison",90,true],["Mike Bibby",90,true],["Kobe Bryant",180,false],["Tim Duncan",180,false],["Michael Jordan",380,false]], {prestige:1.15}),
+    ERA("1999-00", ["Topps Chrome","Fleer Ultra","SP Authentic","Upper Deck","Skybox","Topps Gold Label","Bowman's Best","Stadium Club","Fleer Focus"], [["Elton Brand",180,true],["Steve Francis",180,true],["Lamar Odom",120,true],["Ron Artest",90,true],["Manu Ginóbili",180,true],["Vince Carter",250,false],["Tim Duncan",180,false],["Kobe Bryant",220,false]], {prestige:1.1}),
+    // === 2000s ===
+    ERA("2000-01", ["Topps Chrome","Fleer Ultra","SP Authentic","Upper Deck","Skybox","Topps Gold Label","Bowman's Best","Stadium Club","Topps Reserve"], [["Michael Redd",90,true],["Hedo Türkoğlu",70,true],["Kobe Bryant",180,false],["Tim Duncan",150,false],["Shaquille O'Neal",150,false],["Vince Carter",180,false]], {prestige:1.05}),
+    ERA("2001-02", ["Topps Chrome","Fleer Ultra","SP Authentic","Upper Deck","Topps Gold Label","Bowman's Best","Stadium Club","Fleer Genuine"], [["Pau Gasol",180,true],["Tyson Chandler",90,true],["Tony Parker",280,true],["Shane Battier",90,true],["Kobe Bryant",180,false],["Tim Duncan",150,false],["Kevin Garnett",120,false]], {prestige:1.05}),
+    ERA("2002-03", ["Topps Chrome","Fleer Ultra","SP Authentic","Upper Deck","Bowman","Bowman Signature","Fleer Focus","Topps Pristine"], [["Yao Ming",480,true],["Amar'e Stoudemire",280,true],["Caron Butler",90,true],["Nenê",70,true],["Kobe Bryant",180,false],["Tim Duncan",150,false],["Shaquille O'Neal",150,false]], {prestige:1.05}),
+    ERA("2003-04", ["Topps Chrome","Upper Deck Exquisite","Fleer Ultra","Bowman","SP Authentic","Fleer Patchworks","Topps Rookie Matrix","Upper Deck Sweet Shot"], [["LeBron James",1600,true],["Carmelo Anthony",120,true],["Dwyane Wade",260,true],["Chris Bosh",60,true],["Kirk Hinrich",70,true],["Kobe Bryant",200,false],["Tim Duncan",120,false],["Kevin Garnett",90,false],["Dirk Nowitzki",90,false],["Tracy McGrady",80,false]]),
+    ERA("2004-05", ["Topps Chrome","Upper Deck Exquisite","SP Authentic","Bowman","Fleer Ultra","Topps Pristine","Upper Deck SPx"], [["Dwight Howard",280,true],["Emeka Okafor",90,true],["Andre Iguodala",120,true],["Al Jefferson",90,true],["Josh Smith",90,true],["LeBron James",420,false],["Kobe Bryant",200,false]]),
+    ERA("2005-06", ["Topps Chrome","Upper Deck Exquisite","SP Authentic","Bowman","Fleer Ultra","Topps Chronicles","Upper Deck Reflections"], [["Chris Paul",380,true],["Deron Williams",180,true],["Andrew Bynum",90,true],["Danny Granger",90,true],["David Lee",70,true],["Kobe Bryant",250,false],["LeBron James",380,false]]),
+    ERA("2006-07", ["Topps Chrome","Upper Deck Exquisite","SP Authentic","Bowman","Fleer Ultra","Topps Turkey Red","Upper Deck Chronology"], [["Brandon Roy",180,true],["LaMarcus Aldridge",180,true],["Rajon Rondo",280,true],["Kyle Lowry",120,true],["Rudy Gay",90,true],["Kobe Bryant",250,false],["LeBron James",380,false]]),
+    ERA("2007-08", ["Topps Chrome","Upper Deck Exquisite","SP Authentic","Bowman","Fleer Ultra","Topps Triple Threads","Upper Deck Premier"], [["Kevin Durant",680,true],["Al Horford",180,true],["Joakim Noah",120,true],["Marc Gasol",180,true],["Rudy Fernández",70,true],["Kobe Bryant",250,false],["LeBron James",320,false]]),
+    ERA("2008-09", ["Topps Chrome","Upper Deck Exquisite","SP Authentic","Bowman","Panini","Topps Signature","Upper Deck Premier"], [["Derrick Rose",320,true],["Russell Westbrook",480,true],["Kevin Love",280,true],["Brook Lopez",120,true],["Serge Ibaka",90,true],["Kobe Bryant",250,false],["LeBron James",320,false],["Kevin Durant",280,false]]),
+    ERA("2009-10", ["National Treasures","Panini Certified","Panini Limited","Panini Hoops","Panini Prestige","Panini Absolute","Upper Deck","Topps"], [["Stephen Curry",1300,true],["James Harden",200,true],["Blake Griffin",100,true],["Kobe Bryant",200,false],["LeBron James",300,false],["Kevin Durant",250,false],["Chris Paul",100,false],["Dwight Howard",60,false],["Derrick Rose",90,false],["Russell Westbrook",150,false]]),
+    // === 2010s ===
+    ERA("2010-11", ["Panini Prestige","National Treasures","Panini Certified","Panini Limited","Panini Absolute","Panini Threads","Panini Elite Black Box"], [["John Wall",320,true],["DeMarcus Cousins",180,true],["Paul George",380,true],["Gordon Hayward",120,true],["Greg Monroe",70,true],["LeBron James",250,false],["Kobe Bryant",180,false],["Kevin Durant",220,false]]),
+    ERA("2011-12", ["Panini Prestige","National Treasures","Panini Preferred","Panini Past & Present","Panini Gold Standard","Panini Elite"], [["Kyrie Irving",380,true],["Klay Thompson",280,true],["Kawhi Leonard",580,true],["Jimmy Butler",380,true],["Kemba Walker",120,true],["Isaiah Thomas",120,true],["LeBron James",220,false],["Kobe Bryant",180,false]]),
+    ERA("2012-13", ["Panini Prizm","National Treasures","Panini Immaculate","Panini Hoops","Panini Select","Panini Preferred","Panini Contenders","Panini Absolute"], [["Anthony Davis",200,true],["Damian Lillard",200,true],["Bradley Beal",120,true],["Andre Drummond",90,true],["Kawhi Leonard",150,false],["Kyrie Irving",120,false],["LeBron James",250,false],["Kevin Durant",200,false],["Stephen Curry",320,false]]),
+    ERA("2013-14", ["Panini Prizm","National Treasures","Panini Immaculate","Panini Select","Panini Preferred","Panini Contenders","Panini Intrigue","Panini Titanium"], [["Giannis Antetokounmpo",680,true],["Victor Oladipo",180,true],["Rudy Gobert",280,true],["Otto Porter",70,true],["Michael Carter-Williams",70,true],["LeBron James",220,false],["Kevin Durant",180,false],["Stephen Curry",320,false]]),
+    ERA("2014-15", ["Panini Prizm","National Treasures","Panini Immaculate","Panini Select","Panini Preferred","Panini Contenders","Panini Absolute","Panini Excalibur"], [["Andrew Wiggins",180,true],["Nikola Jokic",680,true],["Zach LaVine",280,true],["Jusuf Nurkic",90,true],["Julius Randle",90,true],["LeBron James",220,false],["Stephen Curry",380,false],["Kevin Durant",180,false]]),
+    ERA("2015-16", ["Panini Prizm","National Treasures","Panini Immaculate","Panini Select","Panini Contenders","Panini Excalibur","Panini Complete","Panini Flawless"], [["Karl-Anthony Towns",320,true],["Devin Booker",380,true],["Kristaps Porziņģis",180,true],["Jahlil Okafor",90,true],["D'Angelo Russell",120,true],["Stephen Curry",380,false],["LeBron James",220,false]]),
+    ERA("2016-17", ["Panini Prizm","National Treasures","Panini Immaculate","Panini Select","Panini Contenders","Donruss Optic","Panini Spectra","Panini Flawless"], [["Ben Simmons",280,true],["Joel Embiid",380,true],["Jaylen Brown",280,true],["Jamal Murray",180,true],["Buddy Hield",90,true],["Stephen Curry",280,false],["LeBron James",220,false]]),
+    ERA("2017-18", ["Panini Prizm","National Treasures","Panini Immaculate","Panini Select","Panini Contenders","Donruss Optic","Panini Spectra","Panini Flawless","Panini Mosaic"], [["Jayson Tatum",480,true],["Donovan Mitchell",380,true],["De'Aaron Fox",280,true],["Bam Adebayo",280,true],["Kyle Kuzma",120,true],["OG Anunoby",120,true],["Stephen Curry",280,false],["LeBron James",220,false]]),
+    ERA("2018-19", ["Panini Prizm","National Treasures","Panini Select","Donruss Optic","Panini Flawless","Panini Immaculate","Panini Spectra","Panini Mosaic","Panini Contenders"], [["Luka Doncic",850,true],["Trae Young",200,true],["Shai Gilgeous-Alexander",680,true],["Michael Porter Jr.",180,true],["Giannis Antetokounmpo",300,false],["LeBron James",200,false],["Stephen Curry",200,false],["Kevin Durant",150,false],["Joel Embiid",150,false]]),
+    ERA("2019-20", ["Panini Prizm","National Treasures","Panini Select","Donruss Optic","Panini Flawless","Panini Immaculate","Panini Mosaic","Panini Chronicles","Panini One and One"], [["Zion Williamson",580,true],["Ja Morant",480,true],["RJ Barrett",180,true],["Tyler Herro",180,true],["Brandon Clarke",90,true],["Luka Doncic",380,false],["Giannis Antetokounmpo",280,false]]),
+    // === 2020s ===
+    ERA("2020-21", ["Panini Prizm","National Treasures","Panini Select","Donruss Optic","Panini Flawless","Panini Immaculate","Panini Mosaic","Panini Origins","Panini Contenders"], [["LaMelo Ball",480,true],["Anthony Edwards",520,true],["Tyrese Haliburton",480,true],["Immanuel Quickley",120,true],["Desmond Bane",180,true],["Ja Morant",280,false],["Luka Doncic",320,false]]),
+    ERA("2021-22", ["Panini Prizm","National Treasures","Panini Select","Donruss Optic","Panini Flawless","Panini Immaculate","Panini Mosaic","Panini Origins","Panini Obsidian"], [["Cade Cunningham",280,true],["Evan Mobley",280,true],["Scottie Barnes",280,true],["Franz Wagner",220,true],["Josh Giddey",180,true],["Ja Morant",220,false],["Luka Doncic",280,false]]),
+    ERA("2022-23", ["Panini Prizm","National Treasures","Panini Select","Panini Mosaic","Panini Immaculate","Panini Flawless","Panini One and One","Panini Origins","Panini Court Kings"], [["Paolo Banchero",320,true],["Jabari Smith Jr.",180,true],["Chet Holmgren",280,true],["Bennedict Mathurin",120,true],["Jalen Williams",180,true],["Nikola Jokic",280,false],["Luka Doncic",280,false],["Giannis Antetokounmpo",220,false]]),
+    ERA("2023-24", ["Panini Prizm","National Treasures","Panini Select","Panini Mosaic","Panini Immaculate","Panini Flawless","Panini Court Kings","Panini Obsidian"], [["Victor Wembanyama",950,true],["Chet Holmgren",200,true],["Scoot Henderson",80,true],["Brandon Miller",120,true],["Nikola Jokic",250,false],["Luka Doncic",250,false],["Shai Gilgeous-Alexander",250,false],["Giannis Antetokounmpo",200,false],["Jayson Tatum",150,false],["Anthony Edwards",320,false]]),
+    ERA("2024-25", ["Topps Chrome","Topps Finest","Bowman","Panini Prizm","Panini Select"], [["Zaccharie Risacher",180,true],["Alex Sarr",120,true],["Reed Sheppard",180,true],["Stephon Castle",180,true],["Zach Edey",120,true],["Victor Wembanyama",520,false],["Nikola Jokic",250,false],["Shai Gilgeous-Alexander",320,false]], {prestige:1}),
+    ERA("2025-26", ["Topps Chrome","Topps Finest","Bowman","Topps Sapphire","Topps Chrome Sapphire"], [["Cooper Flagg",750,true],["Dylan Harper",380,true],["VJ Edgecombe",220,true],["Ace Bailey",220,true],["Victor Wembanyama",420,false],["Nikola Jokic",200,false],["Shai Gilgeous-Alexander",250,false],["Anthony Edwards",260,false],["Luka Doncic",200,false],["Cooper Flagg",750,true]]),
+  ]},
+
+  NFL: { label:"NFL", eras:[
+    // === 1950s ===
+    ERA("1950", ["Bowman"], [["Otto Graham",1200,false],["Y.A. Tittle",380,true],["Doak Walker",280,true],["Bob Waterfield",220,false],["Marion Motley",380,false]], {prestige:1.5}),
+    ERA("1951", ["Bowman"], [["Norm Van Brocklin",320,false],["Otto Graham",480,false],["Charlie Trippi",180,false],["Doak Walker",120,false],["Y.A. Tittle",180,false]], {prestige:1.4}),
+    ERA("1952", ["Bowman"], [["Frank Gifford",1200,true],["Hugh McElhenny",480,true],["Otto Graham",380,false],["Bob Waterfield",180,false],["Y.A. Tittle",180,false]], {prestige:1.45}),
+    ERA("1955", ["Bowman","Topps"], [["Alan Ameche",380,true],["Otto Graham",380,false],["Frank Gifford",280,false],["Bob Waterfield",180,false],["Doak Walker",120,false]], {prestige:1.4}),
+    ERA("1956", ["Topps"], [["Lenny Moore",480,true],["Roosevelt Grier",180,true],["Frank Gifford",380,false],["Y.A. Tittle",250,false],["Otto Graham",280,false]], {prestige:1.4}),
+    ERA("1957", ["Topps"], [["Jim Brown",5500,true],["Johnny Unitas",1800,true],["Bart Starr",1200,true],["Paul Hornung",300,true],["Raymond Berry",180,true],["Y.A. Tittle",220,false],["Frank Gifford",250,false],["Lenny Moore",150,true]], {prestige:1.5}),
+    ERA("1958", ["Topps"], [["Sonny Jurgensen",480,true],["Jim Parker",180,true],["Jim Brown",620,false],["Johnny Unitas",380,false],["Bart Starr",320,false],["Y.A. Tittle",180,false]], {prestige:1.35}),
+    ERA("1959", ["Topps"], [["Sam Huff",280,true],["Jim Taylor",320,true],["Jim Brown",520,false],["Johnny Unitas",320,false],["Bart Starr",280,false]], {prestige:1.3}),
+    // === 1960s ===
+    ERA("1961", ["Topps","Fleer"], [["Fran Tarkenton",580,true],["Don Meredith",320,true],["Jim Brown",380,false],["Johnny Unitas",280,false],["Paul Hornung",180,false]], {prestige:1.3}),
+    ERA("1962", ["Topps","Fleer","Post"], [["Ernie Davis",320,true],["Merlin Olsen",280,true],["Jim Brown",380,false],["Johnny Unitas",250,false],["Bart Starr",250,false]], {prestige:1.25}),
+    ERA("1964", ["Topps","Philadelphia"], [["Charley Taylor",180,true],["John Mackey",220,true],["Jim Brown",280,false],["Johnny Unitas",220,false],["Bart Starr",220,false]], {prestige:1.2}),
+    ERA("1965", ["Topps","Philadelphia"], [["Joe Namath",1800,true],["Fred Biletnikoff",280,true],["Jim Brown",320,false],["Johnny Unitas",220,false],["Fran Tarkenton",180,false]], {prestige:1.35}),
+    ERA("1966", ["Topps","Philadelphia"], [["Gale Sayers",1400,true],["Dick Butkus",1200,true],["Bob Griese",320,true],["Johnny Unitas",180,false],["Joe Namath",380,false]], {prestige:1.4}),
+    ERA("1967", ["Topps","Philadelphia"], [["Bob Griese",280,false],["Willie Lanier",180,true],["Joe Namath",320,false],["Gale Sayers",380,false],["Bart Starr",180,false]], {prestige:1.25}),
+    ERA("1968", ["Topps"], [["Larry Csonka",380,true],["Ken Stabler",280,true],["Bob Griese",250,false],["Joe Namath",280,false],["Gale Sayers",280,false]], {prestige:1.25}),
+    ERA("1969", ["Topps"], [["O.J. Simpson",680,true],["Roger Staubach",580,true],["Terry Bradshaw",520,true],["Joe Namath",280,false],["Larry Csonka",180,false]], {prestige:1.35}),
+    // === 1970s ===
+    ERA("1970", ["Topps"], [["Fran Tarkenton",180,false],["Roger Staubach",280,false],["Terry Bradshaw",280,false],["O.J. Simpson",320,false],["Bob Griese",180,false]], {prestige:1.2}),
+    ERA("1971", ["Topps"], [["Alan Page",180,true],["John Riggins",220,true],["O.J. Simpson",250,false],["Roger Staubach",220,false],["Terry Bradshaw",220,false]], {prestige:1.2}),
+    ERA("1972", ["Topps"], [["Franco Harris",480,true],["Jack Youngblood",180,true],["O.J. Simpson",250,false],["Roger Staubach",220,false],["Terry Bradshaw",220,false]], {prestige:1.2}),
+    ERA("1973", ["Topps"], [["Ken Anderson",180,true],["Chuck Foreman",90,true],["O.J. Simpson",250,false],["Franco Harris",180,false],["Terry Bradshaw",180,false]], {prestige:1.15}),
+    ERA("1974", ["Topps"], [["Lynn Swann",280,true],["Jack Ham",180,true],["Franco Harris",180,false],["Terry Bradshaw",180,false],["Roger Staubach",180,false]], {prestige:1.15}),
+    ERA("1975", ["Topps"], [["Walter Payton",1800,true],["Robert Brazile",120,true],["Franco Harris",180,false],["Terry Bradshaw",180,false],["O.J. Simpson",180,false]], {prestige:1.4}),
+    ERA("1976", ["Topps"], [["Randy White",180,true],["Steve Grogan",90,true],["Walter Payton",380,false],["Terry Bradshaw",180,false],["Roger Staubach",180,false]], {prestige:1.2}),
+    ERA("1977", ["Topps"], [["Steve Largent",320,true],["Harry Carson",120,true],["Walter Payton",280,false],["Roger Staubach",150,false],["Terry Bradshaw",150,false]], {prestige:1.15}),
+    ERA("1978", ["Topps"], [["Tony Dorsett",520,true],["Earl Campbell",520,true],["John Stallworth",180,true],["Walter Payton",280,false],["Terry Bradshaw",180,false]], {prestige:1.3}),
+    ERA("1979", ["Topps"], [["Joe Montana",320,false],["Ozzie Newsome",180,true],["Randy Gradishar",90,true],["Walter Payton",250,false],["Terry Bradshaw",150,false]], {prestige:1.2}),
+    // === 1980s ===
+    ERA("1980", ["Topps"], [["Joe Montana",1200,true],["Phil Simms",280,true],["Anthony Muñoz",180,true],["Walter Payton",250,false],["Terry Bradshaw",150,false]], {prestige:1.3}),
+    ERA("1981", ["Topps"], [["Lawrence Taylor",680,true],["Ronnie Lott",320,true],["Kellen Winslow",180,true],["Cris Collinsworth",120,true],["Joe Montana",380,false],["Walter Payton",180,false]], {prestige:1.3}),
+    ERA("1982", ["Topps"], [["Marcus Allen",380,true],["James Lofton",180,false],["Joe Montana",320,false],["Walter Payton",180,false],["Lawrence Taylor",180,false]], {prestige:1.25}),
+    ERA("1983", ["Topps"], [["John Elway",680,true],["Dan Marino",1200,true],["Jim Kelly",480,true],["Eric Dickerson",380,true],["Curt Warner",120,true],["Joe Montana",280,false],["Walter Payton",180,false]], {prestige:1.4}),
+    ERA("1984", ["Topps"], [["Steve Young",680,true],["Louis Lipps",90,true],["Dan Marino",480,false],["John Elway",380,false],["Joe Montana",280,false]], {prestige:1.3}),
+    ERA("1985", ["Topps"], [["Jerry Rice",1200,true],["Bruce Smith",280,true],["Reggie White",320,true],["Andre Reed",180,true],["Al Toon",90,true],["Dan Marino",380,false],["Joe Montana",280,false]], {prestige:1.35}),
+    ERA("1986", ["Topps"], [["Jerry Rice",1800,true],["Steve Young",600,true],["Reggie White",250,true],["Bruce Smith",180,true],["Dan Marino",320,false],["Joe Montana",380,false],["Lawrence Taylor",180,false],["John Elway",200,false],["Walter Payton",200,false],["Eric Dickerson",130,false]], {prestige:1.3}),
+    ERA("1987", ["Topps"], [["Bo Jackson",680,true],["Vinny Testaverde",120,true],["Neal Anderson",90,true],["Jerry Rice",320,false],["Dan Marino",280,false],["Joe Montana",280,false]], {prestige:1.3}),
+    ERA("1988", ["Topps"], [["Tim Brown",380,true],["Michael Irvin",320,true],["Ickey Woods",70,true],["Jerry Rice",280,false],["Dan Marino",250,false],["Bo Jackson",280,false]], {prestige:1.25}),
+    ERA("1989", ["Topps","Score","Pro Set"], [["Barry Sanders",1200,true],["Troy Aikman",580,true],["Deion Sanders",380,true],["Derrick Thomas",280,true],["Cris Carter",180,true],["Jerry Rice",250,false],["Dan Marino",180,false]], {prestige:1.4}),
+    // === 1990s ===
+    ERA("1990", ["Topps","Score","Pro Set","Action Packed","Fleer"], [["Emmitt Smith",680,true],["Junior Seau",380,true],["Rodney Hampton",90,true],["Barry Sanders",380,false],["Troy Aikman",180,false],["Jerry Rice",180,false]], {prestige:1.3}),
+    ERA("1991", ["Topps","Score","Pro Set","Fleer","Upper Deck","Wild Card","Stadium Club"], [["Brett Favre",580,true],["Herman Moore",90,true],["Ricky Watters",120,true],["Emmitt Smith",280,false],["Barry Sanders",280,false],["Troy Aikman",180,false]], {prestige:1.3}),
+    ERA("1992", ["Topps","Score","Pro Set","Fleer","Upper Deck","Stadium Club","SP","Bowman"], [["Terrell Buckley",70,true],["Steve Emtman",70,true],["Brett Favre",380,false],["Emmitt Smith",280,false],["Barry Sanders",250,false]], {prestige:1.15}),
+    ERA("1993", ["Topps","Score","Pro Set","Fleer","Upper Deck","Stadium Club","SP","Bowman","Playoff","Finest"], [["Drew Bledsoe",280,true],["Rick Mirer",120,true],["Jerome Bettis",280,true],["Brett Favre",250,false],["Emmitt Smith",280,false]], {prestige:1.2}),
+    ERA("1994", ["Topps","Score","Fleer","Upper Deck","Stadium Club","SP","Bowman","Playoff","Finest","Collector's Edge","Skybox"], [["Marshall Faulk",380,true],["Isaac Bruce",180,true],["Charlie Garner",90,true],["Emmitt Smith",250,false],["Brett Favre",250,false]], {prestige:1.2}),
+    ERA("1995", ["Topps","Score","Fleer","Upper Deck","Stadium Club","SP","Bowman","Playoff","Finest","Metal","Pinnacle","Summit"], [["Steve McNair",280,true],["Kerry Collins",120,true],["Kordell Stewart",120,true],["Curtis Martin",280,true],["Brett Favre",280,false],["Emmitt Smith",250,false]], {prestige:1.2}),
+    ERA("1996", ["Topps Chrome","SP","Fleer","Upper Deck","Bowman","Playoff","Finest","Metal","Pinnacle","Stadium Club","Leaf Signature"], [["Eddie George",180,true],["Terrell Owens",380,true],["Terry Glenn",90,true],["Brett Favre",280,false],["Emmitt Smith",220,false]], {prestige:1.2}),
+    ERA("1997", ["Topps Chrome","SP Authentic","Fleer","Upper Deck","Bowman Chrome","Playoff Contenders","Finest","Metal Universe","Pinnacle","Stadium Club","Leaf Signature","Skybox EX-2000"], [["Warrick Dunn",120,true],["Corey Dillon",120,true],["Tony Gonzalez",280,true],["Brett Favre",280,false],["Emmitt Smith",220,false]], {prestige:1.2}),
+    ERA("1998", ["Topps Chrome","SP Authentic","Fleer","Upper Deck","Bowman Chrome","Playoff Contenders","Finest","Metal Universe","Skybox EX-2001","Leaf Rookies & Stars"], [["Peyton Manning",1800,true],["Randy Moss",1200,true],["Charles Woodson",380,true],["Fred Taylor",180,true],["Ryan Leaf",90,true],["Brett Favre",250,false],["Barry Sanders",280,false]], {prestige:1.35}),
+    ERA("1999", ["Topps Chrome","SP Authentic","Fleer","Upper Deck","Bowman Chrome","Playoff Contenders","Finest","Metal Universe","Leaf Rookies & Stars","Fleer Focus"], [["Edgerrin James",380,true],["Donovan McNabb",320,true],["Ricky Williams",280,true],["Torry Holt",180,true],["Peyton Manning",380,false],["Randy Moss",320,false]], {prestige:1.3}),
+    // === 2000s ===
+    ERA("2000", ["Playoff Contenders","Bowman Chrome","Fleer","Topps Chrome","SP Authentic","Upper Deck","Bowman","Absolute","Leaf Rookies & Stars","Pacific"], [["Tom Brady",3200,true],["Brian Urlacher",200,true],["Shaun Alexander",120,true],["Chad Pennington",70,true],["Plaxico Burress",120,true],["Peyton Manning",280,false],["Randy Moss",220,false],["Marshall Faulk",120,false],["Ray Lewis",120,false],["Brett Favre",150,false],["Terrell Owens",100,false]]),
+    ERA("2001", ["Playoff Contenders","Bowman Chrome","Topps Chrome","SP Authentic","Upper Deck","Absolute","Leaf Rookies & Stars","Pacific","Donruss Elite"], [["LaDainian Tomlinson",680,true],["Drew Brees",1200,true],["Michael Vick",580,true],["Reggie Wayne",180,true],["Steve Smith Sr.",180,true],["Tom Brady",580,false],["Peyton Manning",280,false]]),
+    ERA("2002", ["Playoff Contenders","Bowman Chrome","Topps Chrome","SP Authentic","Upper Deck","Absolute","Leaf Rookies & Stars","Donruss Elite","Sage HIT"], [["Ed Reed",280,true],["Julius Peppers",180,true],["Andre Gurode",70,true],["Clinton Portis",120,true],["Tom Brady",380,false],["Peyton Manning",250,false]]),
+    ERA("2003", ["Playoff Contenders","Bowman Chrome","Topps Chrome","SP Authentic","Upper Deck","Absolute","Donruss Elite","Fleer Ultra","Leaf Rookies & Stars"], [["Larry Fitzgerald",480,false],["Troy Polamalu",280,true],["Jason Witten",280,true],["Andre Johnson",180,true],["Willis McGahee",90,true],["Tom Brady",380,false],["Peyton Manning",250,false]]),
+    ERA("2004", ["Playoff Contenders","Bowman Chrome","Topps Chrome","SP Authentic","Upper Deck","Absolute","Donruss Elite","Fleer Ultra","Leaf Rookies & Stars","Bowman Sterling"], [["Eli Manning",320,true],["Philip Rivers",380,true],["Ben Roethlisberger",480,true],["Larry Fitzgerald",380,true],["Roy Williams",90,true],["Tom Brady",380,false],["Peyton Manning",280,false]]),
+    ERA("2005", ["Playoff Contenders","Bowman Chrome","Topps Chrome","SP Authentic","Upper Deck","Absolute","Donruss Elite","Fleer Ultra","Bowman Sterling","Topps Finest"], [["Aaron Rodgers",1200,true],["DeMarcus Ware",180,true],["Frank Gore",280,true],["Roddy White",120,true],["Alex Smith",120,true],["Tom Brady",380,false],["Peyton Manning",250,false]]),
+    ERA("2006", ["Playoff Contenders","Bowman Chrome","Topps Chrome","SP Authentic","Upper Deck","Absolute","Donruss Elite","Fleer Ultra","Bowman Sterling","Topps Finest","Topps Triple Threads"], [["Vince Young",180,true],["Reggie Bush",180,true],["Matt Leinart",90,true],["Marques Colston",120,true],["Devin Hester",180,true],["Tom Brady",380,false],["Peyton Manning",280,false]]),
+    ERA("2007", ["Playoff Contenders","Bowman Chrome","Topps Chrome","SP Authentic","Upper Deck","Absolute","Donruss Elite","Fleer Ultra","Topps Finest","Topps Triple Threads","Leaf Certified"], [["Adrian Peterson",580,true],["Calvin Johnson",480,true],["Patrick Willis",180,true],["Marshawn Lynch",280,true],["Darrelle Revis",180,true],["Tom Brady",380,false]]),
+    ERA("2008", ["Playoff Contenders","Bowman Chrome","Topps Chrome","SP Authentic","Upper Deck","Absolute","Donruss Elite","Fleer Ultra","Topps Finest","Topps Triple Threads","Leaf Certified","Bowman Sterling"], [["Matt Ryan",480,true],["Joe Flacco",280,true],["Chris Johnson",280,true],["Matt Forté",180,true],["DeSean Jackson",120,true],["Adrian Peterson",380,false],["Tom Brady",380,false]]),
+    ERA("2009", ["Playoff Contenders","Bowman Chrome","Topps Chrome","SP Authentic","Upper Deck","Absolute","Donruss Elite","Topps Finest","Topps Triple Threads","Leaf Certified"], [["Matthew Stafford",380,true],["Josh Freeman",120,true],["Mark Sanchez",120,true],["Hakeem Nicks",180,true],["Percy Harvin",120,true],["Adrian Peterson",280,false],["Tom Brady",380,false]]),
+    // === 2010s ===
+    ERA("2010", ["Playoff Contenders","Bowman Chrome","Topps Chrome","SP Authentic","Panini Absolute","Panini Prestige","Panini Certified","Topps Finest","Topps Triple Threads","National Treasures"], [["Rob Gronkowski",580,true],["Sam Bradford",120,true],["Ndamukong Suh",180,true],["Dez Bryant",280,true],["Jimmy Graham",180,true],["Aaron Rodgers",380,false],["Tom Brady",380,false]]),
+    ERA("2011", ["Playoff Contenders","Bowman Chrome","Topps Chrome","Panini Absolute","Panini Prestige","Panini Certified","Topps Finest","Topps Triple Threads","National Treasures","Panini Limited"], [["Cam Newton",580,true],["A.J. Green",380,true],["Julio Jones",480,true],["Von Miller",280,true],["J.J. Watt",380,true],["Aaron Rodgers",380,false],["Tom Brady",380,false]]),
+    ERA("2012", ["Panini Prizm","National Treasures","Panini Contenders","Topps Chrome","Bowman Sterling","Topps Finest","Panini Absolute","Panini Certified","Panini Limited"], [["Russell Wilson",380,true],["Andrew Luck",180,true],["Robert Griffin III",90,true],["Aaron Rodgers",200,false],["Tom Brady",280,false],["Drew Brees",120,false],["Adrian Peterson",100,false],["Calvin Johnson",90,false],["J.J. Watt",100,false]]),
+    ERA("2013", ["Panini Prizm","National Treasures","Panini Contenders","Topps Chrome","Bowman Sterling","Topps Finest","Panini Absolute","Panini Certified","Panini Immaculate","Panini Flawless"], [["Le'Veon Bell",280,true],["Eddie Lacy",120,true],["DeAndre Hopkins",380,true],["Keenan Allen",180,true],["Tyrann Mathieu",180,true],["Peyton Manning",180,false],["Russell Wilson",280,false]]),
+    ERA("2014", ["Panini Prizm","National Treasures","Panini Contenders","Topps Chrome","Bowman Sterling","Topps Finest","Panini Absolute","Panini Certified","Panini Immaculate","Panini Flawless","Panini Select"], [["Odell Beckham Jr.",380,true],["Aaron Donald",380,true],["Khalil Mack",280,true],["Mike Evans",280,true],["Sammy Watkins",120,true],["Russell Wilson",280,false],["Peyton Manning",180,false]]),
+    ERA("2015", ["Panini Prizm","National Treasures","Panini Contenders","Topps Chrome","Panini Absolute","Panini Certified","Panini Immaculate","Panini Flawless","Panini Select","Panini Preferred"], [["Todd Gurley",180,true],["Amari Cooper",180,true],["Melvin Gordon",120,true],["Marcus Mariota",180,true],["Jameis Winston",180,true],["Peyton Manning",180,false],["Aaron Rodgers",250,false]]),
+    ERA("2016", ["Panini Prizm","National Treasures","Panini Contenders","Panini Select","Panini Absolute","Panini Certified","Panini Immaculate","Panini Flawless","Panini Preferred","Panini Spectra","Donruss Optic"], [["Ezekiel Elliott",480,true],["Dak Prescott",520,true],["Jared Goff",180,true],["Carson Wentz",180,true],["Michael Thomas",280,true],["Tom Brady",320,false],["Aaron Rodgers",250,false]]),
+    ERA("2017", ["Panini Prizm","National Treasures","Panini Contenders","Panini Immaculate","Panini Flawless","Panini Select","Panini Spectra","Donruss Optic","Panini Absolute","Panini Origins"], [["Patrick Mahomes",1800,true],["Deshaun Watson",180,true],["Christian McCaffrey",380,true],["Alvin Kamara",220,true],["JuJu Smith-Schuster",120,true],["Tom Brady",250,false],["Aaron Rodgers",180,false],["Ezekiel Elliott",100,false]]),
+    ERA("2018", ["Panini Prizm","National Treasures","Panini Contenders","Panini Immaculate","Panini Flawless","Panini Select","Panini Spectra","Donruss Optic","Panini Obsidian","Panini Origins"], [["Baker Mayfield",180,true],["Saquon Barkley",380,true],["Josh Allen",580,true],["Lamar Jackson",480,true],["Nick Chubb",180,true],["Patrick Mahomes",480,false],["Tom Brady",280,false]]),
+    ERA("2019", ["Panini Prizm","National Treasures","Panini Contenders","Panini Immaculate","Panini Flawless","Panini Select","Panini Spectra","Donruss Optic","Panini Mosaic","Panini Chronicles"], [["Kyler Murray",380,true],["Daniel Jones",120,true],["Dwayne Haskins",90,true],["DK Metcalf",280,true],["A.J. Brown",280,true],["Patrick Mahomes",380,false],["Josh Allen",280,false]]),
+    // === 2020s ===
+    ERA("2020", ["Panini Prizm","National Treasures","Panini Contenders","Panini Select","Panini Mosaic","Panini Immaculate","Panini Flawless","Panini Spectra","Panini Obsidian","Donruss Optic","Panini One"], [["Joe Burrow",550,true],["Justin Herbert",520,true],["Justin Jefferson",480,true],["Jalen Hurts",360,true],["CeeDee Lamb",280,true],["Tua Tagovailoa",180,true],["Patrick Mahomes",300,false],["Lamar Jackson",200,false],["Josh Allen",250,false]]),
+    ERA("2021", ["Panini Prizm","National Treasures","Panini Contenders","Panini Select","Panini Mosaic","Panini Immaculate","Panini Flawless","Panini Spectra","Panini Obsidian","Donruss Optic","Panini Origins"], [["Trevor Lawrence",380,true],["Justin Fields",280,true],["Mac Jones",180,true],["Ja'Marr Chase",480,true],["Kyle Pitts",220,true],["Najee Harris",180,true],["Patrick Mahomes",300,false],["Josh Allen",280,false]]),
+    ERA("2022", ["Panini Prizm","National Treasures","Panini Contenders","Panini Select","Panini Mosaic","Panini Immaculate","Panini Flawless","Panini Obsidian","Donruss Optic","Panini Absolute"], [["Kenny Pickett",120,true],["Garrett Wilson",380,true],["Chris Olave",220,true],["Drake London",180,true],["Breece Hall",220,true],["Brock Purdy",320,true],["Patrick Mahomes",300,false],["Josh Allen",280,false]]),
+    ERA("2023", ["Panini Prizm","National Treasures","Panini Contenders","Panini Select","Panini Mosaic","Panini Immaculate","Panini Flawless","Panini Obsidian","Donruss Optic","Panini Origins"], [["C.J. Stroud",480,true],["Bryce Young",180,true],["Anthony Richardson",280,true],["Bijan Robinson",280,true],["Jahmyr Gibbs",180,true],["Puka Nacua",380,true],["Patrick Mahomes",320,false],["Josh Allen",250,false]]),
+    ERA("2024", ["Panini Prizm","National Treasures","Panini Contenders","Panini Select","Panini Flawless","Panini Immaculate","Panini Obsidian","Panini Chronicles","Donruss Optic"], [["Caleb Williams",620,true],["Jayden Daniels",480,true],["Bo Nix",180,true],["Drake Maye",220,true],["Marvin Harrison Jr.",380,true],["Malik Nabers",260,true],["Rome Odunze",200,true],["Patrick Mahomes",320,false],["Josh Allen",260,false],["Joe Burrow",240,false]]),
+    ERA("2025", ["Panini Prizm","National Treasures","Panini Select","Panini Immaculate","Topps Chrome","Bowman Chrome","Topps Finest"], [["Cam Ward",450,true],["Shedeur Sanders",380,true],["Ashton Jeanty",300,true],["Travis Hunter",520,true],["Abdul Carter",180,true],["Patrick Mahomes",300,false],["Jayden Daniels",280,false],["Caleb Williams",280,false],["Josh Allen",240,false],["Joe Burrow",220,false]]),
+    ERA("2026", ["Topps Chrome","Bowman Chrome","Topps Finest","Topps Sapphire"], [["Arch Manning",480,true],["Drew Allar",180,true],["Garrett Nussmeier",180,true],["Cade Klubnik",120,true],["Patrick Mahomes",280,false],["Jayden Daniels",250,false],["Josh Allen",220,false],["Caleb Williams",220,false]]),
+  ]},
+
+  MLB: { label:"MLB", eras:[
+    // === 1950s ===
+    ERA("1952", ["Topps","Bowman"], [["Mickey Mantle",8500,true],["Willie Mays",1400,false],["Jackie Robinson",950,false],["Yogi Berra",380,false],["Roy Campanella",280,false],["Duke Snider",320,false],["Eddie Mathews",260,true],["Pee Wee Reese",180,false],["Warren Spahn",220,false]], {prestige:1.6}),
+    ERA("1953", ["Topps","Bowman"], [["Mickey Mantle",1200,false],["Willie Mays",580,false],["Jackie Robinson",480,false],["Yogi Berra",280,false],["Roy Campanella",180,false],["Whitey Ford",320,false]], {prestige:1.45}),
+    ERA("1954", ["Topps","Bowman"], [["Hank Aaron",2200,true],["Al Kaline",1400,true],["Ernie Banks",1800,true],["Ted Williams",580,false],["Mickey Mantle",680,false],["Willie Mays",380,false]], {prestige:1.5}),
+    ERA("1955", ["Topps","Bowman"], [["Roberto Clemente",2400,true],["Sandy Koufax",1800,true],["Harmon Killebrew",520,true],["Ken Boyer",180,true],["Hank Aaron",380,false],["Mickey Mantle",480,false]], {prestige:1.55}),
+    ERA("1956", ["Topps"], [["Luis Aparicio",320,true],["Mickey Mantle",580,false],["Willie Mays",320,false],["Hank Aaron",320,false],["Ted Williams",380,false]], {prestige:1.4}),
+    ERA("1957", ["Topps"], [["Frank Robinson",680,false],["Brooks Robinson",480,true],["Bill Mazeroski",180,true],["Mickey Mantle",480,false],["Willie Mays",280,false],["Hank Aaron",280,false]], {prestige:1.35}),
+    ERA("1958", ["Topps"], [["Roger Maris",580,false],["Orlando Cepeda",280,true],["Mickey Mantle",480,false],["Willie Mays",280,false],["Hank Aaron",280,false]], {prestige:1.3}),
+    ERA("1959", ["Topps"], [["Bob Gibson",680,true],["Bill White",120,true],["Mickey Mantle",380,false],["Willie Mays",280,false],["Hank Aaron",280,false],["Ted Williams",320,false]], {prestige:1.35}),
+    // === 1960s ===
+    ERA("1961", ["Topps","Fleer"], [["Juan Marichal",380,true],["Billy Williams",280,true],["Ron Santo",220,true],["Mickey Mantle",380,false],["Roger Maris",320,false],["Willie Mays",250,false]], {prestige:1.3}),
+    ERA("1963", ["Topps","Fleer"], [["Pete Rose",1200,true],["Willie Stargell",480,true],["Rusty Staub",120,true],["Sandy Koufax",320,false],["Mickey Mantle",380,false],["Willie Mays",250,false]], {prestige:1.4}),
+    ERA("1965", ["Topps"], [["Steve Carlton",580,true],["Joe Morgan",280,true],["Tug McGraw",90,true],["Mickey Mantle",320,false],["Willie Mays",220,false],["Hank Aaron",220,false]], {prestige:1.3}),
+    ERA("1967", ["Topps"], [["Rod Carew",580,true],["Tom Seaver",1200,true],["Reggie Jackson",380,false],["Mickey Mantle",280,false],["Willie Mays",180,false]], {prestige:1.35}),
+    ERA("1968", ["Topps"], [["Nolan Ryan",1800,true],["Johnny Bench",1200,true],["Jerry Koosman",180,true],["Rod Carew",250,false],["Tom Seaver",280,false],["Reggie Jackson",380,false]], {prestige:1.4}),
+    ERA("1969", ["Topps"], [["Reggie Jackson",1400,true],["Rollie Fingers",280,true],["Bobby Bonds",180,true],["Nolan Ryan",380,false],["Johnny Bench",320,false],["Tom Seaver",250,false]], {prestige:1.4}),
+    // === 1970s ===
+    ERA("1971", ["Topps"], [["Bert Blyleven",280,true],["Ted Simmons",180,true],["Dusty Baker",120,true],["Nolan Ryan",250,false],["Reggie Jackson",280,false],["Johnny Bench",180,false]], {prestige:1.25}),
+    ERA("1973", ["Topps"], [["Mike Schmidt",1200,true],["Dwight Evans",180,true],["Bob Boone",90,true],["Nolan Ryan",250,false],["Reggie Jackson",280,false],["Johnny Bench",180,false]], {prestige:1.3}),
+    ERA("1975", ["Topps"], [["George Brett",680,true],["Robin Yount",480,true],["Jim Rice",180,true],["Fred Lynn",120,true],["Gary Carter",280,true],["Nolan Ryan",250,false],["Mike Schmidt",280,false]], {prestige:1.35}),
+    ERA("1977", ["Topps"], [["Andre Dawson",280,true],["Dale Murphy",180,true],["Bruce Sutter",90,true],["Nolan Ryan",250,false],["Reggie Jackson",280,false],["Mike Schmidt",280,false]], {prestige:1.25}),
+    ERA("1979", ["Topps"], [["Ozzie Smith",580,true],["Bob Horner",90,true],["Rick Sutcliffe",70,true],["Nolan Ryan",250,false],["Reggie Jackson",280,false],["George Brett",280,false]], {prestige:1.3}),
+    // === 1980s ===
+    ERA("1980", ["Topps"], [["Rickey Henderson",1800,true],["Rickey Henderson",1800,true],["Nolan Ryan",250,false],["Mike Schmidt",280,false],["George Brett",320,false]], {prestige:1.4}),
+    ERA("1981", ["Topps","Fleer","Donruss"], [["Kirk Gibson",180,true],["Fernando Valenzuela",180,true],["Harold Baines",90,true],["Nolan Ryan",250,false],["Mike Schmidt",280,false]], {prestige:1.2}),
+    ERA("1982", ["Topps","Fleer","Donruss"], [["Cal Ripken Jr.",480,true],["Wade Boggs",280,true],["Kent Hrbek",90,true],["Nolan Ryan",250,false],["Mike Schmidt",250,false]], {prestige:1.3}),
+    ERA("1984", ["Topps","Fleer","Donruss","Fleer Update"], [["Don Mattingly",380,true],["Darryl Strawberry",180,true],["Ryne Sandberg",180,false],["Nolan Ryan",250,false],["Mike Schmidt",250,false]], {prestige:1.3}),
+    ERA("1985", ["Topps","Fleer","Donruss","Topps Traded"], [["Roger Clemens",380,true],["Dwight Gooden",280,true],["Mark McGwire",380,true],["Don Mattingly",250,false],["Wade Boggs",180,false]], {prestige:1.3}),
+    ERA("1986", ["Topps","Fleer","Donruss","Fleer Update","Topps Traded"], [["Barry Bonds",480,true],["Barry Larkin",180,true],["Jose Canseco",280,true],["Roger Clemens",280,false],["Wade Boggs",180,false]], {prestige:1.25}),
+    ERA("1987", ["Topps","Fleer","Donruss","Score"], [["Barry Bonds",280,false],["Bo Jackson",380,true],["Mark McGwire",280,false],["Jose Canseco",180,false],["Roger Clemens",250,false]], {prestige:1.2}),
+    ERA("1988", ["Topps","Fleer","Donruss","Score"], [["Tom Glavine",280,true],["Roberto Alomar",280,true],["Craig Biggio",120,false],["Barry Bonds",250,false],["Bo Jackson",250,false]], {prestige:1.2}),
+    ERA("1989", ["Topps","Upper Deck","Fleer","Donruss","Bowman","Score"], [["Ken Griffey Jr.",1200,true],["Randy Johnson",380,true],["Craig Biggio",180,true],["John Smoltz",180,true],["Nolan Ryan",280,false],["Ozzie Smith",120,false],["Wade Boggs",100,false],["Roger Clemens",180,false],["Cal Ripken Jr.",150,false]], {prestige:1.2}),
+    // === 1990s ===
+    ERA("1990", ["Topps","Upper Deck","Fleer","Donruss","Bowman","Score","Leaf"], [["Frank Thomas",580,true],["Sammy Sosa",180,true],["Larry Walker",180,true],["Ken Griffey Jr.",280,false],["Nolan Ryan",180,false]], {prestige:1.15}),
+    ERA("1991", ["Topps","Upper Deck","Fleer","Donruss","Bowman","Score","Leaf","Stadium Club","Studio"], [["Chipper Jones",380,true],["Jim Thome",280,true],["Iván Rodríguez",280,true],["Ken Griffey Jr.",250,false],["Frank Thomas",320,false]], {prestige:1.2}),
+    ERA("1992", ["Topps","Upper Deck","Fleer","Donruss","Bowman","Stadium Club","Studio","Pinnacle","Ultra"], [["Mike Piazza",380,true],["Manny Ramirez",480,true],["Chad Curtis",70,true],["Ken Griffey Jr.",250,false],["Frank Thomas",280,false]], {prestige:1.2}),
+    ERA("1993", ["Topps","Upper Deck","Fleer","Donruss","Bowman","Stadium Club","Pinnacle","Ultra","Finest","SP"], [["Derek Jeter",680,true],["Jason Giambi",180,true],["Todd Helton",280,true],["Ken Griffey Jr.",250,false],["Frank Thomas",280,false]], {prestige:1.35}),
+    ERA("1994", ["Topps","Upper Deck","Fleer","Bowman","Stadium Club","Pinnacle","Ultra","Finest","SP","Bowman's Best","Leaf Limited"], [["Alex Rodriguez",580,true],["Vladimir Guerrero",380,true],["Bobby Higginson",70,true],["Ken Griffey Jr.",250,false],["Barry Bonds",180,false]], {prestige:1.25}),
+    ERA("1995", ["Topps","Upper Deck","Fleer","Bowman","Stadium Club","Pinnacle","Ultra","Finest","SP","Bowman's Best","Leaf Limited","Zenith"], [["Nomar Garciaparra",180,true],["Andruw Jones",180,true],["Kenny Lofton",120,false],["Ken Griffey Jr.",250,false],["Alex Rodriguez",380,false]], {prestige:1.15}),
+    ERA("1996", ["Topps Chrome","Upper Deck","Fleer","Bowman Chrome","Stadium Club","Pinnacle","Ultra","Finest","SP","Bowman's Best","Leaf Signature"], [["Andruw Jones",180,false],["Scott Rolen",180,true],["Vladimir Guerrero",280,false],["Ken Griffey Jr.",250,false],["Alex Rodriguez",320,false]], {prestige:1.15}),
+    ERA("1997", ["Topps Chrome","Upper Deck","Fleer","Bowman Chrome","Stadium Club","Pinnacle","Ultra","Finest","SP Authentic","Bowman's Best","Leaf Signature","Circa"], [["Nomar Garciaparra",180,false],["Kerry Wood",120,true],["Adrián Beltré",180,true],["Ken Griffey Jr.",250,false],["Alex Rodriguez",250,false]], {prestige:1.15}),
+    ERA("1998", ["Topps Chrome","Upper Deck","Fleer","Bowman Chrome","Stadium Club","Pinnacle","Ultra","Finest","SP Authentic","Bowman's Best","Skybox Metal Universe"], [["Miguel Cabrera",580,true],["Aramis Ramírez",90,true],["Placido Polanco",70,true],["Sammy Sosa",280,false],["Mark McGwire",380,false],["Ken Griffey Jr.",250,false]], {prestige:1.25}),
+    ERA("1999", ["Topps Chrome","Upper Deck","Fleer","Bowman Chrome","Stadium Club","Ultra","Finest","SP Authentic","Bowman's Best"], [["Carlos Beltrán",180,true],["Freddy Garcia",70,true],["Miguel Cabrera",380,false],["Ken Griffey Jr.",250,false],["Alex Rodriguez",250,false]], {prestige:1.15}),
+    // === 2000s ===
+    ERA("2000", ["Topps Chrome","Upper Deck","Fleer","Bowman Chrome","Stadium Club","Ultra","Finest","SP Authentic","Bowman's Best","Topps Heritage"], [["Adam Wainwright",120,true],["Josh Beckett",120,true],["Miguel Cabrera",280,false],["Alex Rodriguez",220,false],["Barry Bonds",220,false]], {prestige:1.1}),
+    ERA("2001", ["Bowman Chrome","Topps Chrome","Bowman Draft","Upper Deck SP Authentic","Fleer Ultra","Finest","Topps Heritage","Stadium Club","Playoff Absolute"], [["Albert Pujols",620,true],["Ichiro Suzuki",520,true],["Roy Halladay",200,false],["Alex Rodriguez",220,false],["Derek Jeter",280,false],["Chipper Jones",150,false],["Barry Bonds",200,false],["Randy Johnson",120,false]], {prestige:1.1}),
+    ERA("2002", ["Bowman Chrome","Topps Chrome","Bowman Draft","Upper Deck SP Authentic","Fleer Ultra","Finest","Topps Heritage","Stadium Club","Playoff Absolute","Topps Total"], [["Joe Mauer",280,true],["B.J. Upton",90,true],["Prince Fielder",180,true],["Albert Pujols",320,false],["Ichiro Suzuki",280,false]], {prestige:1.1}),
+    ERA("2003", ["Bowman Chrome","Topps Chrome","Bowman Draft","Upper Deck SP Authentic","Fleer Ultra","Finest","Topps Heritage","Stadium Club","Playoff Absolute","Bowman's Best"], [["Cole Hamels",180,true],["Aaron Hill",70,true],["Albert Pujols",280,false],["Ichiro Suzuki",250,false],["Barry Bonds",200,false]], {prestige:1.1}),
+    ERA("2004", ["Bowman Chrome","Topps Chrome","Bowman Draft","Upper Deck SP Authentic","Fleer Ultra","Finest","Topps Heritage","Stadium Club","Bowman Sterling","Donruss Elite"], [["Justin Verlander",380,true],["Dustin Pedroia",180,true],["Jered Weaver",120,true],["Albert Pujols",250,false],["Ichiro Suzuki",180,false]], {prestige:1.15}),
+    ERA("2005", ["Bowman Chrome","Topps Chrome","Bowman Draft","SP Authentic","Fleer Ultra","Finest","Topps Heritage","Stadium Club","Bowman Sterling","Topps Triple Threads"], [["Ryan Braun",180,true],["Ryan Zimmerman",180,true],["Troy Tulowitzki",180,true],["Albert Pujols",250,false],["Ichiro Suzuki",180,false]], {prestige:1.1}),
+    ERA("2006", ["Bowman Chrome","Topps Chrome","Bowman Draft","SP Authentic","Finest","Topps Heritage","Bowman Sterling","Topps Triple Threads","Topps Turkey Red"], [["Evan Longoria",280,true],["Andrew McCutchen",280,true],["Tim Lincecum",180,true],["Justin Upton",180,true],["Clayton Kershaw",680,true],["Albert Pujols",250,false]], {prestige:1.15}),
+    ERA("2007", ["Bowman Chrome","Topps Chrome","Bowman Draft","SP Authentic","Finest","Topps Heritage","Bowman Sterling","Topps Triple Threads"], [["Clayton Kershaw",380,false],["Jason Heyward",120,true],["Yovani Gallardo",90,true],["Albert Pujols",250,false],["Alex Rodriguez",180,false]], {prestige:1.1}),
+    ERA("2008", ["Bowman Chrome","Topps Chrome","Bowman Draft","SP Authentic","Finest","Topps Heritage","Bowman Sterling","Topps Triple Threads","Topps Chicle"], [["Jay Bruce",120,true],["Geovany Soto",90,true],["Max Scherzer",280,true],["Albert Pujols",250,false],["Clayton Kershaw",380,false]], {prestige:1.1}),
+    ERA("2009", ["Bowman Chrome","Topps Chrome","Bowman Chrome Draft","Topps Finest","Topps Triple Threads","Topps Heritage","SP Authentic","Bowman Sterling","Topps Chicle"], [["Mike Trout",1900,true],["Stephen Strasburg",280,true],["Buster Posey",280,true],["Jason Heyward",120,true],["Albert Pujols",180,false],["Derek Jeter",200,false],["Josh Hamilton",100,false]], {prestige:1.15}),
+    // === 2010s ===
+    ERA("2010", ["Bowman Chrome","Topps Chrome","Bowman Chrome Draft","Topps Finest","Topps Triple Threads","Topps Heritage","Bowman Sterling","Topps Update","Topps Tier One"], [["Aroldis Chapman",180,true],["Domonic Brown",70,true],["Mike Trout",480,false],["Stephen Strasburg",180,false],["Buster Posey",180,false]], {prestige:1.1}),
+    ERA("2011", ["Bowman Chrome","Topps Chrome","Bowman Chrome Draft","Topps Finest","Topps Triple Threads","Topps Heritage","Bowman Sterling","Topps Tier One","Topps Marquee"], [["Bryce Harper",680,true],["Manny Machado",320,true],["Anthony Rizzo",180,true],["Mike Trout",380,false],["Clayton Kershaw",180,false],["Albert Pujols",120,false],["Miguel Cabrera",120,false]]),
+    ERA("2012", ["Bowman Chrome","Topps Chrome","Bowman Chrome Draft","Topps Finest","Topps Triple Threads","Topps Heritage","Bowman Sterling","Topps Tier One","Topps Museum Collection"], [["Yasiel Puig",180,true],["Wil Myers",120,true],["Yu Darvish",180,true],["Bryce Harper",480,false],["Mike Trout",380,false]], {prestige:1.1}),
+    ERA("2013", ["Bowman Chrome","Topps Chrome","Bowman Draft","Topps Finest","Topps Triple Threads","Topps Heritage","Bowman Sterling","Topps Tier One","Topps Museum Collection","Topps Chrome Update"], [["Gerrit Cole",280,true],["Xander Bogaerts",180,true],["Jose Fernandez",180,true],["Kris Bryant",480,true],["Bryce Harper",380,false]], {prestige:1.15}),
+    ERA("2014", ["Bowman Chrome","Topps Chrome","Bowman Draft","Topps Finest","Topps Triple Threads","Topps Heritage","Bowman Sterling","Topps Tier One","Topps Museum Collection","Topps Chrome Update","Topps Dynasty"], [["Mookie Betts",580,true],["Jacob deGrom",380,true],["George Springer",180,true],["Kris Bryant",280,false],["Mike Trout",280,false]]),
+    ERA("2015", ["Bowman Chrome","Topps Chrome","Bowman Draft","Topps Finest","Topps Triple Threads","Topps Heritage","Bowman Sterling","Topps Tier One","Topps Museum Collection","Topps Chrome Update","Topps Dynasty"], [["Corey Seager",280,true],["Carlos Correa",280,true],["Kyle Schwarber",120,true],["Miguel Sanó",90,true],["Kris Bryant",250,false],["Mike Trout",250,false]]),
+    ERA("2016", ["Bowman Chrome","Topps Chrome","Bowman Draft","Topps Finest","Topps Triple Threads","Topps Heritage","Bowman Sterling","Topps Tier One","Topps Museum Collection","Topps Chrome Update","Topps Dynasty"], [["Trea Turner",180,true],["Trevor Story",180,true],["Corey Seager",180,false],["Kris Bryant",250,false],["Mike Trout",250,false]]),
+    ERA("2017", ["Bowman Chrome","Topps Chrome","Bowman Draft","Topps Finest","Topps Triple Threads","Topps Heritage","Bowman Sterling","Topps Tier One","Topps Museum Collection","Topps Chrome Update","Topps Dynasty","Topps Chrome Sapphire"], [["Aaron Judge",580,true],["Cody Bellinger",180,true],["Rhys Hoskins",120,true],["Andrew Benintendi",120,true],["Mike Trout",250,false],["Kris Bryant",180,false]]),
+    ERA("2018", ["Bowman Chrome","Topps Chrome","Topps Finest","Topps Dynasty","Topps Sapphire","Bowman Draft","Topps Heritage","Topps Museum Collection","Topps Chrome Update"], [["Shohei Ohtani",1200,true],["Ronald Acuña Jr.",580,true],["Juan Soto",520,true],["Gleyber Torres",120,true],["Mike Trout",280,false],["Aaron Judge",320,false],["Mookie Betts",180,false],["Cody Bellinger",100,false]]),
+    ERA("2019", ["Bowman Chrome","Topps Chrome","Topps Finest","Topps Dynasty","Topps Sapphire","Bowman Draft","Topps Heritage","Topps Museum Collection","Topps Chrome Update","Topps Chrome Sapphire"], [["Vladimir Guerrero Jr.",380,true],["Fernando Tatís Jr.",480,true],["Pete Alonso",280,true],["Eloy Jimenez",120,true],["Yordan Alvarez",280,true],["Aaron Judge",280,false]]),
+    // === 2020s ===
+    ERA("2020", ["Bowman Chrome","Topps Chrome","Topps Finest","Topps Dynasty","Topps Sapphire","Bowman Draft","Topps Heritage","Topps Museum Collection","Topps Chrome Update","Topps Chrome Sapphire"], [["Luis Robert",180,true],["Kyle Lewis",90,true],["Cristian Pache",70,true],["Fernando Tatís Jr.",320,false],["Vladimir Guerrero Jr.",180,false]]),
+    ERA("2021", ["Bowman Chrome","Topps Chrome","Topps Finest","Topps Dynasty","Topps Sapphire","Bowman Draft","Topps Heritage","Topps Museum Collection","Topps Chrome Update","Topps Chrome Sapphire","Topps Cosmic Chrome"], [["Wander Franco",280,true],["Randy Arozarena",180,true],["Jonathan India",120,true],["Vladimir Guerrero Jr.",250,false],["Fernando Tatís Jr.",280,false]]),
+    ERA("2022", ["Bowman Chrome","Topps Chrome","Topps Chrome Sapphire","Topps Finest","Topps Dynasty","Topps Sapphire","Topps Heritage","Topps Museum Collection","Topps Chrome Update","Topps Cosmic Chrome"], [["Julio Rodríguez",480,true],["Adley Rutschman",280,true],["Bobby Witt Jr.",380,true],["Spencer Torkelson",120,true],["Shohei Ohtani",320,false],["Aaron Judge",380,false],["Juan Soto",250,false],["Ronald Acuña Jr.",300,false]]),
+    ERA("2023", ["Bowman Chrome","Topps Chrome","Topps Chrome Sapphire","Topps Finest","Topps Dynasty","Topps Sapphire","Topps Heritage","Topps Museum Collection","Topps Chrome Update","Topps Chrome Black"], [["Corbin Carroll",280,true],["Gunnar Henderson",320,true],["Elly De La Cruz",380,true],["James Wood",180,true],["Shohei Ohtani",420,false],["Aaron Judge",320,false],["Ronald Acuña Jr.",380,false]]),
+    ERA("2024", ["Bowman Chrome","Topps Chrome","Topps Chrome Sapphire","Topps Finest","Topps Dynasty","Topps Sapphire","Topps Heritage","Topps Museum Collection","Topps Chrome Update","Topps Chrome Black"], [["Paul Skenes",620,true],["Jackson Holliday",380,true],["Wyatt Langford",220,true],["Jackson Chourio",280,true],["Shohei Ohtani",420,false],["Aaron Judge",320,false],["Juan Soto",280,false],["Bobby Witt Jr.",280,false],["José Ramírez",120,false]]),
+    ERA("2025", ["Bowman Chrome","Topps Chrome","Topps Chrome Sapphire","Topps Finest","Topps Dynasty","Topps Sapphire","Topps Heritage","Topps Chrome Update","Topps Chrome Black"], [["Roki Sasaki",380,true],["Dylan Crews",280,true],["Roman Anthony",320,true],["Walker Jenkins",220,true],["Shohei Ohtani",380,false],["Paul Skenes",380,false],["Aaron Judge",280,false]]),
+    ERA("2026", ["Bowman Chrome","Topps Chrome","Topps Chrome Sapphire","Topps Finest","Topps Dynasty"], [["Ethan Salas",280,true],["Konnor Griffin",180,true],["Shohei Ohtani",320,false],["Paul Skenes",320,false],["Aaron Judge",250,false]]),
+  ]},
+
+  EPL: { label:"Premier League", eras:[
+    ERA("1992-93", ["Merlin Premier League"], [["Eric Cantona",380,true],["Alan Shearer",220,false],["Ryan Giggs",280,true],["Peter Schmeichel",180,true],["Ian Wright",120,false],["Roy Keane",120,false]], {prestige:1.15}),
+    ERA("1993-94", ["Merlin Premier League"], [["Andy Cole",220,true],["Chris Sutton",120,true],["Eric Cantona",280,false],["Alan Shearer",250,false],["Ryan Giggs",180,false]], {prestige:1.1}),
+    ERA("1994-95", ["Merlin Premier Gold","Merlin Premier League"], [["Robbie Fowler",320,true],["Nick Barmby",90,false],["Alan Shearer",220,false],["Eric Cantona",250,false],["Andy Cole",180,false]], {prestige:1.1}),
+    ERA("1995-96", ["Merlin Premier Gold","Merlin Premier League"], [["David Beckham",580,true],["Paul Scholes",320,true],["Gary Neville",120,true],["Nicky Butt",90,true],["Alan Shearer",250,false],["Eric Cantona",220,false]], {prestige:1.15}),
+    ERA("1996-97", ["Merlin Premier Gold","Merlin Premier League"], [["Alan Shearer",280,false],["Eric Cantona",320,false],["Ryan Giggs",220,false],["David Beckham",380,true],["Dennis Bergkamp",180,false],["Gianfranco Zola",120,false],["Roy Keane",120,false],["Andy Cole",90,false]], {prestige:1.15}),
+    ERA("1997-98", ["Merlin Premier Gold"], [["Michael Owen",380,true],["Rio Ferdinand",180,true],["Dwight Yorke",120,false],["Alan Shearer",180,false],["David Beckham",280,false]], {prestige:1.1}),
+    ERA("1998-99", ["Merlin Premier Gold"], [["Nicolas Anelka",180,false],["Frank Lampard",180,false],["Michael Owen",250,false],["David Beckham",250,false],["Dennis Bergkamp",120,false]], {prestige:1.1}),
+    ERA("1999-00", ["Merlin Premier Gold"], [["Steven Gerrard",580,true],["Kevin Phillips",120,false],["Michael Owen",180,false],["David Beckham",220,false],["Roy Keane",120,false]], {prestige:1.1}),
+    ERA("2000-01", ["Merlin Premier Gold","Panini Premier League"], [["Thierry Henry",280,false],["John Terry",180,true],["Steven Gerrard",280,false],["Michael Owen",180,false],["David Beckham",220,false]], {prestige:1.05}),
+    ERA("2001-02", ["Merlin Premier Gold","Panini Premier League"], [["Wayne Rooney",480,false],["Ashley Cole",120,true],["Thierry Henry",280,false],["Steven Gerrard",250,false],["David Beckham",220,false]], {prestige:1.05}),
+    ERA("2002-03", ["Merlin Premier Gold","Panini Premier League"], [["Cristiano Ronaldo",580,false],["Wayne Rooney",280,false],["Thierry Henry",280,false],["Steven Gerrard",220,false],["Frank Lampard",180,false]], {prestige:1.05}),
+    ERA("2003-04", ["Merlin Premier Gold","Panini Premier League"], [["Cristiano Ronaldo",1800,true],["Wayne Rooney",680,true],["Thierry Henry",380,false],["Frank Lampard",180,false],["Steven Gerrard",220,false],["John Terry",120,false],["Rio Ferdinand",100,false],["Ryan Giggs",120,false]]),
+    ERA("2004-05", ["Panini Premier League","Topps Premier League"], [["Frank Lampard",180,false],["John Terry",180,false],["Steven Gerrard",220,false],["Cristiano Ronaldo",480,false],["Thierry Henry",280,false]]),
+    ERA("2005-06", ["Panini Premier League","Topps Premier League"], [["Michael Essien",120,false],["Aaron Lennon",90,true],["Wayne Rooney",280,false],["Cristiano Ronaldo",480,false],["Thierry Henry",250,false]]),
+    ERA("2006-07", ["Panini Premier League","Topps Premier League"], [["Cesc Fàbregas",280,true],["Cristiano Ronaldo",380,false],["Wayne Rooney",250,false],["Steven Gerrard",180,false],["Frank Lampard",150,false]]),
+    ERA("2007-08", ["Panini Premier League","Topps Premier League","Topps Premier Gold"], [["Fernando Torres",320,true],["David Silva",280,false],["Cristiano Ronaldo",380,false],["Wayne Rooney",250,false],["Cesc Fàbregas",180,false]]),
+    ERA("2008-09", ["Panini Premier League","Topps Premier Gold"], [["Gareth Bale",380,false],["Robin van Persie",180,false],["Cristiano Ronaldo",320,false],["Fernando Torres",220,false],["Wayne Rooney",220,false]]),
+    ERA("2009-10", ["Panini Premier League","Topps Premier Gold"], [["Luis Suárez",480,false],["Vincent Kompany",180,false],["Wayne Rooney",250,false],["Cristiano Ronaldo",280,false],["Fernando Torres",180,false]]),
+    ERA("2010-11", ["Panini Premier League","Topps Premier Gold"], [["Sergio Agüero",320,true],["David de Gea",180,true],["Luis Suárez",320,false],["Wayne Rooney",220,false],["Robin van Persie",150,false]]),
+    ERA("2011-12", ["Panini Premier League","Topps Premier Gold"], [["Yaya Touré",180,false],["Juan Mata",180,false],["Sergio Agüero",280,false],["Luis Suárez",280,false],["Robin van Persie",180,false]]),
+    ERA("2012-13", ["Panini Premier League","Topps Premier Gold","Topps Match Attax"], [["Eden Hazard",280,true],["Michu",70,true],["Sergio Agüero",250,false],["Luis Suárez",280,false],["Robin van Persie",180,false]]),
+    ERA("2013-14", ["Panini Premier League","Topps Premier Gold","Topps Match Attax"], [["Eden Hazard",220,false],["Luis Suárez",280,false],["Sergio Agüero",220,false],["Yaya Touré",120,false],["Vincent Kompany",100,false],["Robin van Persie",150,false],["Wayne Rooney",180,false],["David Silva",120,false]]),
+    ERA("2014-15", ["Panini Premier League","Topps Premier Gold","Topps Match Attax"], [["Harry Kane",380,true],["Diego Costa",180,false],["Eden Hazard",220,false],["Sergio Agüero",220,false],["David Silva",120,false]]),
+    ERA("2015-16", ["Panini Premier League","Topps Premier Gold","Topps Match Attax","Topps Chrome Premier League"], [["Riyad Mahrez",180,false],["Jamie Vardy",180,false],["Harry Kane",320,false],["Eden Hazard",180,false],["Sergio Agüero",180,false]]),
+    ERA("2016-17", ["Panini Premier League","Topps Chrome Premier League","Topps Merlin Chrome"], [["Kevin De Bruyne",280,false],["Sadio Mané",180,false],["N'Golo Kanté",180,false],["Harry Kane",280,false],["Eden Hazard",180,false]]),
+    ERA("2017-18", ["Panini Prizm Premier League","Topps Chrome Premier League","Topps Merlin Chrome"], [["Mohamed Salah",380,false],["Kevin De Bruyne",250,false],["Harry Kane",280,false],["Sadio Mané",180,false],["Eden Hazard",180,false]]),
+    ERA("2018-19", ["Panini Prizm Premier League","Topps Chrome Premier League","Topps Merlin Chrome"], [["Trent Alexander-Arnold",380,true],["Virgil van Dijk",220,false],["Mohamed Salah",320,false],["Kevin De Bruyne",280,false],["Sadio Mané",180,false],["Harry Kane",250,false],["Raheem Sterling",180,false],["Sergio Agüero",150,false]]),
+    ERA("2019-20", ["Panini Prizm Premier League","Topps Chrome Premier League","Topps Merlin Chrome"], [["Bruno Fernandes",280,false],["Mason Mount",280,true],["Trent Alexander-Arnold",280,false],["Mohamed Salah",280,false],["Harry Kane",220,false]]),
+    ERA("2020-21", ["Panini Prizm Premier League","Topps Chrome Premier League","Topps Merlin Chrome","Panini Immaculate"], [["Phil Foden",320,true],["Bukayo Saka",380,true],["Bruno Fernandes",250,false],["Mohamed Salah",280,false],["Harry Kane",220,false]]),
+    ERA("2021-22", ["Panini Prizm Premier League","Topps Chrome Premier League","Topps Merlin Chrome","Panini Immaculate"], [["Reece James",180,false],["Declan Rice",180,true],["Mohamed Salah",280,false],["Kevin De Bruyne",250,false],["Bukayo Saka",280,false]]),
+    ERA("2022-23", ["Panini Prizm Premier League","Topps Chrome Premier League","Topps Merlin Chrome","Panini Immaculate"], [["Erling Haaland",1400,true],["Bukayo Saka",380,false],["Martin Ødegaard",220,false],["Kevin De Bruyne",250,false],["Mohamed Salah",280,false],["Harry Kane",250,false],["Virgil van Dijk",180,false],["Trent Alexander-Arnold",250,false],["Cole Palmer",320,true]]),
+    ERA("2023-24", ["Panini Prizm Premier League","Topps Chrome Premier League","Topps Merlin Chrome","Topps UEFA Chrome"], [["Cole Palmer",580,true],["Alejandro Garnacho",280,true],["Erling Haaland",620,false],["Bukayo Saka",320,false],["Phil Foden",250,false],["Rodri",220,false],["Declan Rice",180,false],["Mohamed Salah",250,false],["Bruno Fernandes",180,false]]),
+    ERA("2024-25", ["Panini Prizm Premier League","Topps Chrome Premier League","Topps Merlin Chrome","Topps UEFA Chrome"], [["Erling Haaland",580,false],["Cole Palmer",420,false],["Mohamed Salah",320,false],["Bukayo Saka",280,false],["Bruno Fernandes",180,false],["Alexander Isak",280,false],["Rodri",180,false],["Phil Foden",220,false],["Declan Rice",180,false]]),
+    ERA("2025-26", ["Panini Prizm Premier League","Topps Chrome Premier League","Topps Merlin Chrome","Topps UEFA Chrome"], [["Estêvão Willian",280,true],["Mohamed Salah",280,false],["Erling Haaland",480,false],["Cole Palmer",380,false],["Bukayo Saka",280,false]]),
+  ]},
+
+  MLS: { label:"MLS", eras:[
+    ERA("1996", ["Upper Deck MLS"], [["Eric Wynalda",180,true],["Tab Ramos",120,true],["Alexi Lalas",120,true],["Jorge Campos",120,true],["Marco Etcheverry",90,true]], {prestige:1.05}),
+    ERA("1998", ["Upper Deck MLS"], [["Cobi Jones",90,false],["Preki",70,false],["Roy Lassiter",70,false],["Eddie Pope",70,false]], {prestige:1}),
+    ERA("2000", ["Upper Deck MLS"], [["Ariel Graziani",70,false],["Landon Donovan",580,true],["DaMarcus Beasley",120,true],["Tim Howard",180,true],["Eddie Pope",70,false]], {prestige:1.1}),
+    ERA("2003", ["Upper Deck MLS"], [["Freddy Adu",180,true],["Landon Donovan",280,false],["DaMarcus Beasley",120,false],["Clint Dempsey",180,true]], {prestige:1}),
+    ERA("2007", ["Upper Deck MLS"], [["David Beckham",320,true],["Cuauhtémoc Blanco",120,true],["Landon Donovan",180,false],["Clint Dempsey",120,false]], {prestige:1.05}),
+    ERA("2010", ["Topps MLS","Upper Deck MLS"], [["Thierry Henry",280,true],["Rafael Márquez",120,true],["Landon Donovan",180,false],["David Beckham",220,false]], {prestige:1}),
+    ERA("2012", ["Topps MLS"], [["Chris Wondolowski",90,false],["Robbie Keane",120,false],["Thierry Henry",180,false],["Landon Donovan",150,false]], {prestige:1}),
+    ERA("2014", ["Topps MLS"], [["Kaká",180,false],["Michael Bradley",90,false],["Clint Dempsey",120,false],["Landon Donovan",120,false]], {prestige:1}),
+    ERA("2016", ["Topps MLS","Topps Chrome MLS","Panini Prizm MLS"], [["Sebastian Giovinco",120,false],["David Villa",120,false],["Kaká",150,false],["Robbie Keane",90,false],["Bradley Wright-Phillips",70,false],["Michael Bradley",70,false],["Clint Dempsey",100,false],["Andrea Pirlo",180,false]]),
+    ERA("2018", ["Topps MLS","Topps Chrome MLS","Panini Prizm MLS"], [["Zlatan Ibrahimović",280,true],["Josef Martínez",120,false],["Carlos Vela",120,false],["Wayne Rooney",180,true],["Diego Rossi",90,false],["Nicolás Lodeiro",80,false],["Bastian Schweinsteiger",120,false]]),
+    ERA("2020", ["Topps Chrome MLS","Topps Merlin Chrome MLS","Panini Prizm MLS"], [["Alphonso Davies",380,true],["Miguel Almirón",100,false],["Diego Chará",70,false],["Carlos Vela",120,false],["Josef Martínez",100,false],["Nicolás Lodeiro",80,false],["Chicharito Hernández",150,true]]),
+    ERA("2022", ["Topps Chrome MLS","Topps Merlin Chrome MLS","Topps Finest MLS","Panini Prizm MLS"], [["Xherdan Shaqiri",120,true],["Lorenzo Insigne",180,true],["Sebastián Driussi",100,false],["Hany Mukhtar",90,false],["Dániel Gazdag",70,false],["Cristian Espinoza",70,false]]),
+    ERA("2023", ["Topps Chrome MLS","Topps Merlin Chrome MLS","Topps Finest MLS","Panini Prizm MLS"], [["Lionel Messi",2200,true],["Sergio Busquets",280,true],["Jordi Alba",220,true],["Thiago Almada",180,false],["Denis Bouanga",120,false],["Luciano Acosta",100,false],["Riqui Puig",100,false]], {prestige:1.05}),
+    ERA("2024", ["Topps Chrome MLS","Topps Merlin Chrome MLS","Topps Finest MLS","Topps Dynasty MLS"], [["Lionel Messi",980,false],["Luis Suárez",380,true],["Cucho Hernández",120,false],["Cristian Roldan",70,false],["Diego Luna",120,false],["Christian Benteke",90,false],["Thiago Almada",120,false]]),
+    ERA("2025", ["Topps Chrome MLS","Topps Merlin Chrome MLS","Topps Finest MLS","Topps Dynasty MLS"], [["Cavan Sullivan",580,true],["Lionel Messi",820,false],["Luis Suárez",280,false],["Christian Pulisic",380,true],["Son Heung-min",320,true],["Emil Forsberg",120,false],["Denis Bouanga",100,false],["Thiago Almada",100,false]]),
+    ERA("2026", ["Topps Chrome MLS","Topps Merlin Chrome MLS","Topps Finest MLS","Topps Dynasty MLS"], [["Lionel Messi",680,false],["Christian Pulisic",320,false],["Cavan Sullivan",320,false],["Son Heung-min",220,false],["Diego Luna",120,false]]),
+  ]},
+
+  NTFC: { label:"Northampton Town", eras:[
+    ERA("2022-23", ["Cobblers Collection","Sixfields Signatures"], [["Sam Hoskins",120,false],["Jon Guthrie",60,false],["Louis Appéré",80,false],["Mitch Pinnock",70,false],["Aaron McGowan",50,false],["Jack Sowerby",45,false],["Kieron Bowie",65,true]]),
+    ERA("2023-24", ["Cobblers Collection","Sixfields Signatures","Claret & White"], [["Sam Hoskins",140,false],["Louis Appéré",95,false],["Mitch Pinnock",80,false],["Marc Leonard",85,false],["Kieron Bowie",90,false],["Jack Baldwin",70,false],["Cameron McGeehan",95,true],["Sam Sherring",60,false]]),
+    ERA("2024-25", ["Cobblers Collection","Sixfields Signatures","Claret & White","Cobblers Chrome"], [["Cameron McGeehan",180,false],["Sam Hoskins",220,false],["Jack Baldwin",150,false],["Louis Appéré",140,false],["Marcus McGuane",160,true],["Marc Leonard",120,false],["Mitch Pinnock",100,false],["Tyler Roberts",130,true],["Liam McCarron",90,true],["Aaron McGowan",80,false]]),
+  ]},
+};
+
+
+// premium sets deliver more/better hits; base products almost never do
+const PREMIUM=/National Treasures|Exquisite|Flawless|Immaculate|Limited|Certified/i;
+const BASE_PRODUCT=/^(Fleer|Star Co\.|Panini Hoops)$/;
+// display label depends on rookie status (RPA = ROOKIE patch auto only)
+function typeLabel(k, rookie){
+  if(k==="Base") return rookie?"Base RC":"Base";
+  if(k==="Short Print") return "SP";
+  if(k==="Autograph") return rookie?"RC Auto":"Auto";
+  if(k==="Patch / RPA") return rookie?"RPA":"Patch Auto";
+  return k;
+}
+
+/* Real subset names per brand: inserts, the SP/case-hit chase, the auto & patch
+   lines, colored parallels by serial tier, and the 1/1 case-hit name. */
+const SETINFO = {
+  "Fleer":{ins:["Sticker"],sp:"Sticker",par:{}},
+  "Star Co.":{ins:["Team Set"],sp:"Team Set",par:{}},
+  "Topps Chrome":{ins:["Refractor","Gold Refractor"],sp:"X-Fractor",auto:"Chrome Rookie Auto",rpa:"Rookie Auto Patch",patch:"Jersey",chrome:true,caseHit:"Superfractor",par:{"/1000":"Refractor","/100":"X-Fractor","/25":"Gold Refractor","/10":"Red Refractor","1/1":"Superfractor"}},
+  "Topps Finest":{ins:["Refractor","Finest Moments"],sp:"Gold Refractor",auto:"Finest Auto",rpa:"Rookie Auto",patch:"Jersey",chrome:true,caseHit:"SuperFractor",par:{"/1000":"Refractor","/100":"Gold Refractor","/25":"Red Refractor","/10":"Orange Refractor","1/1":"SuperFractor"}},
+  "Fleer Ultra":{ins:["Fresh Ink","Thrill Seekers","Ultra Gold Medallion"],sp:"Platinum Medallion",auto:"Fresh Ink Auto",rpa:"Autographics",patch:"Game Jersey",par:{"/1000":"Gold Medallion","/100":"Platinum Medallion","/25":"Masterpiece"}},
+  "Skybox Metal Universe":{ins:["Championship Galaxy","Platinum Portraits","Metal Reign"],sp:"Precious Metal Gems",caseHit:"PMG Emerald",par:{"/100":"Precious Metal Gems","/25":"PMG Red","/10":"PMG Emerald"}},
+  "Upper Deck Exquisite":{ins:["Exquisite Signatures","Noble Nameplates"],sp:"Emerald",auto:"Exquisite Signature",rpa:"Rookie Patch Auto",patch:"Patch",caseHit:"Rookie Patch Auto",par:{"/100":"Base","/25":"Gold","/10":"Emerald"}},
+  "Bowman":{ins:["Chrome Prospect","Refractor"],sp:"Gold Refractor",auto:"Chrome Rookie Auto",rpa:"Rookie Auto",patch:"Relic",chrome:true,caseHit:"Superfractor",par:{"/1000":"Refractor","/100":"Blue Refractor","/25":"Gold Refractor","/10":"Red Refractor","1/1":"Superfractor"}},
+  "National Treasures":{ins:["Century Materials","Treasured Threads","Colossal Materials"],sp:"Century Gold",auto:"NT Signatures",rpa:"Rookie Patch Auto",patch:"Game-Worn Patch",caseHit:"Logoman",par:{"/100":"Base","/25":"Silver","/10":"Gold","1/1":"Logoman"}},
+  "Panini Certified":{ins:["Mirror","Fabric of the Game","Certified Potential"],sp:"Mirror Gold",auto:"Certified Signatures",rpa:"Rookie Patch Auto",patch:"Fabric of the Game",caseHit:"Mirror Black",par:{"/1000":"Mirror","/100":"Mirror Blue","/25":"Mirror Gold","/10":"Mirror Red","1/1":"Mirror Black"}},
+  "Panini Limited":{ins:["Monikers","Threads","Limited Logos"],sp:"Spotlight Gold",auto:"Monikers Auto",rpa:"Rookie Patch Auto",patch:"Threads",caseHit:"Platinum Spotlight",par:{"/100":"Silver Spotlight","/25":"Gold Spotlight","/10":"Platinum Spotlight","1/1":"Team Trademarks"}},
+  "Panini Hoops":{ins:["Hoopla","Rise and Shine","Lights Out","Courtside"],sp:"Hoopla Purple",auto:"Rookie Ink",rpa:"Rookie Ink Auto",patch:"Jersey",caseHit:"Black",par:{"/1000":"Silver","/100":"Blue","/25":"Purple","/10":"Gold","1/1":"Black"}},
+  "Panini Prizm":{ins:["Color Blast","Fireworks","Emergent","Instant Impact"],sp:"Kaboom!",auto:"Sensational Signatures",rpa:"Rookie Patch Auto",patch:"Sensational Swatches",chrome:true,caseHit:"Black Finite",par:{"/1000":"Hyper","/100":"Purple","/25":"Mojo","/10":"Gold","1/1":"Black Finite"}},
+  "Panini Immaculate":{ins:["Standard Setters","Numbers","Shadowbox"],sp:"Sneak Peek",auto:"Immaculate Signatures",rpa:"Rookie Patch Auto",patch:"Dual Patch",caseHit:"Logoman",par:{"/100":"Base","/25":"Gold","/10":"Platinum","1/1":"Logoman"}},
+  "Panini Select":{ins:["Snakeskin","Sparkle","Phenomenon"],sp:"Zebra Prizm",auto:"Rookie Signatures",rpa:"Rookie Patch Auto",patch:"Swatches",chrome:true,caseHit:"Black",par:{"/1000":"Silver","/100":"Blue","/25":"Tri-Color","/10":"Gold","1/1":"Black"}},
+  "Donruss Optic":{ins:["Downtown!","My House","The Rookies","Raining 3s"],sp:"Kaboom!",auto:"Rookie Signatures",rpa:"Rookie Auto",patch:"Jersey",chrome:true,caseHit:"Gold Vinyl",par:{"/1000":"Holo","/100":"Blue","/25":"Purple","/10":"Gold","1/1":"Gold Vinyl"}},
+  "Panini Flawless":{ins:["Flawless Finishes","Diamond Signatures","Gem Materials"],sp:"Ruby",auto:"Flawless Signatures",rpa:"Rookie Patch Auto",patch:"Patch",caseHit:"Diamond",par:{"/25":"Base","/10":"Ruby","1/1":"Diamond"}},
+  "Panini Mosaic":{ins:["Bang!","Stare Masters","Give and Go","Will to Win"],sp:"Kaboom!",auto:"Rookie Autographs",rpa:"Rookie Auto",patch:"Jersey",chrome:true,caseHit:"Nebula",par:{"/1000":"Reactive Blue","/100":"Green","/25":"Gold","/10":"Black","1/1":"Nebula"}},
+  "Topps Sapphire":{ins:["Refractor","Sapphire Selections"],sp:"Padparadscha",auto:"Sapphire Auto",rpa:"Rookie Auto",patch:"Relic",chrome:true,caseHit:"Red Sapphire",par:{"/100":"Aqua","/25":"Gold","/10":"Orange","1/1":"Red Sapphire"}},
+
+  // ---- NFL-specific brands ----
+  "Topps":{ins:["All-Star","Rookie All-Star"],sp:"Rookie Stars",par:{}},
+  "Playoff Contenders":{ins:["Rookie Ticket","MVP Contenders","Playoff Ticket"],sp:"Championship Ticket",auto:"Rookie Ticket Auto",rpa:"Rookie Ticket Autograph",patch:"Playoff Materials",caseHit:"Championship Ticket Auto",par:{"/100":"Playoff Ticket","/25":"Championship Ticket","/10":"Cracked Ice","1/1":"Championship Ticket 1/1"}},
+  "Bowman Sterling":{ins:["Refractor","Rookie Refractor"],sp:"Superfractor Bowman",auto:"Bowman Rookie Auto",rpa:"Rookie Auto Relic",patch:"Rookie Relic",chrome:true,caseHit:"Superfractor",par:{"/1000":"Refractor","/100":"Blue Refractor","/25":"Gold Refractor","/10":"Red Refractor","1/1":"Superfractor"}},
+  "Panini Contenders":{ins:["Rookie Ticket","MVP Contenders","Playoff Ticket","Round Numbers"],sp:"Cracked Ice",auto:"Rookie Ticket Auto",rpa:"Rookie Ticket Patch Auto",patch:"Playoff Ticket Patch",caseHit:"Championship Ticket 1/1",par:{"/100":"Playoff Ticket","/25":"Championship Ticket","/10":"Cracked Ice","1/1":"Championship Ticket"}},
+  "SP Authentic":{ins:["Future Watch","SP Rookie","Sign of the Times"],sp:"Future Watch Auto",auto:"Sign of the Times",rpa:"Future Watch Rookie Auto",patch:"Rookie Patch",caseHit:"Sign of the Times 1/1",par:{"/1000":"Future Watch","/100":"Blue","/25":"Gold","/10":"Platinum","1/1":"Black"}},
+
+  // ---- MLB-specific brands ----
+  "Bowman":{ins:["Prospect","Rookie","Chrome Prospect"],sp:"Gold",par:{}},
+  "Upper Deck":{ins:["Star Rookie","Team Checklist"],sp:"Rookie Threads",par:{}},
+  "Donruss":{ins:["Diamond Kings","Rated Rookie","Rookie All-Star"],sp:"Rated Rookie",par:{}},
+  "Bowman Chrome":{ins:["Refractor","Rookie Refractor","Chrome Prospect Refractor"],sp:"Chrome Prospect Auto",auto:"Chrome Prospect Auto",rpa:"Rookie Auto Refractor",patch:"Chrome Relic Auto",chrome:true,caseHit:"Superfractor",par:{"/1000":"Refractor","/500":"Blue Refractor","/100":"Purple Refractor","/25":"Orange Refractor","/10":"Gold Refractor","1/1":"Superfractor"}},
+  "Bowman Draft":{ins:["Chrome Draft Refractor","Draft Pick Auto"],sp:"Chrome Draft Auto",auto:"Chrome Draft Auto",rpa:"Draft Pick Auto Relic",patch:"Draft Pick Relic",chrome:true,caseHit:"Superfractor",par:{"/1000":"Refractor","/100":"Purple Refractor","/25":"Orange","/10":"Gold","1/1":"Superfractor"}},
+  "Bowman Chrome Draft":{ins:["Chrome Draft Refractor","Draft Pick Chrome"],sp:"Chrome Draft Auto",auto:"Chrome Draft Auto",rpa:"Rookie Auto Relic",patch:"Draft Pick Relic",chrome:true,caseHit:"Superfractor",par:{"/500":"Refractor","/100":"Purple","/25":"Orange","/10":"Gold","1/1":"Superfractor"}},
+  "Upper Deck SP Authentic":{ins:["Rookie Signature","Sign of the Times","Chirography"],sp:"Rookie Signatures",auto:"Sign of the Times",rpa:"Rookie Sig Patch",patch:"Rookie Relic",caseHit:"Sign of the Times 1/1",par:{"/1000":"Base","/100":"Blue","/25":"Gold","/10":"Platinum","1/1":"Black"}},
+  "Topps Triple Threads":{ins:["Triple Autographs","Triple Relics","Unity"],sp:"Sepia",auto:"Triple Auto",rpa:"Triple Auto Relic",patch:"Triple Relic",caseHit:"Onyx 1/1",par:{"/99":"Emerald","/50":"Amethyst","/25":"Amber","/10":"Sapphire","1/1":"Onyx"}},
+  "Topps Tier One":{ins:["Break Out","Prime Performers","Clear One"],sp:"Bronze Ink",auto:"Break Out Auto",rpa:"Prime Performers Patch Auto",patch:"Prime Performers Relic",caseHit:"Cut Signature 1/1",par:{"/99":"Base","/25":"Silver Ink","/10":"Bronze Ink","1/1":"Copper Ink"}},
+  "Topps Dynasty":{ins:["Dynasty Autographed Patch","Dynasty Auto Patch Book"],sp:"Silver",auto:"Dynasty Auto",rpa:"Dynasty Auto Patch",patch:"Dynasty Relic",caseHit:"Dynasty Logoman 1/1",par:{"/10":"Gold","/5":"Silver","1/1":"Logoman"}},
+  "Topps Chrome Sapphire":{ins:["Sapphire Refractor","Sapphire Selections"],sp:"Padparadscha",auto:"Sapphire Auto",rpa:"Sapphire Auto Patch",patch:"Sapphire Relic",chrome:true,caseHit:"Red Sapphire",par:{"/500":"Aqua","/100":"Gold","/25":"Orange","/10":"Red","1/1":"Padparadscha"}},
+
+  // ---- EPL / Soccer brands ----
+  "Merlin Premier League":{ins:["Sticker","Team Set","Superstar"],sp:"Golden Sticker",par:{}},
+  "Merlin Premier Gold":{ins:["Sticker","Gold Sticker"],sp:"Gold Star",par:{}},
+  "Panini Premier League":{ins:["Team of the Season","Elite","Superstars"],sp:"Legend",par:{}},
+  "Topps Premier Gold":{ins:["Golden Boot","Golden Glove","Chairmen"],sp:"Refractor",par:{}},
+  "Topps Match Attax":{ins:["Man of the Match","100 Club","Star Player"],sp:"Limited Edition",par:{}},
+  "Panini Prizm Premier League":{ins:["Kaboom!","Color Blast","Instant Impact","Fireworks"],sp:"Silver",auto:"Signatures",rpa:"Rookie Signatures",patch:"Sensational Swatches",chrome:true,caseHit:"Black Finite",par:{"/999":"Hyper","/199":"Blue","/49":"Purple Wave","/25":"Mojo","/10":"Gold","1/1":"Black Finite"}},
+  "Topps Chrome Premier League":{ins:["Refractor","Big City Strikers","Golazo","Icons"],sp:"SuperFractor",auto:"Chrome Auto",rpa:"Rookie Chrome Auto",patch:"Chrome Relic",chrome:true,caseHit:"SuperFractor",par:{"/999":"Refractor","/99":"Purple","/50":"Blue","/25":"Gold","/10":"Red","1/1":"SuperFractor"}},
+  "Topps Merlin Chrome":{ins:["Refractor","Nostalgia","Global Icons"],sp:"SuperFractor",auto:"Chrome Auto",rpa:"Rookie Auto Patch",patch:"Chrome Relic",chrome:true,caseHit:"SuperFractor",par:{"/499":"Refractor","/150":"Aqua","/99":"Blue","/25":"Orange","/10":"Gold","1/1":"SuperFractor"}},
+  "Topps UEFA Chrome":{ins:["Refractor","Champions Crowned","Golazo"],sp:"SuperFractor",auto:"Chrome Auto",rpa:"Rookie Chrome Auto",patch:"Champions Chrome Relic",chrome:true,caseHit:"SuperFractor",par:{"/499":"Refractor","/99":"Purple","/50":"Blue","/25":"Gold","/10":"Red","1/1":"SuperFractor"}},
+
+  // ---- MLS brands ----
+  "Topps MLS":{ins:["Team of the Year","All-Star","Golden Boot"],sp:"Gold",par:{}},
+  "Topps Chrome MLS":{ins:["Refractor","Big City Strikers","MLS Icons","Golazo"],sp:"SuperFractor",auto:"Chrome Auto",rpa:"Rookie Chrome Auto",patch:"Chrome Relic",chrome:true,caseHit:"SuperFractor",par:{"/499":"Refractor","/199":"Blue","/99":"Purple","/25":"Gold","/10":"Red","1/1":"SuperFractor"}},
+  "Topps Merlin Chrome MLS":{ins:["Refractor","MLS Renaissance","Big City Strikers"],sp:"SuperFractor",auto:"Renaissance Auto",rpa:"Renaissance Rookie Auto",patch:"Merlin Chrome Relic",chrome:true,caseHit:"SuperFractor",par:{"/299":"Refractor","/99":"Aqua","/49":"Blue","/25":"Orange","/10":"Gold","1/1":"SuperFractor"}},
+  "Topps Finest MLS":{ins:["Refractor","Finest Moments","Finest Rookies"],sp:"Gold Refractor",auto:"Finest Auto",rpa:"Finest Rookie Auto",patch:"Finest Relic",chrome:true,caseHit:"SuperFractor",par:{"/250":"Refractor","/150":"Blue","/50":"Green","/25":"Gold","/10":"Orange","1/1":"SuperFractor"}},
+  "Topps Dynasty MLS":{ins:["Dynasty Autographed Patch"],sp:"Silver",auto:"Dynasty Auto",rpa:"Dynasty Rookie Auto Patch",patch:"Dynasty Relic",caseHit:"Dynasty Logoman 1/1",par:{"/10":"Gold","/5":"Silver","1/1":"Logoman"}},
+  "Panini Prizm MLS":{ins:["Color Blast","Fireworks","Instant Impact"],sp:"Silver",auto:"Rookie Signatures",rpa:"Rookie Patch Auto",patch:"Sensational Swatches",chrome:true,caseHit:"Black Finite",par:{"/999":"Hyper","/199":"Blue","/49":"Purple","/25":"Mojo","/10":"Gold","1/1":"Black Finite"}},
+
+  // ---- Northampton Town brands (fictional but internally consistent) ----
+  "Cobblers Collection":{ins:["Sixfields Stars","Away Days","Terrace Legends"],sp:"Claret & White SP",auto:"Cobblers Auto",rpa:"Cobblers Rookie Auto Patch",patch:"Matchworn Patch",caseHit:"Sixfields Gold",par:{"/500":"Away","/100":"Claret","/25":"White","/10":"Gold","1/1":"Sixfields Gold"}},
+  "Sixfields Signatures":{ins:["Signed Squad","On-Card Auto","Captain's Corner"],sp:"Gold Ink",auto:"On-Card Auto",rpa:"Signed Rookie Patch",patch:"Match Relic",caseHit:"Manager's 1/1",par:{"/199":"Base","/49":"Silver","/25":"Gold","/10":"Black","1/1":"Manager's Cut"}},
+  "Claret & White":{ins:["League One Icons","Cobblers Classic","Kit History"],sp:"Anniversary SP",auto:"Legends Auto",rpa:"Rookie Kit Auto",patch:"Kit Relic",caseHit:"Kit History 1/1",par:{"/300":"White","/100":"Claret","/25":"Gold","/10":"Black","1/1":"Vintage Kit"}},
+  "Cobblers Chrome":{ins:["Refractor","Sixfields Shine","Northampton Icons"],sp:"Gold Refractor",auto:"Chrome Auto",rpa:"Rookie Chrome Patch Auto",patch:"Chrome Relic",chrome:true,caseHit:"SuperFractor",par:{"/499":"Refractor","/99":"Purple","/50":"Blue","/25":"Gold","/10":"Red","1/1":"SuperFractor"}},
+
+  // ---- Expansion brands (common ones referenced by new eras) ----
+  // NBA vintage / 90s
+  "Star Co.":{ins:["Team Set"],sp:"Team Sticker",par:{}},
+  "Hoops":{ins:["Rookie","All-Star"],sp:"Team",par:{}},
+  "NBA Hoops":{ins:["Rookie","All-Star","Slam Dunk"],sp:"Prevue",par:{}},
+  "Skybox":{ins:["Rookie Preview","Center Stage"],sp:"Rookie Prevue",par:{}},
+  "Skybox Premium":{ins:["Rookie","Premium Standings"],sp:"Star Rubies",par:{}},
+  "Stadium Club":{ins:["Members Only","Beam Team","Chrome"],sp:"First Day Issue",auto:"Rookie Signature",par:{}},
+  "SP":{ins:["Foil","Premier Prospects","Championship Series"],sp:"All Star Foils",par:{}},
+  "SP Authentic":{ins:["Future Watch","SP Rookie","Sign of the Times"],sp:"Future Watch Auto",auto:"Sign of the Times",rpa:"Future Watch Rookie Auto",patch:"Rookie Patch",caseHit:"Sign of the Times 1/1",par:{"/1000":"Future Watch","/100":"Blue","/25":"Gold","/10":"Platinum","1/1":"Black"}},
+  "Finest":{ins:["Refractor","Rack Pack Refractor"],sp:"Gold Refractor",chrome:true,par:{"/500":"Refractor","/100":"Gold","/25":"Red","1/1":"SuperFractor"}},
+  "Flair":{ins:["Wave of the Future","Hardwood Leaders"],sp:"Row 0",par:{}},
+  "Flair Showcase":{ins:["Row 0","Row 1","Row 2","Row 3"],sp:"Legacy Collection",par:{}},
+  "Metal":{ins:["Metal Force","Rookie Roll Call"],sp:"Precious Metal Gems",par:{"/100":"Precious Metal Gems"}},
+  "Metal Universe":{ins:["Championship","Platinum Portraits","Metal Reign"],sp:"Precious Metal Gems",par:{"/100":"Precious Metal Gems","/25":"PMG Red","/10":"PMG Emerald"}},
+  "Emotion":{ins:["N-Tense"],sp:"Star Session",par:{}},
+  "Bowman's Best":{ins:["Refractor","Best Cuts"],sp:"Refractor",chrome:true,par:{"/500":"Refractor","/100":"Blue","/25":"Gold","1/1":"SuperFractor"}},
+  "SP Championship":{ins:["Championship Shots","Playoff Showcase"],sp:"Championship Fever",par:{}},
+  "Skybox EX-2000":{ins:["A Cut Above","Star Date"],sp:"Credentials",par:{}},
+  "Skybox EX-2001":{ins:["Behind the Numbers","E-X Century"],sp:"Essential Credentials",par:{"/99":"Essential Credentials"}},
+  "Topps Gold Label":{ins:["Class 1","Class 2","Class 3"],sp:"Black Label",chrome:true,par:{"/250":"Black","/100":"Gold","1/1":"Red Label"}},
+  "Fleer Focus":{ins:["Focus Rookies","Focus Pool"],sp:"Focal Point",par:{}},
+  "Fleer Genuine":{ins:["Genuine Coverage","Rookies"],sp:"Rookie Coverage",par:{}},
+  "Topps Pristine":{ins:["Personal Endorsements","Refractor"],sp:"Uncirculated Refractor",chrome:true,par:{"/999":"Refractor","/199":"Gold","/50":"Black","1/1":"Personal Signature"}},
+  "Topps Reserve":{ins:["Signed Editions","Refractor"],sp:"Reserve Autographs",par:{}},
+  "Topps Signature":{ins:["Master Strokes","Signature Series"],sp:"Signature Ink",auto:"Master Signature",par:{}},
+  "Topps Chronicles":{ins:["Chronicles","Milestones"],sp:"Framed",par:{}},
+  "Upper Deck SPx":{ins:["SPxciting Rookies","Winning Materials"],sp:"Radiance",par:{"/99":"Spectrum","/25":"Gold"}},
+  "Upper Deck Reflections":{ins:["Amber","Emerald"],sp:"Ruby",par:{"/199":"Amber","/50":"Emerald","/25":"Sapphire","/10":"Ruby","1/1":"Diamond"}},
+  "Upper Deck Chronology":{ins:["Chronology Auto","Chronology Materials"],sp:"Auto Materials",par:{}},
+  "Upper Deck Premier":{ins:["Premier Rookies","Premier Autographs"],sp:"Premier Foundations",par:{}},
+  "Upper Deck Sweet Shot":{ins:["Sweet Shot Signatures","Sweet Swatch"],sp:"Sweet Sigs",par:{}},
+  "Fleer Patchworks":{ins:["Patch Attack","Patchworks Auto"],sp:"Feel the Game",par:{}},
+  "Topps Rookie Matrix":{ins:["Rookie Matrix","Freshman Sensations"],sp:"Matrix Auto",par:{}},
+  "Bowman":{ins:["Prospect","Chrome Prospect","Rookie"],sp:"Gold",par:{}},
+  "Bowman Signature":{ins:["Signature","Signature Rookies"],sp:"Autograph",auto:"Signature Auto",par:{}},
+  "Panini":{ins:["Rookies","Elite"],sp:"Gold",par:{}},
+  "Panini Prestige":{ins:["Rookie","Stars of the NBA","Bonus Shots"],sp:"Bonus Shots Green",par:{}},
+  "Panini Preferred":{ins:["Silhouettes","Panini's Choice"],sp:"Crown Materials",par:{}},
+  "Panini Past & Present":{ins:["Fireworks","Elusive Ink"],sp:"Fireworks Gold",par:{}},
+  "Panini Gold Standard":{ins:["Rookie Jumbo","Gold Signatures"],sp:"Rookie Jumbo Patch Auto",par:{"/199":"Gold","/25":"Platinum"}},
+  "Panini Elite":{ins:["Passing the Torch","Down to the Wire"],sp:"Elite Series",par:{}},
+  "Panini Elite Black Box":{ins:["Rookie Materials","Elite Signatures"],sp:"Rookie Patch Auto",par:{}},
+  "Panini Titanium":{ins:["Titanium Rookies","Legendary Contenders"],sp:"Titanium Threads",par:{}},
+  "Panini Intrigue":{ins:["Intriguing Players","Autographic"],sp:"Autographic Booklet",par:{}},
+  "Panini Excalibur":{ins:["Kings of Battle","Crusade"],sp:"Sword",par:{}},
+  "Panini Complete":{ins:["Rookies","Complete Sights"],sp:"Silver",par:{}},
+  "Panini Spectra":{ins:["Signatures","Neon Blue"],sp:"Universal Signatures",par:{"/199":"Nebula","/49":"Neon Blue","/25":"Neon Green","/10":"Gold","1/1":"Nebula"}},
+  "Panini Chronicles":{ins:["Origins","Playbook","Chronicles"],sp:"Framed",par:{}},
+  "Panini One and One":{ins:["Downtown!","Timeless Moments"],sp:"Downtown!",par:{}},
+  "Panini Contenders":{ins:["Rookie Ticket","MVP Contenders","Playoff Ticket","Round Numbers"],sp:"Cracked Ice",auto:"Rookie Ticket Auto",rpa:"Rookie Ticket Patch Auto",patch:"Playoff Ticket Patch",caseHit:"Championship Ticket 1/1",par:{"/100":"Playoff Ticket","/25":"Championship Ticket","/10":"Cracked Ice","1/1":"Championship Ticket"}},
+  "Panini Absolute":{ins:["Rookie Baseline","Kaboom!"],sp:"Kaboom!",par:{}},
+  "Panini Threads":{ins:["Fabric of the Game","Rookie Fabric"],sp:"Century Proof",par:{}},
+  "Panini Certified":{ins:["Mirror","Fabric of the Game","Certified Potential"],sp:"Mirror Gold",auto:"Certified Signatures",rpa:"Rookie Patch Auto",patch:"Fabric of the Game",caseHit:"Mirror Black",par:{"/1000":"Mirror","/100":"Mirror Blue","/25":"Mirror Gold","/10":"Mirror Red","1/1":"Mirror Black"}},
+  "Panini Origins":{ins:["Origins","Rookie Jumbo Patch"],sp:"Rookie Patch Auto",par:{}},
+  "Panini Court Kings":{ins:["Court Kings","Aurora","Fresh Paint"],sp:"Aurora",par:{}},
+  "Panini Obsidian":{ins:["Obsidian","Volcanic Materials"],sp:"Electric Etch",par:{"/95":"Electric Etch Blue","/25":"Electric Etch Orange","/10":"Electric Etch Yellow","1/1":"Electric Etch Red"}},
+
+  // NFL brand extras
+  "Score":{ins:["Rookie","Franchise","All-Pro"],sp:"Gold",par:{}},
+  "Pro Set":{ins:["Rookie","Special","Think About It"],sp:"Final Update",par:{}},
+  "Action Packed":{ins:["Braille","Rookie"],sp:"24K Gold",par:{}},
+  "Wild Card":{ins:["Stripes","Rookie"],sp:"Rushmore",par:{}},
+  "Fleer":{ins:["Rookie","All-Pro","Star"],sp:"Legends of the Game",par:{}},
+  "Pacific":{ins:["Rookie","Gold Crown","Cramer's Choice"],sp:"Cramer's Choice",par:{}},
+  "Playoff":{ins:["Rookies","Contenders"],sp:"Absolute",par:{}},
+  "Playoff Contenders":{ins:["Rookie Ticket","MVP Contenders","Playoff Ticket"],sp:"Championship Ticket",auto:"Rookie Ticket Auto",rpa:"Rookie Ticket Autograph",patch:"Playoff Materials",caseHit:"Championship Ticket Auto",par:{"/100":"Playoff Ticket","/25":"Championship Ticket","/10":"Cracked Ice","1/1":"Championship Ticket 1/1"}},
+  "Leaf Signature":{ins:["Signature","Century Marks"],sp:"Century Signature",auto:"Century Signature",par:{}},
+  "Leaf Rookies & Stars":{ins:["Rookies","Stars","Freshman Orientation"],sp:"Longevity",par:{}},
+  "Leaf Certified":{ins:["Certified Rookie","Fabric of the Game"],sp:"Mirror Gold",par:{}},
+  "Leaf Limited":{ins:["Limited Rookie","Threads"],sp:"Studio",par:{}},
+  "Metal Universe Championship":{ins:["Championship","Metal Reign"],sp:"Precious Metal Gems",par:{"/100":"Precious Metal Gems"}},
+  "Absolute":{ins:["Rookie","Kaboom!","Tools of the Trade"],sp:"Kaboom!",par:{}},
+  "Donruss Elite":{ins:["Elite","Passing the Torch","Aspirations"],sp:"Aspirations",par:{"/999":"Aspirations","/50":"Status"}},
+  "Sage HIT":{ins:["Rookie","Autographs"],sp:"Gold",par:{}},
+  "Collector's Edge":{ins:["Rookie","Prime Timers"],sp:"Millennium Collection",par:{}},
+  "Circa":{ins:["Rave Review","Boss"],sp:"Rave",par:{}},
+  "Pinnacle":{ins:["Rookie","Museum Collection","Team 2000"],sp:"Artist's Proof",par:{}},
+  "Summit":{ins:["Rookie","Nth Degree"],sp:"Nth Degree",par:{}},
+  "Zenith":{ins:["Rookie","Z-Team"],sp:"Z-Silver",par:{}},
+
+  // MLB brand extras
+  "Topps":{ins:["All-Star","Rookie All-Star","In Action"],sp:"Rookie Cup",par:{}},
+  "Fleer Update":{ins:["Update","Rookie"],sp:"Glossy",par:{}},
+  "Topps Traded":{ins:["Traded","Rookie","Prospects"],sp:"Traded Rookies",par:{}},
+  "Donruss":{ins:["Diamond Kings","Rated Rookie","Rookie All-Star"],sp:"Rated Rookie",par:{}},
+  "Upper Deck":{ins:["Star Rookie","Team Checklist","MVP"],sp:"Rookie Threads",par:{}},
+  "Studio":{ins:["Portraits","Silver Series"],sp:"Portraits",par:{}},
+  "Leaf":{ins:["Rookie","All-Star","Gold Leaf Rookies"],sp:"Gold Leaf",par:{}},
+  "Ultra":{ins:["Rookie","Feel the Game","Golden Prospects"],sp:"Gold Medallion",par:{"/100":"Platinum Medallion"}},
+  "Playoff Absolute":{ins:["Absolute Rookie","Boxing Day"],sp:"Absolute Kaboom!",par:{}},
+  "Topps Total":{ins:["Total","Rookies"],sp:"Silver",par:{}},
+  "Topps Heritage":{ins:["Heritage Rookies","Real One Autographs","Chrome Refractor"],sp:"Chrome Refractor",auto:"Real One Autograph",rpa:"Real One Rookie Auto",patch:"Clubhouse Collection",par:{"/999":"Refractor","/100":"Gold","/25":"Red","/10":"Black","1/1":"Superfractor"}},
+  "Topps Update":{ins:["Update Rookies","All-Star Game"],sp:"Gold",chrome:true,par:{"/2020":"Gold","/50":"Black","1/1":"Superfractor"}},
+  "Topps Turkey Red":{ins:["Turkey Red","Portrait"],sp:"Turkey Red Chrome",par:{}},
+  "Topps Chicle":{ins:["Chicle Rookies","Chicle All-Stars"],sp:"Chicle Original",par:{}},
+  "Topps Marquee":{ins:["Marquee","Marquee Signature"],sp:"Marquee Signature Materials",par:{}},
+  "Topps Museum Collection":{ins:["Momentous Materials","Museum Signatures","Momentous Material Jumbo"],sp:"Museum Signature",auto:"Museum Signature Auto",rpa:"Momentous Material Jumbo Rookie Auto",patch:"Momentous Material",caseHit:"Museum Signature 1/1",par:{"/100":"Copper","/50":"Silver","/25":"Gold","/5":"Black","1/1":"Ruby"}},
+  "Topps Chrome Update":{ins:["Refractor","Update Chrome","Rookie Chrome"],sp:"Superfractor",chrome:true,caseHit:"Superfractor",par:{"/499":"Refractor","/99":"Blue","/25":"Gold","/10":"Orange","1/1":"Superfractor"}},
+  "Topps Chrome Black":{ins:["Refractor","Black Chrome"],sp:"White Refractor",chrome:true,caseHit:"White Refractor",par:{"/299":"Refractor","/50":"Green","/25":"Gold","/10":"Red","1/1":"White"}},
+  "Topps Cosmic Chrome":{ins:["Cosmic Refractor","Universe"],sp:"Neon Cosmic",chrome:true,caseHit:"Superfractor",par:{"/299":"Cosmic","/99":"Blue","/25":"Gold","/10":"Red","1/1":"Superfractor"}},
+  "Panini Diamond Kings":{ins:["Diamond Kings","DK Materials"],sp:"Framed Gray",par:{}},
+
+  // EPL extras
+  "Topps Premier League":{ins:["Star Player","Golden Boot","Chairman"],sp:"Gold",par:{}},
+
+  // MLS extras
+  "Upper Deck MLS":{ins:["Star","Team of the Year","Champion"],sp:"Gold",par:{}},
+
+
+};
+function subsetName(brand, k, rookie, serial, grail){
+  const s=SETINFO[brand]||{};
+  if(grail && s.caseHit) return s.caseHit;                 // marquee 1/1 name
+  if(k==="Base"){
+    if(serial && s.par && s.par[serial]) return s.par[serial];
+    return rookie?"Base":"Base";
+  }
+  if(k==="Insert") return rnd(s.ins&&s.ins.length?s.ins:["Insert"]);
+  if(k==="Short Print") return s.sp||"Short Print";
+  if(k==="Autograph"){ const a=s.auto||"Autograph"; return rookie&&!/rookie/i.test(a)?("Rookie "+a):a; }
+  if(k==="Patch / RPA") return rookie?(s.rpa||"Rookie Patch Auto"):(s.patch||"Patch Auto");
+  return k;
+}
+
+// type: name, value multiplier vs a base card, pull weight, color var
+const TYPES = [
+  {k:"Base",       v:1,    w:100, c:"--chrome"},
+  {k:"Insert",     v:2.5,  w:34,  c:"--insert"},
+  {k:"Short Print",v:5,    w:14,  c:"--sp"},
+  {k:"Autograph",  v:10,   w:5,   c:"--auto"},
+  {k:"Patch / RPA",v:28,   w:3,   c:"--patch"},
+];
+// the "chasing" spin options (what the third wheel lands on)
+const CHASE = ["Base","Insert","Short Print","Autograph","Patch / RPA"];
+
+// serial tiers: label, value multiplier, weight, isGrail
+const SERIALS = [
+  {s:"",      m:1,   w:100},
+  {s:"/1000", m:1.6, w:26},
+  {s:"/100",  m:3,   w:12},
+  {s:"/25",   m:6,   w:5},
+  {s:"/10",   m:11,  w:2.4},
+  {s:"1/1",   m:28,  w:0.8, grail:true},
+];
+
+/* Marquee grails: when a matching top-tier hit is pulled, snap its RAW value
+   into a real-world sale band (rough public sales, high-grade). Keeps the
+   headline chase cards realistic instead of letting multipliers run away. */
+const GRAILS = [
+  // NBA grails (existing)
+  {who:"LeBron James",     era:"2003-04", lo:3500000, hi:5200000}, // Exquisite RPA
+  {who:"Stephen Curry",    era:"2009-10", lo:3800000, hi:5900000}, // NT Logoman 1/1
+  {who:"Victor Wembanyama",era:"2023-24", lo:90000,   hi:400000},
+  {who:"Luka Doncic",      era:"2018-19", lo:30000,   hi:120000},
+  {who:"Cooper Flagg",     era:"2025-26", lo:80000,   hi:300000},
+  {who:"Anthony Davis",    era:"2012-13", lo:15000,   hi:70000},
+  {who:"Damian Lillard",   era:"2012-13", lo:12000,   hi:55000},
+  // NFL grails
+  {who:"Patrick Mahomes",  era:"2017",    lo:2800000, hi:4300000}, // NT Shield RPA 1/1
+  {who:"Tom Brady",        era:"2000",    lo:1200000, hi:2250000}, // Playoff Contenders Championship Ticket
+  {who:"Jim Brown",        era:"1957",    lo:180000,  hi:640000},  // Topps rookie gem
+  {who:"Jerry Rice",       era:"1986",    lo:60000,   hi:220000},
+  {who:"Joe Burrow",       era:"2020",    lo:120000,  hi:480000},
+  {who:"Justin Herbert",   era:"2020",    lo:100000,  hi:400000},
+  {who:"Justin Jefferson", era:"2020",    lo:80000,   hi:320000},
+  {who:"Caleb Williams",   era:"2024",    lo:60000,   hi:220000},
+  {who:"Travis Hunter",    era:"2024",    lo:50000,   hi:180000},
+  // MLB grails
+  {who:"Mickey Mantle",    era:"1952",    lo:2000000, hi:12600000}, // 1952 Topps #311
+  {who:"Ken Griffey Jr.",  era:"1989",    lo:15000,   hi:75000},
+  {who:"Mike Trout",       era:"2009",    lo:900000,  hi:3930000},  // Bowman Chrome Superfractor
+  {who:"Shohei Ohtani",    era:"2018",    lo:250000,  hi:1200000},
+  {who:"Ronald Acuña Jr.", era:"2018",    lo:80000,   hi:320000},
+  {who:"Juan Soto",        era:"2018",    lo:60000,   hi:280000},
+  {who:"Paul Skenes",      era:"2024",    lo:120000,  hi:1100000},  // 2024 Topps Chrome debut
+  {who:"Jackson Holliday", era:"2024",    lo:40000,   hi:180000},
+  {who:"Bryce Harper",     era:"2011",    lo:35000,   hi:180000},
+  // EPL grails
+  {who:"Cristiano Ronaldo",era:"2003-04", lo:280000,  hi:1200000},
+  {who:"Erling Haaland",   era:"2022-23", lo:80000,   hi:380000},
+  {who:"Cole Palmer",      era:"2023-24", lo:35000,   hi:180000},
+  {who:"Trent Alexander-Arnold", era:"2018-19", lo:30000, hi:120000},
+  {who:"David Beckham",    era:"1996-97", lo:20000,   hi:90000},
+  // MLS grails
+  {who:"Lionel Messi",     era:"2023",    lo:180000,  hi:820000},  // Debut Patch Auto
+  {who:"Cavan Sullivan",   era:"2025",    lo:40000,   hi:220000},  // youngest MLS signee
+  {who:"Alphonso Davies",  era:"2020",    lo:20000,   hi:80000},
+];
+// grade multipliers — vintage gem cards jump far more than modern
+function gradeMult(vintage, g){
+  const modern={"10":2.6,"9.5":1.8,"9":1.3,"8":1,"7":0.7};
+  const vint  ={"10":6,  "9.5":3.2,"9":2,  "8":1.3,"7":0.8};
+  return (vintage?vint:modern)[g];
+}
+
+// win condition: your 5 graded/slabbed cards need to total this much
+const GOAL = 200000;
+// re-spins available per box (used across all packs)
+const RESPINS_PER_BOX = 2;
+
+/* Team lookup — iconic player→team mapping for the marquee cards.
+   Rookies get their draft team; legends get their most-associated team.
+   Cards without a match just don't show a team badge, which is fine. */
+const TEAM = {abbr:"", primary:"", secondary:""};
+const T = (abbr, primary, secondary) => ({abbr, primary, secondary});
+const TEAMS = {
+  // NBA
+  "Michael Jordan":T("CHI","#CE1141","#000000"),"LeBron James":T("LAL","#552583","#FDB927"),"Kobe Bryant":T("LAL","#552583","#FDB927"),"Stephen Curry":T("GSW","#1D428A","#FFC72C"),"Kevin Durant":T("PHX","#1D1160","#E56020"),"Larry Bird":T("BOS","#007A33","#BA9653"),"Magic Johnson":T("LAL","#552583","#FDB927"),"Bill Russell":T("BOS","#007A33","#BA9653"),"Wilt Chamberlain":T("PHI","#006BB6","#ED174C"),"Jerry West":T("LAL","#552583","#FDB927"),"Kareem Abdul-Jabbar":T("LAL","#552583","#FDB927"),"Lew Alcindor":T("MIL","#00471B","#EEE1C6"),"Julius Erving":T("PHI","#006BB6","#ED174C"),"Shaquille O'Neal":T("LAL","#552583","#FDB927"),"Tim Duncan":T("SAS","#C4CED4","#000000"),"Hakeem Olajuwon":T("HOU","#CE1141","#000000"),"Allen Iverson":T("PHI","#006BB6","#ED174C"),"Dirk Nowitzki":T("DAL","#00538C","#002B5E"),"Charles Barkley":T("PHI","#006BB6","#ED174C"),"Karl Malone":T("UTA","#002B5C","#F9A01B"),"John Stockton":T("UTA","#002B5C","#F9A01B"),"Patrick Ewing":T("NYK","#006BB6","#F58426"),"Isiah Thomas":T("DET","#C8102E","#1D42BA"),"Scottie Pippen":T("CHI","#CE1141","#000000"),"Dennis Rodman":T("CHI","#CE1141","#000000"),"David Robinson":T("SAS","#C4CED4","#000000"),"Reggie Miller":T("IND","#002D62","#FDBB30"),"Grant Hill":T("DET","#C8102E","#1D42BA"),"Vince Carter":T("TOR","#CE1141","#000000"),"Tracy McGrady":T("HOU","#CE1141","#000000"),"Kevin Garnett":T("MIN","#0C2340","#236192"),"Ray Allen":T("MIL","#00471B","#EEE1C6"),"Steve Nash":T("PHX","#1D1160","#E56020"),"Paul Pierce":T("BOS","#007A33","#BA9653"),"Yao Ming":T("HOU","#CE1141","#000000"),"Carmelo Anthony":T("DEN","#0E2240","#FEC524"),"Dwyane Wade":T("MIA","#98002E","#F9A01B"),"Chris Bosh":T("TOR","#CE1141","#000000"),"Dwight Howard":T("ORL","#0077C0","#C4CED4"),"Chris Paul":T("NOH","#0C2340","#85714D"),"Deron Williams":T("UTA","#002B5C","#F9A01B"),"LaMarcus Aldridge":T("POR","#E03A3E","#000000"),"Brandon Roy":T("POR","#E03A3E","#000000"),"Rajon Rondo":T("BOS","#007A33","#BA9653"),"Derrick Rose":T("CHI","#CE1141","#000000"),"Russell Westbrook":T("OKC","#007AC1","#EF3B24"),"James Harden":T("OKC","#007AC1","#EF3B24"),"Blake Griffin":T("LAC","#C8102E","#1D428A"),"Kyrie Irving":T("CLE","#860038","#041E42"),"Kawhi Leonard":T("SAS","#C4CED4","#000000"),"Klay Thompson":T("GSW","#1D428A","#FFC72C"),"Anthony Davis":T("NOH","#0C2340","#85714D"),"Damian Lillard":T("POR","#E03A3E","#000000"),"Jimmy Butler":T("CHI","#CE1141","#000000"),"Giannis Antetokounmpo":T("MIL","#00471B","#EEE1C6"),"Nikola Jokic":T("DEN","#0E2240","#FEC524"),"Joel Embiid":T("PHI","#006BB6","#ED174C"),"Jayson Tatum":T("BOS","#007A33","#BA9653"),"Donovan Mitchell":T("UTA","#002B5C","#F9A01B"),"Luka Doncic":T("DAL","#00538C","#002B5E"),"Trae Young":T("ATL","#E03A3E","#C1D32F"),"Ben Simmons":T("PHI","#006BB6","#ED174C"),"Jaylen Brown":T("BOS","#007A33","#BA9653"),"Zion Williamson":T("NOP","#0C2340","#85714D"),"Ja Morant":T("MEM","#5D76A9","#12173F"),"RJ Barrett":T("NYK","#006BB6","#F58426"),"LaMelo Ball":T("CHA","#1D1160","#00788C"),"Anthony Edwards":T("MIN","#0C2340","#236192"),"Tyrese Haliburton":T("SAC","#5A2D81","#63727A"),"Cade Cunningham":T("DET","#C8102E","#1D42BA"),"Evan Mobley":T("CLE","#860038","#041E42"),"Scottie Barnes":T("TOR","#CE1141","#000000"),"Paolo Banchero":T("ORL","#0077C0","#C4CED4"),"Chet Holmgren":T("OKC","#007AC1","#EF3B24"),"Victor Wembanyama":T("SAS","#C4CED4","#000000"),"Scoot Henderson":T("POR","#E03A3E","#000000"),"Cooper Flagg":T("DAL","#00538C","#002B5E"),"Shai Gilgeous-Alexander":T("OKC","#007AC1","#EF3B24"),"Bill Walton":T("POR","#E03A3E","#000000"),"George Mikan":T("MIN","#552583","#FDB927"),"Bob Cousy":T("BOS","#007A33","#BA9653"),"Pete Maravich":T("ATL","#E03A3E","#C1D32F"),"George Gervin":T("SAS","#C4CED4","#000000"),"Moses Malone":T("PHI","#006BB6","#ED174C"),"Elgin Baylor":T("LAL","#552583","#FDB927"),"Oscar Robertson":T("CIN","#CE1141","#000000"),"Bernard King":T("NYK","#006BB6","#F58426"),"Rick Barry":T("GSW","#1D428A","#FFC72C"),
+
+  // NFL
+  "Tom Brady":T("NE","#002244","#C60C30"),"Patrick Mahomes":T("KC","#E31837","#FFB81C"),"Peyton Manning":T("IND","#002C5F","#A2AAAD"),"Aaron Rodgers":T("GB","#203731","#FFB612"),"Joe Montana":T("SF","#AA0000","#B3995D"),"Jerry Rice":T("SF","#AA0000","#B3995D"),"Steve Young":T("SF","#AA0000","#B3995D"),"Dan Marino":T("MIA","#008E97","#FC4C02"),"John Elway":T("DEN","#FB4F14","#002244"),"Emmitt Smith":T("DAL","#003594","#869397"),"Troy Aikman":T("DAL","#003594","#869397"),"Barry Sanders":T("DET","#0076B6","#B0B7BC"),"Brett Favre":T("GB","#203731","#FFB612"),"Walter Payton":T("CHI","#0B162A","#C83803"),"Jim Brown":T("CLE","#311D00","#FF3C00"),"Johnny Unitas":T("BAL","#241773","#000000"),"Bart Starr":T("GB","#203731","#FFB612"),"Joe Namath":T("NYJ","#125740","#000000"),"Terry Bradshaw":T("PIT","#FFB612","#101820"),"Franco Harris":T("PIT","#FFB612","#101820"),"O.J. Simpson":T("BUF","#00338D","#C60C30"),"Roger Staubach":T("DAL","#003594","#869397"),"Lawrence Taylor":T("NYG","#0B2265","#A71930"),"Reggie White":T("PHI","#004C54","#A5ACAF"),"Bruce Smith":T("BUF","#00338D","#C60C30"),"Randy Moss":T("MIN","#4F2683","#FFC62F"),"Ray Lewis":T("BAL","#241773","#000000"),"Ed Reed":T("BAL","#241773","#000000"),"LaDainian Tomlinson":T("LAC","#0080C6","#FFC20E"),"Drew Brees":T("NO","#D3BC8D","#101820"),"Michael Vick":T("ATL","#A71930","#000000"),"Adrian Peterson":T("MIN","#4F2683","#FFC62F"),"Calvin Johnson":T("DET","#0076B6","#B0B7BC"),"Larry Fitzgerald":T("ARI","#97233F","#000000"),"Ben Roethlisberger":T("PIT","#FFB612","#101820"),"Eli Manning":T("NYG","#0B2265","#A71930"),"Philip Rivers":T("LAC","#0080C6","#FFC20E"),"J.J. Watt":T("HOU","#03202F","#A71930"),"Rob Gronkowski":T("NE","#002244","#C60C30"),"Cam Newton":T("CAR","#0085CA","#101820"),"Russell Wilson":T("SEA","#002244","#69BE28"),"Andrew Luck":T("IND","#002C5F","#A2AAAD"),"Odell Beckham Jr.":T("NYG","#0B2265","#A71930"),"Aaron Donald":T("LAR","#003594","#FFA300"),"Khalil Mack":T("OAK","#000000","#A5ACAF"),"Dak Prescott":T("DAL","#003594","#869397"),"Ezekiel Elliott":T("DAL","#003594","#869397"),"Deshaun Watson":T("HOU","#03202F","#A71930"),"Christian McCaffrey":T("CAR","#0085CA","#101820"),"Josh Allen":T("BUF","#00338D","#C60C30"),"Lamar Jackson":T("BAL","#241773","#000000"),"Saquon Barkley":T("NYG","#0B2265","#A71930"),"Baker Mayfield":T("CLE","#311D00","#FF3C00"),"Kyler Murray":T("ARI","#97233F","#000000"),"Joe Burrow":T("CIN","#FB4F14","#000000"),"Justin Herbert":T("LAC","#0080C6","#FFC20E"),"Justin Jefferson":T("MIN","#4F2683","#FFC62F"),"Jalen Hurts":T("PHI","#004C54","#A5ACAF"),"CeeDee Lamb":T("DAL","#003594","#869397"),"Ja'Marr Chase":T("CIN","#FB4F14","#000000"),"Trevor Lawrence":T("JAX","#101820","#D7A22A"),"C.J. Stroud":T("HOU","#03202F","#A71930"),"Bryce Young":T("CAR","#0085CA","#101820"),"Puka Nacua":T("LAR","#003594","#FFA300"),"Caleb Williams":T("CHI","#0B162A","#C83803"),"Jayden Daniels":T("WAS","#5A1414","#FFB612"),"Marvin Harrison Jr.":T("ARI","#97233F","#000000"),"Malik Nabers":T("NYG","#0B2265","#A71930"),"Cam Ward":T("TEN","#0C2340","#4B92DB"),"Travis Hunter":T("JAX","#101820","#D7A22A"),"Ashton Jeanty":T("LV","#000000","#A5ACAF"),
+
+  // MLB
+  "Mickey Mantle":T("NYY","#132448","#C4CED4"),"Willie Mays":T("SFG","#FD5A1E","#27251F"),"Hank Aaron":T("ATL","#CE1141","#13274F"),"Ted Williams":T("BOS","#BD3039","#0C2340"),"Roberto Clemente":T("PIT","#FDB827","#27251F"),"Sandy Koufax":T("LAD","#005A9C","#FFFFFF"),"Nolan Ryan":T("TEX","#003278","#C0111F"),"Ken Griffey Jr.":T("SEA","#0C2C56","#005C5C"),"Barry Bonds":T("SFG","#FD5A1E","#27251F"),"Cal Ripken Jr.":T("BAL","#DF4601","#000000"),"Derek Jeter":T("NYY","#132448","#C4CED4"),"Alex Rodriguez":T("NYY","#132448","#C4CED4"),"Chipper Jones":T("ATL","#CE1141","#13274F"),"Frank Thomas":T("CHW","#27251F","#C4CED4"),"Mike Piazza":T("NYM","#002D72","#FF5910"),"Ichiro Suzuki":T("SEA","#0C2C56","#005C5C"),"Albert Pujols":T("STL","#C41E3A","#0C2340"),"Mike Trout":T("LAA","#BA0021","#003263"),"Bryce Harper":T("PHI","#E81828","#002D72"),"Manny Machado":T("SDP","#2F241D","#FFC425"),"Shohei Ohtani":T("LAD","#005A9C","#FFFFFF"),"Aaron Judge":T("NYY","#132448","#C4CED4"),"Ronald Acuña Jr.":T("ATL","#CE1141","#13274F"),"Juan Soto":T("NYY","#132448","#C4CED4"),"Vladimir Guerrero Jr.":T("TOR","#134A8E","#1D2D5C"),"Fernando Tatís Jr.":T("SDP","#2F241D","#FFC425"),"Julio Rodríguez":T("SEA","#0C2C56","#005C5C"),"Bobby Witt Jr.":T("KCR","#004687","#BD9B60"),"Adley Rutschman":T("BAL","#DF4601","#000000"),"Paul Skenes":T("PIT","#FDB827","#27251F"),"Jackson Holliday":T("BAL","#DF4601","#000000"),"Wyatt Langford":T("TEX","#003278","#C0111F"),"Mookie Betts":T("LAD","#005A9C","#FFFFFF"),"Cody Bellinger":T("LAD","#005A9C","#FFFFFF"),"Kris Bryant":T("CHC","#0E3386","#CC3433"),"Clayton Kershaw":T("LAD","#005A9C","#FFFFFF"),"Max Scherzer":T("WSN","#AB0003","#14225A"),"Justin Verlander":T("DET","#0C2340","#FA4616"),"Buster Posey":T("SFG","#FD5A1E","#27251F"),"Stephen Strasburg":T("WSN","#AB0003","#14225A"),"Miguel Cabrera":T("DET","#0C2340","#FA4616"),"José Ramírez":T("CLE","#00385D","#E50022"),"Corbin Carroll":T("ARI","#A71930","#000000"),"Gunnar Henderson":T("BAL","#DF4601","#000000"),"Yogi Berra":T("NYY","#132448","#C4CED4"),"Jackie Robinson":T("BRO","#005A9C","#FFFFFF"),"Ernie Banks":T("CHC","#0E3386","#CC3433"),"Al Kaline":T("DET","#0C2340","#FA4616"),"Bob Gibson":T("STL","#C41E3A","#0C2340"),"Reggie Jackson":T("OAK","#003831","#EFB21E"),"Tom Seaver":T("NYM","#002D72","#FF5910"),"Johnny Bench":T("CIN","#C6011F","#000000"),"Pete Rose":T("CIN","#C6011F","#000000"),"Mike Schmidt":T("PHI","#E81828","#002D72"),"George Brett":T("KCR","#004687","#BD9B60"),"Rickey Henderson":T("OAK","#003831","#EFB21E"),"Wade Boggs":T("BOS","#BD3039","#0C2340"),"Cal Ripken":T("BAL","#DF4601","#000000"),"Randy Johnson":T("ARI","#A71930","#000000"),"Greg Maddux":T("ATL","#CE1141","#13274F"),
+
+  // EPL
+  "Cristiano Ronaldo":T("MUN","#DA020E","#FFE500"),"Wayne Rooney":T("MUN","#DA020E","#FFE500"),"David Beckham":T("MUN","#DA020E","#FFE500"),"Ryan Giggs":T("MUN","#DA020E","#FFE500"),"Eric Cantona":T("MUN","#DA020E","#FFE500"),"Paul Scholes":T("MUN","#DA020E","#FFE500"),"Bruno Fernandes":T("MUN","#DA020E","#FFE500"),"Alejandro Garnacho":T("MUN","#DA020E","#FFE500"),"Alan Shearer":T("NEW","#241F20","#F1BE48"),"Thierry Henry":T("ARS","#EF0107","#023474"),"Dennis Bergkamp":T("ARS","#EF0107","#023474"),"Cesc Fàbregas":T("ARS","#EF0107","#023474"),"Bukayo Saka":T("ARS","#EF0107","#023474"),"Martin Ødegaard":T("ARS","#EF0107","#023474"),"Declan Rice":T("ARS","#EF0107","#023474"),"Michael Owen":T("LIV","#C8102E","#00B2A9"),"Steven Gerrard":T("LIV","#C8102E","#00B2A9"),"Luis Suárez":T("LIV","#C8102E","#00B2A9"),"Mohamed Salah":T("LIV","#C8102E","#00B2A9"),"Virgil van Dijk":T("LIV","#C8102E","#00B2A9"),"Sadio Mané":T("LIV","#C8102E","#00B2A9"),"Trent Alexander-Arnold":T("LIV","#C8102E","#00B2A9"),"Frank Lampard":T("CHE","#034694","#DBA111"),"John Terry":T("CHE","#034694","#DBA111"),"Eden Hazard":T("CHE","#034694","#DBA111"),"Cole Palmer":T("CHE","#034694","#DBA111"),"Reece James":T("CHE","#034694","#DBA111"),"Mason Mount":T("CHE","#034694","#DBA111"),"Sergio Agüero":T("MCI","#6CABDD","#1C2C5B"),"Vincent Kompany":T("MCI","#6CABDD","#1C2C5B"),"Yaya Touré":T("MCI","#6CABDD","#1C2C5B"),"David Silva":T("MCI","#6CABDD","#1C2C5B"),"Kevin De Bruyne":T("MCI","#6CABDD","#1C2C5B"),"Raheem Sterling":T("MCI","#6CABDD","#1C2C5B"),"Erling Haaland":T("MCI","#6CABDD","#1C2C5B"),"Rodri":T("MCI","#6CABDD","#1C2C5B"),"Phil Foden":T("MCI","#6CABDD","#1C2C5B"),"Harry Kane":T("TOT","#132257","#FFFFFF"),"Gareth Bale":T("TOT","#132257","#FFFFFF"),"Son Heung-min":T("TOT","#132257","#FFFFFF"),"Fernando Torres":T("LIV","#C8102E","#00B2A9"),"Alexander Isak":T("NEW","#241F20","#F1BE48"),"Estêvão Willian":T("CHE","#034694","#DBA111"),
+
+  // MLS + Northampton
+  "Lionel Messi":T("MIA","#F7B5CD","#231F20"),"Luis Suárez_MLS":T("MIA","#F7B5CD","#231F20"),"Sergio Busquets":T("MIA","#F7B5CD","#231F20"),"Jordi Alba":T("MIA","#F7B5CD","#231F20"),"Alphonso Davies":T("MTL","#001E62","#003DA5"),"Zlatan Ibrahimović":T("LAG","#00245D","#EAAA00"),"David Beckham_MLS":T("LAG","#00245D","#EAAA00"),"Landon Donovan":T("LAG","#00245D","#EAAA00"),"Thierry Henry_MLS":T("NYR","#ED1E36","#8AB7E9"),"Cavan Sullivan":T("PHI","#B18500","#000000"),"Christian Pulisic":T("MIL","#010040","#F4B223"),"Sam Hoskins":T("NTFC","#7B1F3D","#FFFFFF"),"Cameron McGeehan":T("NTFC","#7B1F3D","#FFFFFF"),"Jack Baldwin":T("NTFC","#7B1F3D","#FFFFFF"),"Louis Appéré":T("NTFC","#7B1F3D","#FFFFFF"),"Marcus McGuane":T("NTFC","#7B1F3D","#FFFFFF"),"Marc Leonard":T("NTFC","#7B1F3D","#FFFFFF"),"Mitch Pinnock":T("NTFC","#7B1F3D","#FFFFFF"),"Tyler Roberts":T("NTFC","#7B1F3D","#FFFFFF"),"Liam McCarron":T("NTFC","#7B1F3D","#FFFFFF"),"Aaron McGowan":T("NTFC","#7B1F3D","#FFFFFF"),"Jon Guthrie":T("NTFC","#7B1F3D","#FFFFFF"),"Kieron Bowie":T("NTFC","#7B1F3D","#FFFFFF"),"Sam Sherring":T("NTFC","#7B1F3D","#FFFFFF"),"Jack Sowerby":T("NTFC","#7B1F3D","#FFFFFF"),
+};
+function teamFor(playerName, sport){
+  // MLS players who also appear as EPL players get an MLS-suffixed lookup
+  if(sport==="MLS"){
+    const k=playerName+"_MLS";
+    if(TEAMS[k]) return TEAMS[k];
+  }
+  return TEAMS[playerName] || null;
+}
+
+/* ---------- HISTORY (persistent) ----------
+   Everything survives reload via window.storage. One key holds the whole
+   lifetime collection so a rip is a single write. */
+const HKEY = "rth:lifetime";
+let history = {cards:[], boxes:0, wins:0};
+async function loadHistory(){
+  if(!window.storage) return;
+  try{ const r = await window.storage.get(HKEY); if(r) history = JSON.parse(r.value); }
+  catch(e){ /* first run, key absent — that's fine */ }
+  updateNavCount();
+}
+async function saveHistory(){
+  if(!window.storage) return;
+  try{ await window.storage.set(HKEY, JSON.stringify(history)); }
+  catch(e){ console.warn("save failed", e); }
+}
+function updateNavCount(){
+  const el=document.querySelector('#navCount'); if(el) el.textContent=history.cards.length;
+}
+function addToHistory(newCards){
+  const stamp = Date.now();
+  newCards.forEach(c=>{ history.cards.push({...c, ripAt:stamp}); });
+  updateNavCount();
+  saveHistory();
+}
+
+let box=null;           // current pack's {era, brand, chase}
+let cards=[];           // accumulates to 24 across 4 packs
+let selected=new Set();
+let spinStage=0;        // 0 year,1 brand,2 type,3 done
+let packNo=1;           // 1..6
+let respinsLeft=2;
+
+/* ---------- HELPERS ---------- */
+const $=s=>document.querySelector(s);
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+function wpick(list, key="w"){
+  let t=list.reduce((s,x)=>s+x[key],0), r=Math.random()*t;
+  for(const x of list){ if((r-=x[key])<=0) return x; } return list[list.length-1];
+}
+function cvar(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+function money(n){
+  if(n>=1e6) return "$"+(n/1e6).toFixed(n>=1e7?1:2)+"M";
+  if(n>=1e3) return "$"+(n/1e3).toFixed(n>=1e5?0:1)+"k";
+  return "$"+Math.round(n).toLocaleString();
+}
+function show(id){document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));$('#'+id).classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});}
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200);}
+function flash(){const f=$('#flash');f.style.background="radial-gradient(circle at 50% 40%, rgba(255,61,127,.5), rgba(229,185,78,.25) 40%, transparent 70%)";f.classList.remove('go');void f.offsetWidth;f.classList.add('go');}
+
+/* ---------- SPIN FLOW ---------- */
+function startSpin(){
+  cards=[];selected.clear();packNo=1;respinsLeft=2;
+  $('#packNo').textContent="1";
+  $('#tally').textContent="0 cards collected";
+  $('#reveal').innerHTML='';
+  resetWheels();
+  $('#phasetag').textContent="Pack 1 of 4 · spin to rip";
+  show('spin');
+}
+
+function spinWheel(el, options, finalVal, ms, cb){
+  el.classList.add('spinning');
+  const valEl=el.querySelector('.val');
+  let t=0;const iv=setInterval(()=>{valEl.textContent=rnd(options);t+=70;
+    if(t>=ms){
+      clearInterval(iv);valEl.textContent=finalVal;
+      el.classList.remove('spinning');el.classList.add('locked');
+      // gold streak flash across the top when the wheel lands
+      const old=el.querySelector('.streak'); if(old) old.remove();
+      const streak=document.createElement('div'); streak.className='streak'; el.appendChild(streak);
+      cb&&cb();
+    }
+  },70);
+}
+
+function doSpin(){
+  const btn=$('#spinBtn');btn.disabled=true;
+  if(spinStage===0){
+    const sportKey=rnd(Object.keys(SPORTS)); const sport=SPORTS[sportKey];
+    box={sport:sportKey, sportLabel:sport.label};
+    spinWheel($('#w-sport'), Object.values(SPORTS).map(s=>s.label), sport.label, 900, ()=>{
+      spinStage=1;btn.disabled=false;btn.textContent="Spin the year →";
+    });
+  } else if(spinStage===1){
+    const eras=SPORTS[box.sport].eras.filter(e=>e.brands && e.brands.length>0);
+    const era=rnd(eras);box.era=era;
+    spinWheel($('#w-year'), eras.map(e=>e.year), era.year, 900, ()=>{
+      spinStage=2;btn.disabled=false;btn.textContent="Spin the brand →";
+    });
+  } else if(spinStage===2){
+    const brand=rnd(box.era.brands);box.brand=brand;
+    spinWheel($('#w-brand'), box.era.brands, brand, 900, ()=>{
+      spinStage=3;btn.disabled=false;btn.textContent="Spin what you're chasing →";
+    });
+  } else if(spinStage===3){
+    const chase=rnd(CHASE);box.chase=chase;
+    spinWheel($('#w-type'), CHASE, chase, 1000, ()=>{
+      spinStage=4;
+      $('#w-type').querySelector('.type-note').textContent="Boosted toward "+chase.toLowerCase();
+      btn.classList.add('hidden');
+      $('#ripNo').textContent=packNo;
+      $('#ripBtn').classList.remove('hidden');
+      if(respinsLeft>0){ $('#respinN').textContent=respinsLeft; $('#respinBtn').classList.remove('hidden'); }
+    });
+  }
+}
+
+function resetWheels(){
+  spinStage=0;
+  ['w-sport','w-year','w-brand','w-type'].forEach(id=>{
+    const el=$('#'+id);el.classList.remove('locked','spinning');
+    el.querySelector('.val').textContent='—';
+    const note=el.querySelector('.type-note');if(note)note.textContent='';
+    const streak=el.querySelector('.streak');if(streak) streak.remove();
+  });
+  const b=$('#spinBtn');b.textContent="Spin the sport →";b.disabled=false;b.classList.remove('hidden');
+  $('#ripBtn').classList.add('hidden');
+  $('#respinBtn').classList.add('hidden');
+  $('#nextBtn').classList.add('hidden');
+  $('#toCollBtn').classList.add('hidden');
+}
+
+function reSpin(){
+  if(respinsLeft<=0) return;
+  respinsLeft--;
+  toast(respinsLeft+" re-spin"+(respinsLeft===1?"":"s")+" left");
+  resetWheels();
+}
+
+function nextPack(){
+  packNo++;
+  $('#packNo').textContent=packNo;
+  $('#reveal').innerHTML='';
+  resetWheels();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---------- GENERATION ---------- */
+function makeCard(){
+  const era=box.era, brand=box.brand;
+  const [pname,pv,rookie]=rnd(era.players);
+  const premium=PREMIUM.test(brand), baseProduct=BASE_PRODUCT.test(brand);
+
+  // only card types that existed in this era; base products yield no auto/patch
+  let pool=TYPES.filter(t=>era.types.includes(t.k));
+  if(baseProduct) pool=pool.filter(t=>t.k!=="Autograph" && t.k!=="Patch / RPA");
+  pool=pool.map(t=>{
+    let w=t.w;
+    if(t.k===box.chase) w*=4.5;                                   // chase tilt
+    if(premium && (t.k==="Autograph"||t.k==="Patch / RPA")) w*=3; // premium hit boost
+    return {...t,w};
+  });
+  const type=wpick(pool);
+
+  // serial numbering: none before it existed; hits number more often than base
+  let ser;
+  if(!era.numbered){ ser=SERIALS[0]; }
+  else{
+    let serPool = type.k==="Base"
+        ? SERIALS.map(s=>({...s, w: s.s===""?100: s.w*0.15}))
+        : SERIALS.map(s=>({...s, w: s.s===""? (type.k==="Insert"?60:22) : s.w}));
+    if(type.k===box.chase && type.k!=="Base") serPool=serPool.map(s=>s.grail?{...s,w:s.w*2}:s);
+    ser=wpick(serPool);
+  }
+
+  const chrome=!!(SETINFO[brand]&&SETINFO[brand].chrome);
+  const isHit=(type.k==="Autograph"||type.k==="Patch / RPA");
+  const grail=ser.s==="1/1" && (isHit || chrome);   // any 1/1 auto/patch, or a chrome 1/1 (Superfractor)
+  const subset=subsetName(brand, type.k, rookie, ser.s, grail);
+
+  // realistic raw market value: player base $ x type x serial x rookie x era, with jitter
+  let raw = pv * type.v * ser.m * (rookie?2.2:1) * era.prestige * (0.8+Math.random()*0.5);
+
+  // snap marquee ROOKIE grails to real sale bands when a top-tier RPA/auto lands
+  const anchor = GRAILS.find(g=>g.who===pname && g.era===era.year);
+  const topSerial = (ser.s==="1/1"||ser.s==="/10"||ser.s==="/25");
+  if(anchor && rookie && isHit && topSerial){
+    const t = ser.s==="1/1"?1 : ser.s==="/10"?0.6 : 0.32;
+    raw = anchor.lo + (anchor.hi-anchor.lo)*t*(0.85+Math.random()*0.3);
+  } else if(!grail){
+    raw = Math.min(raw, 1500000);
+  }
+  raw = Math.round(raw);
+
+  return {pname,pv,rookie,brand,year:era.year,vintage:era.vintage,type:type.k,
+          label:typeLabel(type.k,rookie),subset,color:type.c,
+          sport:box.sport, sportLabel:box.sportLabel,
+          serial:ser.s,serMult:ser.m,raw,grail,logoman: grail && (subset==="Logoman")};
+}
+function generatePack(){
+  const four=[];
+  for(let i=0;i<6;i++) four.push(makeCard());
+  return four;
+}
+
+/* ---------- RIP (one pack per spin) ---------- */
+function valTier(raw){
+  if(raw>=20000) return 'v-grail';   // $20K+ — screamer under real-value economy
+  if(raw>=5000)  return 'v-huge';    // $5K+ — big hit
+  if(raw>=1000)  return 'v-big';     // $1K+ — nice pull
+  if(raw>=100)   return 'v-mid';     // $100+ — worth noting
+  return 'v-low';                    // filler
+}
+function cardHTML(c, idx){
+  const col=cvar(c.color);
+  const cls = c.grail?'holo grail':(['Autograph','Patch / RPA','Short Print'].includes(c.type)?'holo':'');
+  const showCat = c.subset!==c.label && !/^Base$/.test(c.subset);
+  const sportTag = c.sportLabel ? `<div class="sport">${c.sportLabel}</div>` : '';
+  const vt = valTier(c.raw);
+  const team = teamFor(c.pname, c.sport);
+  const teamBadge = team ? `<div class="teambadge" style="background:${team.primary};color:${team.secondary}">${team.abbr}</div>` : '';
+  const teamStripe = team ? `background:linear-gradient(90deg,${team.primary} 0%,${team.primary} 40%,${col} 60%,${col} 100%)` : `background:${col}`;
+  return `<div class="tc ${cls} ${c.rookie?'rookie':''} ${vt}" style="animation-delay:${idx*0.06}s">
+    <div class="rb" style="${teamStripe}"></div>
+    ${sportTag}
+    ${teamBadge}
+    <div class="yr">${c.year}</div>
+    <div class="nm">${c.pname}</div>
+    <div class="br">${c.brand}</div>
+    <div class="subset" style="color:${col}">${c.subset}</div>
+    ${showCat?`<div class="subcat">${c.label}</div>`:``}
+    <div class="meta">
+      <span class="ser" style="color:${c.serial?col:'var(--faint)'}">${c.serial||'—'}</span>
+      <span class="val">${money(c.raw)}</span>
+    </div></div>`;
+}
+function ripPack(){
+  const pack=generatePack();
+  pack.forEach(c=>{ c.id=cards.length; cards.push(c); });
+  addToHistory(pack);
+
+  // Render the tearing pack animation first, then the cards inside it
+  const rv=$('#reveal');
+  rv.innerHTML=`<div class="rvhead">Pack ${packNo} · ${box.sportLabel} · ${box.era.year} ${box.brand} · chasing ${box.chase}</div>
+    <div class="ripstage">
+      <div class="ripwrap">
+        <div class="rippack rippack-top"><div class="ripshine"></div><div class="rippacklabel">PACK ${packNo}<small>6 CARDS</small></div></div>
+        <div class="rippack rippack-bot"><div class="ripshine"></div></div>
+        <div class="riptear"></div>
+      </div>
+    </div>
+    <div class="slabbar hidden" id="postSlabbar"><span>Tap a card to slab it. <b>Locked once picked.</b></span><span class="slabcount"><b id="revSelN">${selected.size}</b> / 5 slabbed</span></div>
+    <div class="grid4 hidden" id="packGrid">${pack.map((c,i)=>cardHTML(c,i)).join('')}</div>`;
+
+  // After the tear animation (~800ms), swap in the cards
+  setTimeout(()=>{
+    const stage=rv.querySelector('.ripstage');
+    if(stage) stage.classList.add('done');
+    setTimeout(()=>{
+      const grid=$('#packGrid'), bar=$('#postSlabbar');
+      if(grid) grid.classList.remove('hidden');
+      if(bar) bar.classList.remove('hidden');
+      // attach click handlers to each card for mid-rip slabbing
+      [...rv.querySelectorAll('.tc')].forEach((node,idx)=>{
+        const c=pack[idx];
+        node.insertAdjacentHTML('beforeend','<div class="tick">✓</div>');
+        node.onclick=()=>slabDuringRip(c,node);
+        if(selected.has(c.id)) node.classList.add('sel','locked');
+      });
+    }, 350);
+  }, 750);
+
+  // celebrate
+  const grailPull=pack.find(c=>c.grail);
+  if(grailPull){flash();toast("Case hit — "+grailPull.pname+" "+grailPull.subset+" "+(grailPull.serial||"1/1"));}
+  else{
+    const best=pack.reduce((a,b)=>b.raw>a.raw?b:a);
+    if(best.raw>8000) setTimeout(()=>toast(best.pname+" "+best.subset+(best.serial?" "+best.serial:"")+" — "+money(best.raw)), 1200);
+  }
+
+  // update counters + buttons
+  $('#tally').textContent=cards.length+" cards collected";
+  $('#ripBtn').classList.add('hidden');
+  if(packNo>=4){
+    $('#toCollBtn').classList.remove('hidden');
+  }else{
+    $('#nextNo').textContent=packNo+1;
+    $('#nextBtn').classList.remove('hidden');
+  }
+}
+function slabDuringRip(c, node){
+  if(node.classList.contains('locked')) return;   // already slabbed — locked forever
+  if(selected.size>=5){ toast("You've already slabbed 5 — rip on"); return; }
+  selected.add(c.id);
+  node.classList.add('sel','locked');
+  const n=$('#revSelN'); if(n) n.textContent=selected.size;
+  toast("Slabbed: "+c.pname+(c.serial?" "+c.serial:""));
+}
+
+function goCollection(){
+  // if already fully slabbed mid-rip, go straight to grading
+  if(selected.size>=5){ gradeThem(); return; }
+  const g=$('#grid');
+  const order=[...cards].sort((a,b)=>b.raw-a.raw);
+  g.innerHTML=order.map((c,i)=>cardHTML(c,i)).join('');
+  [...g.children].forEach((node,idx)=>{
+    const c=order[idx];
+    node.insertAdjacentHTML('beforeend','<div class="tick">✓</div>');
+    if(selected.has(c.id)){ node.classList.add('sel','locked'); node.onclick=()=>toast("Already slabbed — locked"); }
+    else { node.onclick=()=>toggleSel(c,node); }
+  });
+  $('#selN').textContent=selected.size;
+  $('#gradeBtn').disabled = selected.size!==5;
+  const selVal=cards.filter(c=>selected.has(c.id)).reduce((s,c)=>s+c.raw,0);
+  $('#selVal').textContent=money(selVal)+" raw";
+  const pct=Math.min(100, selVal/GOAL*100);
+  const fill=$('#progFill'); fill.style.width=pct+"%";
+  fill.classList.toggle('win', selVal>=GOAL);
+  $('#phasetag').textContent="Fill your remaining slabs";
+  show('collection');
+}
+function toggleSel(c,node){
+  if(node.classList.contains('locked')) return;
+  if(selected.has(c.id)){selected.delete(c.id);node.classList.remove('sel');}
+  else{
+    if(selected.size>=5){toast("You can only slab 5 — deselect one first");return;}
+    selected.add(c.id);node.classList.add('sel');
+  }
+  $('#selN').textContent=selected.size;
+  $('#gradeBtn').disabled = selected.size!==5;
+  const selVal=cards.filter(c=>selected.has(c.id)).reduce((s,c)=>s+c.raw,0);
+  $('#selVal').textContent=money(selVal)+" raw";
+  const pct=Math.min(100, selVal/GOAL*100);
+  const fill=$('#progFill'); fill.style.width=pct+"%";
+  fill.classList.toggle('win', selVal>=GOAL);
+}
+
+/* ---------- GRADING ---------- */
+function gradeCard(c){
+  // weighted PSA grade; multiplier depends on era (vintage gems spike hard)
+  const g=wpick([{v:"10",w:22},{v:"9.5",w:26},{v:"9",w:30},{v:"8",w:16},{v:"7",w:6}],"w");
+  const gv=Math.round(c.raw*gradeMult(c.vintage, g.v));
+  return {...c, grade:g.v, graded:gv};
+}
+function slabHTML(c){
+  const col=cvar(c.color);
+  return `<div class="slab ${c.grail||['Autograph','Patch / RPA'].includes(c.type)?'holo':''}">
+    <div class="label"><span class="psa">PSA</span><span class="grade">${c.grade}</span></div>
+    <div class="inner">
+      <div class="rb" style="background:${col}"></div>
+      <div class="nm">${c.pname}</div>
+      <div class="br">${c.year} ${c.brand}</div>
+      <div class="br" style="color:${col}">${c.subset}${c.serial?' '+c.serial:''}</div>
+      <div class="val">${money(c.graded)}</div>
+    </div></div>`;
+}
+function gradeThem(){
+  const chosen=cards.filter(c=>selected.has(c.id)).map(gradeCard);
+  chosen.sort((a,b)=>b.graded-a.graded);
+  $('#slabs').innerHTML=chosen.map(slabHTML).join('');
+  const showcase=chosen.reduce((s,c)=>s+c.graded,0);
+  const collTotal=cards.reduce((s,c)=>s+c.raw,0);
+  const best=cards.reduce((a,b)=>b.raw>a.raw?b:a);
+  const hasGrail=cards.some(c=>c.grail);
+  const won = showcase>=GOAL;
+  history.boxes = (history.boxes||0) + 1;
+  if(won) history.wins = (history.wins||0) + 1;
+  saveHistory();
+
+  $('#sShowcase').textContent=money(showcase);
+  $('#sColl').textContent=money(collTotal);
+  $('#sBest').textContent=best.pname+" · "+best.subset+(best.serial?" "+best.serial:"");
+
+  // verdict: hit $200,000 across your 5 slabbed cards to win the box
+  let vt,vd;
+  if(won && hasGrail){vt="Box won";vd="Over $200,000, headlined by a 1-of-1. This is the box collectors dream about.";}
+  else if(won){vt="Box won";vd="You cleared the $200,000 target — box complete.";}
+  else if(showcase>140000){vt="So close";vd="Just "+money(GOAL-showcase)+" short of $200,000. Rip another box?";}
+  else if(showcase>70000){vt="Strong rip";vd="Real hits in here, but short of the $200,000 goal by "+money(GOAL-showcase)+".";}
+  else if(showcase>20000){vt="Solid box";vd="Respectable pulls — still a ways from the $200,000 target.";}
+  else {vt="Rough rip";vd="Well under the $200,000 goal. The hobby giveth and taketh. Rip another?";}
+  $('#verdictText').textContent=vt;$('#verdictDesc').textContent=vd;
+  $('#verdictEyebrow').textContent = won ? "Goal cleared" : "Box graded";
+  $('#verdictBox').classList.toggle('win', won);
+  if(hasGrail||won)flash();
+
+  const topGrade=chosen[0];
+  const sportsHit=new Set(cards.map(c=>c.sportLabel).filter(Boolean));
+  $('#shareText').textContent=
+`200K-Rip — my box
+4 packs · ${sportsHit.size} sport${sportsHit.size>1?'s':''} · 24 cards
+—
+Best slab: ${topGrade.pname} ${topGrade.year} ${topGrade.brand} ${topGrade.subset}${topGrade.serial?' '+topGrade.serial:''} · PSA ${topGrade.grade} · ${money(topGrade.graded)}
+Graded 5 showcase: ${money(showcase)} / $200,000 goal
+Full 24-card collection: ${money(collTotal)}
+Verdict: ${vt}${won?'':' — missed by '+money(GOAL-showcase)}
+Can you beat my box?`;
+
+  $('#phasetag').textContent="Box graded";
+  show('results');
+}
+
+/* ---------- HISTORY PAGE ---------- */
+let histFilter = "all";
+function goHistory(){
+  renderHistory();
+  $('#phasetag').textContent="Lifetime collection";
+  show('history');
+}
+function goHome(){
+  if(cards.length && packNo<=4 && spinStage<4){ show('spin'); }  // mid-rip
+  else if(cards.length){ show('results'); }                       // just finished
+  else { show('intro'); }
+  $('#phasetag').textContent="Sealed box · ready to rip";
+}
+function renderHistory(){
+  const all = history.cards || [];
+  $('#hCount').textContent = all.length.toLocaleString();
+  const lifetime = all.reduce((s,c)=>s+(c.raw||0),0);
+  $('#hValue').textContent = money(lifetime);
+  $('#hBoxes').textContent = (history.boxes||0)+" · "+(history.wins||0);
+
+  // filter chips: All, grails, then sport filters, then card type filters
+  const sportFilters = Object.entries(SPORTS).map(([k,v])=>["sport:"+k, v.label]);
+  const filters = [
+    ["all","All"],["grail","Grails"],
+    ...sportFilters,
+    ["Patch / RPA","Patch/RPA"],["Autograph","Autos"],["Short Print","SPs"],["Insert","Inserts"],["Base","Base"]
+  ];
+  const matchFilter = (c, k) => {
+    if(k==="all") return true;
+    if(k==="grail") return c.grail;
+    if(k.startsWith("sport:")) return c.sport===k.slice(6);
+    return c.type===k;
+  };
+  $('#filterBar').innerHTML = filters.map(([k,label])=>{
+    const n = all.filter(c=>matchFilter(c,k)).length;
+    if(n===0 && k!=="all") return '';  // hide empty categories
+    return `<button class="${histFilter===k?'on':''}" onclick="setHistFilter('${k}')">${label} · ${n}</button>`;
+  }).join('');
+
+  // filter + sort (best first)
+  let shown = all.filter(c=>matchFilter(c,histFilter));
+  shown.sort((a,b)=> b.raw - a.raw);
+
+  const g = $('#histGrid');
+  if(!shown.length){
+    g.innerHTML = `<div class="emptyhist">${all.length? "No cards match this filter." : "You haven't ripped any packs yet. Open a box to start your collection."}</div>`;
+    return;
+  }
+  g.innerHTML = shown.slice(0,300).map((c,i)=>cardHTML(c,i)).join('');
+  if(shown.length>300){
+    g.insertAdjacentHTML('beforeend',
+      `<div class="emptyhist" style="grid-column:1/-1">Showing top 300 of ${shown.length} cards. Filter to narrow down.</div>`);
+  }
+}
+function setHistFilter(k){ histFilter=k; renderHistory(); }
+async function clearHistory(){
+  if(!confirm("Reset your entire lifetime collection? This can't be undone.")) return;
+  history = {cards:[], boxes:0, wins:0};
+  if(window.storage){ try{ await window.storage.delete(HKEY); }catch(e){} }
+  updateNavCount(); renderHistory();
+  toast("Collection reset");
+}
+
+// load history at startup
+loadHistory();
+
+function copyShare(){
+  const txt=$('#shareText').textContent;
+  navigator.clipboard?.writeText(txt).then(()=>toast("Result copied — go flex"),()=>toast("Copy failed"));
+}
+</script>
+
+<footer class="sitefooter">Made by Drew Siegel · 2026</footer>
+</body>
+</html>
